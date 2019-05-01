@@ -65,6 +65,9 @@ describe ProductsController do
       }.wont_change "Product.count"
       
       must_respond_with :bad_request
+      
+      expect(flash[:status]).must_equal :error
+      expect(flash[:message]).wont_be_nil
     end
   end
 
