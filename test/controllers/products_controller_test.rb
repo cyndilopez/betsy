@@ -1,7 +1,18 @@
 require "test_helper"
 
 describe ProductsController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "index" do
+  end
+
+  describe "show" do
+  end
+
+  describe "new" do
+  end
+
+  describe "edit" do
+  end
+
+  describe "update" do
+  end
 end
