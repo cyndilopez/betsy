@@ -46,13 +46,14 @@ class ProductsController < ApplicationController
   end
 
   def update
+      @product = Product.find_by(id: params[:id])
     if @product.update(product_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated product #{@product.name}"
       redirect_to product_path(@product)
     else
       flash.now[:status] = :error
-      flash.now[:message] = "Could not save product #{@product.id}"
+      flash.now[:message] = "Could not save product #{@product.name}"
       render :edit, status: :bad_request
     end
   end

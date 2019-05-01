@@ -83,8 +83,48 @@ describe ProductsController do
       
       must_respond_with :ok
     end
+    
+    it "responds with not found for a fake product" do
+      product_id = Product.last.id + 1
+      
+      get edit_product_path(product_id)
+      
+      must_respond_with :not_found 
+    end
   end
 
   describe "update" do
+    before do
+      @product = Product.first
+      @merchant = Merchant.first
+      @product_data = {
+          product: {
+            name: "Updated",
+            description: "description",
+            price: 4.99,
+            photoURL: "github.com",
+            stock: 8,
+            merchant_id: @merchant.id,
+          }
+        }
+    end
+    it "changes the data on the model" do
+      @product.assign_attributes(@product_data[:product])
+      
+      expect(@product).must_be :valid?
+      @product.reload
+      
+      patch product_path(@product), params: @product_data
+      
+      must_respond_with :redirect
+      must_redirect_to product_path(@product)
+      
+      expect(flash[:status]).must_equal :success
+      expect(flash[:message]).wont_be_nil
+      
+      
+      @product.reload
+      expect(@product.name).must_equal(@product_data[:product][:name])
+    end
   end
 end
