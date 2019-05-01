@@ -11,9 +11,9 @@
 
   <body>
     <header></header>
-      <% if flash[:messages] or flash[:read_text]%>
+      <% if flash[:messages] or flash[:message]%>
     <section>
-      <div class="alert alert-<%= flash[:status].to_s == 'failure' ? 'warning' : flash[:status] %>">
+      <div class="alert alert-<%= flash[:status].to_s == :error ? :warning : flash[:status] %>">
         <%= flash[:status].to_s == "failure" ? "A problem occurred: " : "" %><%= flash[:message] %>
         <% if flash[:messages] %>
           <ul>
