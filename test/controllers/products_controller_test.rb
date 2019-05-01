@@ -16,10 +16,11 @@ describe ProductsController do
   end
   
   describe "create" do
-    it "creates a new product" do
+    before do
+      @merchant = Merchant.first
+    end
     
-      merchant = Merchant.first
-      
+    it "creates a new product" do  
       product_data = {
         product: {
           name: "amy's test name",
@@ -27,7 +28,7 @@ describe ProductsController do
           price: 4.99,
           photoURL: "github.com",
           stock: 8,
-          merchant_id: merchant.id,
+          merchant_id: @merchant.id,
         },
       }
     
@@ -42,6 +43,28 @@ describe ProductsController do
       expect(product.name).must_equal product_data[:product][:name]
       expect(product.id).wont_be_nil
       
+    end
+    
+    it "sends back a bad request if product couldn't be created" do
+      
+      product_data = {
+        product: {
+          name: "",
+          description: "description",
+          price: 4.99,
+          photoURL: "github.com",
+          stock: 8,
+          merchant_id: @merchant.id,
+        }
+      }
+      
+      expect(Product.new(product_data[:product])).wont_be :valid?
+      
+      expect {
+        post products_path, params: product_data
+      }.wont_change "Product.count"
+      
+      must_respond_with :bad_request
     end
   end
 
