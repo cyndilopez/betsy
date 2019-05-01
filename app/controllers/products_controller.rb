@@ -41,19 +41,26 @@ class ProductsController < ApplicationController
       
       unless @product
         head :not_found
-        return
       end
   end
 
   def update
-      @product = Product.find_by(id: params[:id])
+    @product = Product.find_by(id: params[:id])
+    
+      unless @product
+        head :not_found
+        return
+      end
+      
     if @product.update(product_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated product #{@product.name}"
+      
       redirect_to product_path(@product)
     else
       flash.now[:status] = :error
       flash.now[:message] = "Could not save product #{@product.name}"
+      
       render :edit, status: :bad_request
     end
   end

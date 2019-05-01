@@ -126,5 +126,23 @@ describe ProductsController do
       @product.reload
       expect(@product.name).must_equal(@product_data[:product][:name])
     end
+    
+    it "responds with NOT FOUND for a fake product" do
+      product_id = Product.last.id + 1
+      patch product_path(product_id), params: @product_data
+      must_respond_with :not_found
+    end
+    
+    it "responds with bad request for bad data" do
+      @product_data[:product][:name] = ""
+      
+      @product.assign_attributes(@product_data[:product])
+      expect(@product).wont_be :valid?
+      @product.reload
+      
+      patch product_path(@product), params: @product_data
+      
+      must_respond_with :bad_request
+    end
   end
 end
