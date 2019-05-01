@@ -13,3 +13,11 @@ two:
   price: 1.5
   photoURL: MyString
   stock: 1
+
+starbursts:
+  name: Starburst minis
+  description: taste the rainbow
+  price: 15.74
+  photoURL: starburst.jpg
+  stock: 10
+  merchant: bob

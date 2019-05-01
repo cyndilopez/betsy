@@ -7,3 +7,7 @@ one:
 two:
   username: MyString
   email: MyString
+
+bob:
+  username: bobby123
+  email: bob@tree.com
