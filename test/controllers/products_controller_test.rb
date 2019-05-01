@@ -75,6 +75,14 @@ describe ProductsController do
   end
 
   describe "edit" do
+    before do
+      @product = Product.first
+    end
+    it "responds with OK for a real product" do
+      get edit_product_path(@product)
+      
+      must_respond_with :ok
+    end
   end
 
   describe "update" do
