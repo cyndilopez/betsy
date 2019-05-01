@@ -43,6 +43,9 @@ describe ProductsController do
       expect(product.name).must_equal product_data[:product][:name]
       expect(product.id).wont_be_nil
       
+      expect(flash[:status]).must_equal :success
+      expect(flash[:message]).wont_be_nil
+      
     end
     
     it "sends back a bad request if product couldn't be created" do
