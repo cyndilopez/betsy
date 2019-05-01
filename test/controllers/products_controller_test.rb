@@ -98,8 +98,74 @@ describe ProductsController do
   end
 
   describe "edit" do
+    before do
+      @product = Product.first
+    end
+    it "responds with OK for a real product" do
+      get edit_product_path(@product)
+      
+      must_respond_with :ok
+    end
+    
+    it "responds with not found for a fake product" do
+      product_id = Product.last.id + 1
+      
+      get edit_product_path(product_id)
+      
+      must_respond_with :not_found 
+    end
   end
 
   describe "update" do
+    before do
+      @product = Product.first
+      @merchant = Merchant.first
+      @product_data = {
+          product: {
+            name: "Updated",
+            description: "description",
+            price: 4.99,
+            photoURL: "github.com",
+            stock: 8,
+            merchant_id: @merchant.id,
+          }
+        }
+    end
+    it "changes the data on the model" do
+      @product.assign_attributes(@product_data[:product])
+      
+      expect(@product).must_be :valid?
+      @product.reload
+      
+      patch product_path(@product), params: @product_data
+      
+      must_respond_with :redirect
+      must_redirect_to product_path(@product)
+      
+      expect(flash[:status]).must_equal :success
+      expect(flash[:message]).wont_be_nil
+      
+      
+      @product.reload
+      expect(@product.name).must_equal(@product_data[:product][:name])
+    end
+    
+    it "responds with NOT FOUND for a fake product" do
+      product_id = Product.last.id + 1
+      patch product_path(product_id), params: @product_data
+      must_respond_with :not_found
+    end
+    
+    it "responds with bad request for bad data" do
+      @product_data[:product][:name] = ""
+      
+      @product.assign_attributes(@product_data[:product])
+      expect(@product).wont_be :valid?
+      @product.reload
+      
+      patch product_path(@product), params: @product_data
+      
+      must_respond_with :bad_request
+    end
   end
 end
