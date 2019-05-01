@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
       product_id = @product.id
       redirect_to product_path(product_id)
     else
-      raise ActionController::RoutingError.new("Not Found")
+      head :not_found
     end
   end
 
