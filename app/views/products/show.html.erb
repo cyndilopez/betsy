@@ -1,1 +1,9 @@
-<h1>This is a show page</h1>
+<h2><%= @product.name %></h2>
+
+<ul>
+  <li><%= image_tag (@product.photoURL) %></li>
+  <li><%=@product.description %></li>
+  <li><%=@product.price %></li>
+
+</ul>
+<%end%>
