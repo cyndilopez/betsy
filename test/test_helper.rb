@@ -26,3 +26,20 @@ end
 def setup
   OmniAuth.config.test_mode = true
 end
+
+def perform_login(merchant = nil)
+  merchant ||= Merchant.first
+
+  mock_auth_hash = {
+    uid: merchant.uid,
+    provider: merchant.provider,
+    info: {
+      name: merchant.name,
+      email: merchant.email,
+      username: merchant.username,
+    },
+  }
+
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash)
+  return merchant
+end
