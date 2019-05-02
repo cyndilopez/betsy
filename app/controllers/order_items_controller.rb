@@ -1,15 +1,24 @@
 class OrderItemsController < ApplicationController
   def create
-    @order_item = OrderItem.new(order_items_params)
+    @order = current_order
     
+    if @order == nil 
+      @order = Order.new
+      @order.save 
+    end
+    
+    @order_item = OrderItem.new(order_items_params)
+    @order_item.order_id = @order.id
+      
     if @order_item.save
+      session[:order_id] = @order.id
       flash[:status] = :success
       flash[:message] = "Added to cart!"
-      redirect_to product_path(id: params[:product_id])
+      redirect_to product_path(@order_item.product_id)
     else
-      flash.new[:status] = :error
-      flash.new[:message] = "Unable to add to cart :("
-      redirect_back(fallback_location: root_path)
+      flash.now[:status] = :error
+      flash.now[:message] = "Unable to add to cart :("
+      redirect_back(fallback_location: root_path)    
     end
   end
 
@@ -25,6 +34,6 @@ class OrderItemsController < ApplicationController
   private
 
   def order_items_params
-    params.require(:order_item).permit(:quantity, :product_id, :order_id)
+    params.require(:order_item).permit(:quantity, :product_id)
   end
 end
