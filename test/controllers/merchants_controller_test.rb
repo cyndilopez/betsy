@@ -1,4 +1,5 @@
 require "test_helper"
+require "pry"
 
 describe MerchantsController do
   # it "must be a real test" do
@@ -7,18 +8,13 @@ describe MerchantsController do
 
   describe "auth callback" do
     it "can log in an existing user" do
-      merchant = Merchant.first
+      start_count = Merchant.count
+      merchant = merchants(:jenkins)
 
-      expect {
-        perform_login(merchant)
-        get auth_callback_path(:github)
-      }.wont_change "Merchant.count"
+      perform_login(merchant)
+      session[:merchant_id].must_equal merchant.id
 
-      puts "******** #{flash}"
-      expect(flash[:status]).must_equal :success
-      expect(session[:merchant_id]).must_equal merchant.id
-
-      must_redirect_to root_path
+      Merchant.count.must_equal start_count
     end
 
     it "can log in a new user" do
