@@ -7,6 +7,18 @@ describe MerchantsController do
 
   describe "auth callback" do
     it "can log in an existing user" do
+      merchant = Merchant.first
+
+      expect {
+        perform_login(merchant)
+        get auth_callback_path(:github)
+      }.wont_change "Merchant.count"
+
+      puts "******** #{flash}"
+      expect(flash[:status]).must_equal :success
+      expect(session[:merchant_id]).must_equal merchant.id
+
+      must_redirect_to root_path
     end
 
     it "can log in a new user" do
