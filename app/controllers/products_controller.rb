@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  skip_before_action :require_login, only: [:root, :index, :show]
+
   def root
   end
 
@@ -37,29 +39,29 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by(id: params[:id])
-      
-      unless @product
-        head :not_found
-      end
+
+    unless @product
+      head :not_found
+    end
   end
 
   def update
     @product = Product.find_by(id: params[:id])
-    
-      unless @product
-        head :not_found
-        return
-      end
-      
+
+    unless @product
+      head :not_found
+      return
+    end
+
     if @product.update(product_params)
       flash[:status] = :success
       flash[:message] = "Successfully updated product #{@product.name}"
-      
+
       redirect_to product_path(@product)
     else
       flash.now[:status] = :error
       flash.now[:message] = "Could not save product #{@product.name}"
-      
+
       render :edit, status: :bad_request
     end
   end
