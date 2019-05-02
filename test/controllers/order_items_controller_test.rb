@@ -19,8 +19,34 @@ describe OrderItemsController do
         post order_items_path, params: order_item_data
       }.must_change "OrderItem.count", 1
       
-      
       expect(session[:order_id]).wont_be_nil
+      expect(flash[:status]).must_equal :success
+      must_respond_with :found
+      must_redirect_to product_path(id: @product.id)
+    end
+    
+    it "is associated with an Order" do
+      order = Order.last
+      order_item = OrderItem.last
+      
+      expect(order.order_items).wont_be_nil
+      expect(order_item.order_id).must_equal order.id
+    end
+    
+    it "will display an error message if given bad data" do
+      order_item_data = {
+        order_item: {
+          product_id: -1,
+          quantity: 1,
+        }
+      }
+      
+      expect {
+        post order_items_path, params: order_item_data
+      }.wont_change "OrderItem.count"
+      
+      expect(flash[:status]).must_equal :error
+      must_respond_with :redirect
       
     end
   end
