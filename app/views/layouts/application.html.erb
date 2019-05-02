@@ -10,7 +10,11 @@
   </head>
 
   <body>
-    <header></header>
+    <header>
+      <nav>
+        <%=link_to "Login with GitHub", github_login_path %>
+      </nav>
+    </header>
       <% if flash[:messages] or flash[:message]%>
     <section>
       <div class="alert alert-<%= flash[:status].to_s == "error" ? "warning" : flash[:status] %>">
