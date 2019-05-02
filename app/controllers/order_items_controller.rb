@@ -48,6 +48,20 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
+    order_item_id = params[:id]
+    @order_item = OrderItem.find_by(id: params[:id])
+
+    if @order_item.destroy
+      flash[:status] = :success
+      flash[:messages] = "Successfully Deleted"
+
+      render :edit
+    else
+      flash.now[:status] = :error
+      flash.now[:messages] = "Unable to delete"
+
+      render :edit
+    end
   end
 
   private
