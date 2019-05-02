@@ -11,7 +11,6 @@ class ProductsController < ApplicationController
 
     if @product
       product_id = @product.id
-      redirect_to product_path(product_id)
     else
       head :not_found
     end
