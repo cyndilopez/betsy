@@ -1,0 +1,50 @@
+<% if @product.errors.messages.any? %>
+  <section class="alert alert-danger">
+    There were some issues with your submission
+    <ul>
+      <% @product.errors.messages.each do |column, problem_list| %>
+        <% problem_list.each do |problem| %>
+          <li>
+            <%= column %>: <%= problem %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<%= form_with model: @product, class: 'product-form' do |f| %>
+
+  <div>
+    <%= f.label :name, "Product name" %>
+    <%= f.text_field :name, placeholder: "Sweetness pencil pouch" %>
+  </div>
+  
+  <div>
+    <%= f.label :price, "Unit price" %>
+    <%= f.text_field :price, placeholder: "$" %>
+  </div>
+
+  <div>
+    <%= f.label :stock, "Quantity in stock" %>
+    <%= f.text_field :stock, placeholder: "45" %>
+  </div>
+ 
+  <div>
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, placeholder: "Carrying size pencil pouch" %>
+  </div>
+
+  <div>
+    <%= f.label :photoURL, "Product photo URL" %>
+    <%= f.text_field :photoURL, placeholder: "http://image-host.com/yourimage.png" %>
+  </div>
+  
+  <%# <div>
+    <%= f.label :categories %>
+    <%# <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
+  <%# </div>  %>
+
+  <%= f.submit button_text, class: "btn btn-success btn-block" %>
+
+<% end %>

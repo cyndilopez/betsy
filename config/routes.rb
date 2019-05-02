@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create"
+  resources :order_items, only: [:create, :edit, :update, :destroy]
 end

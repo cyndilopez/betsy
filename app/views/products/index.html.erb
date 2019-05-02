@@ -1,8 +1,10 @@
 <h1>Product</h1>
 <%@products.each do |product|%>
 <ul>
-<li>Name: <%=product.name%></li>
-<li>Price: <%=product.price%></li>
-<li>Description: <%=product.description%></li>
+  <li>Name: <%=product.name%></li>
+  <li>Price: <%=product.price%></li>
+  <li>Description: <%=product.description%></li>
+  <li><%= link_to "Product Details", product_path(product.id) %></li>
+    <li><%= link_to "Edit", edit_product_path(product.id) %></li>
 </ul>
 <%end%>
