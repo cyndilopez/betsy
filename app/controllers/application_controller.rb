@@ -1,6 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :require_login
 
+  def find_product
+    @product = Product.find_by(id: params[:id])
+    unless @product
+      head :not_found
+      return
+    end
+  end
+
   def require_login
     if !session[:merchant_id]
       flash[:status] = :error
