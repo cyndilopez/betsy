@@ -1,15 +1,15 @@
 class OrderItemsController < ApplicationController
   def create
     @order = current_order
-    
-    if @order == nil 
+
+    if @order == nil
       @order = Order.new
-      @order.save 
+      @order.save
     end
-    
+
     @order_item = OrderItem.new(order_items_params)
     @order_item.order_id = @order.id
-      
+
     if @order_item.save
       session[:order_id] = @order.id
       flash[:status] = :success
@@ -18,14 +18,33 @@ class OrderItemsController < ApplicationController
     else
       flash.now[:status] = :error
       flash.now[:message] = "Unable to add to cart :("
-      redirect_back(fallback_location: root_path)    
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def edit
+    @order_item = OrderItem.find_by(id: params[:id])
+
+    unless @order_item
+      head :not_found
+      return
+    end
   end
 
   def update
+    @order_item = OrderItem.find_by(id: params[:id])
+
+    if @order_item.update(order_items_params)
+      flash[:status] = :success
+      flash[:message] = "Updated #{@order_item.id}"
+
+      @order_item.reload
+    else
+      flash.now[:status] = :error
+      flash.now[:message] = "Unable to update"
+
+      render :edit
+    end
   end
 
   def destroy
