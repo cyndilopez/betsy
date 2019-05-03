@@ -43,4 +43,19 @@ describe MerchantsController do
       expect(session[:merchant_id]).must_be_nil
     end
   end
+
+  describe "destroy" do
+    before do
+      @merchant = merchants(:jenkins)
+      perform_login(@merchant)
+    end
+    it "successfully logs out a merchant" do
+      expect(session[:merchant_id]).must_equal @merchant.id
+      delete logout_path
+      expect(session[:merchant_id]).must_be_nil
+      must_redirect_to root_path
+      expect(flash[:status]).must_equal :success
+      expect([flash[:message]]).wont_be_nil
+    end
+  end
 end
