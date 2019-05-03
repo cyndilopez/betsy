@@ -1,8 +1,13 @@
 class OrdersController < ApplicationController
 
   def create
-    @order = Order.new
+    @order = Order.new(status: params[:status])
     
+    
+  end
+  
+  def complete_order
+    self.status = "paid"
   end
 
   private

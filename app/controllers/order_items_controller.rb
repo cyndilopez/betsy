@@ -6,6 +6,8 @@ class OrderItemsController < ApplicationController
       @order = Order.new
       @order.save
     end
+    
+    product = Product.find(params[:product_id])
 
     @order_item = OrderItem.new(order_items_params)
     @order_item.order_id = @order.id
@@ -69,4 +71,6 @@ class OrderItemsController < ApplicationController
   def order_items_params
     params.require(:order_item).permit(:quantity, :product_id)
   end
+  
+ 
 end
