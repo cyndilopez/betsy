@@ -10,10 +10,8 @@ describe MerchantsController do
       @start_count = Merchant.count
     end
     it "can log in an existing user" do
-      merchant = merchants(:jenkins)
-
-      perform_login(merchant)
-      session[:merchant_id].must_equal merchant.id
+      perform_login(@merchant)
+      session[:merchant_id].must_equal @merchant.id
 
       Merchant.count.must_equal @start_count
       must_redirect_to root_path
