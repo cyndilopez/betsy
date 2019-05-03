@@ -7,7 +7,11 @@ class Order < ApplicationRecord
   
   
   def total
-    
+    total = 0
+    self.order_items.each do |item|
+      total += item.subtotal
+    end
+    return total
   end
   
   private
@@ -15,5 +19,6 @@ class Order < ApplicationRecord
     def set_status
       self.status = "pending"
     end
+    
   
 end
