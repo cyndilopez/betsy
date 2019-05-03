@@ -1,8 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+jenkins:
   username: MyString
   email: MyString
+  uid: 1234
+  provider: github
+  name: jenkins
 
 two:
   username: MyString
