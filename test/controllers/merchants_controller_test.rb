@@ -2,15 +2,16 @@ require "test_helper"
 require "pry"
 
 describe MerchantsController do
+  before do
+    @merchant = merchants(:jenkins)
+  end
   describe "auth callback" do
     before do
       @start_count = Merchant.count
     end
     it "can log in an existing user" do
-      merchant = merchants(:jenkins)
-
-      perform_login(merchant)
-      session[:merchant_id].must_equal merchant.id
+      perform_login(@merchant)
+      session[:merchant_id].must_equal @merchant.id
 
       Merchant.count.must_equal @start_count
       must_redirect_to root_path
@@ -56,6 +57,22 @@ describe MerchantsController do
       must_redirect_to root_path
       expect(flash[:status]).must_equal :success
       expect([flash[:message]]).wont_be_nil
+    end
+  end
+
+  describe "show" do
+    it "returns a 404 status code if the merchant doesn't exist" do
+      merchant_id = 123456789
+
+      get merchant_path(merchant_id)
+
+      must_respond_with :not_found
+    end
+
+    it "works for a merchant that exists" do
+      get merchant_path(@merchant.id)
+
+      must_respond_with :ok
     end
   end
 end
