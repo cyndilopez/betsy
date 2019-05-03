@@ -39,7 +39,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-<<<<<<< HEAD
     # @product = Product.find_by(id: params[:id])
 
     # unless @product
@@ -54,22 +53,6 @@ class ProductsController < ApplicationController
     #   head :not_found
     #   return
     # end
-=======
-    @product = Product.find_by(id: params[:id])
-
-    unless @product
-      head :not_found
-    end
-  end
-
-  def update
-    @product = Product.find_by(id: params[:id])
-
-    unless @product
-      head :not_found
-      return
-    end
->>>>>>> master
 
     if @product.update(product_params)
       flash[:status] = :success
