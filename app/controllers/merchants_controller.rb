@@ -30,4 +30,9 @@ class MerchantsController < ApplicationController
     flash[:message] = "Successfully logged out"
     redirect_to root_path
   end
+
+  def show
+    @merchant = Merchant.find_by(id: params[:id])
+    head :not_found unless @merchant
+  end
 end
