@@ -43,4 +43,12 @@ describe MerchantsController do
       expect(session[:merchant_id]).must_be_nil
     end
   end
+
+  describe "show" do
+    it "returns a 404 status code if the merchant doesn't exist" do
+    end
+
+    it "works for a merchant that exists" do
+    end
+  end
 end
