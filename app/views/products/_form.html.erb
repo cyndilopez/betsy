@@ -40,10 +40,12 @@
     <%= f.text_field :photoURL, placeholder: "http://image-host.com/yourimage.png" %>
   </div>
   
-  <%# <div>
+  <div>
     <%= f.label :categories %>
-    <%# <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
-  <%# </div>  %>
+    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
+    
+    <%= link_to "Add new category", new_category_path, class: "btn btn-primary"  </>
+  
 
   <%= f.submit button_text, class: "btn btn-success btn-block" %>
 
