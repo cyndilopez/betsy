@@ -23,4 +23,9 @@ class MerchantsController < ApplicationController
     session[:merchant_id] = merchant.id
     redirect_to root_path
   end
+
+  def show
+    @merchant = Merchant.find_by(id: params[:id])
+    render_404 unless @merchant
+  end
 end
