@@ -10,7 +10,15 @@
   </head>
 
   <body>
-    <header></header>
+    <header>
+      <nav>
+        <%if session[:merchant_id] %>
+          <%=link_to "Logout", logout_path, method: :delete %>
+        <%else%>
+          <%=link_to "Login with GitHub", github_login_path %>
+        <%end%>
+      </nav>
+    </header>
       <% if flash[:messages] or flash[:message]%>
     <section>
       <div class="alert alert-<%= flash[:status].to_s == "error" ? "warning" : flash[:status] %>">
