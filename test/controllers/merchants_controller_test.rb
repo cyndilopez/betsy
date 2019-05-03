@@ -46,9 +46,14 @@ describe MerchantsController do
 
   describe "show" do
     it "returns a 404 status code if the merchant doesn't exist" do
+      merchant_id = 123456789
+
+      get merchant_path(merchant_id)
+
+      must_respond_with :not_found
     end
 
-    it "works for a merchant that exists" do
-    end
+    # it "works for a merchant that exists" do
+    # end
   end
 end
