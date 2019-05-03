@@ -2,6 +2,9 @@ require "test_helper"
 require "pry"
 
 describe MerchantsController do
+  before do
+    @merchant = merchants(:jenkins)
+  end
   describe "auth callback" do
     before do
       @start_count = Merchant.count
@@ -53,7 +56,10 @@ describe MerchantsController do
       must_respond_with :not_found
     end
 
-    # it "works for a merchant that exists" do
-    # end
+    it "works for a merchant that exists" do
+      get merchant_path(@merchant.id)
+
+      must_respond_with :ok
+    end
   end
 end
