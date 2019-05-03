@@ -12,7 +12,11 @@
   <body>
     <header>
       <nav>
-        <%=link_to "Login with GitHub", github_login_path %>
+        <%if session[:merchant_id] %>
+          <%=link_to "Logout", logout_path, method: :delete %>
+        <%else%>
+          <%=link_to "Login with GitHub", github_login_path %>
+        <%end%>
       </nav>
     </header>
       <% if flash[:messages] or flash[:message]%>
