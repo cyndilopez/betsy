@@ -21,3 +21,13 @@ starbursts:
   photoURL: starburst.jpg
   stock: 10
   merchant: bob
+  categories: cake, confection
+
+jelly_beans:
+  name: Jelly Belly
+  description: 29 flavors
+  price: 10.59
+  photoURL: jellybean.jpg
+  stock: 20
+  merchant: bob
+  categories: cake

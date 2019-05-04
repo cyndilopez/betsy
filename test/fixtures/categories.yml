@@ -5,3 +5,9 @@ one:
 
 two:
   name: MyString
+
+cake:
+  name: cake
+
+confection:
+  name: confection
