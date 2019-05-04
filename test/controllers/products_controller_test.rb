@@ -26,7 +26,7 @@ describe ProductsController do
 
       get product_path(product_id)
 
-      must_respond_with :redirect
+      must_respond_with :ok
     end
   end
 

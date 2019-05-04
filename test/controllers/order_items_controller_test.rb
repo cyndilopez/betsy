@@ -1,17 +1,19 @@
 require "test_helper"
 
 describe OrderItemsController do
-  before do
-    @product = Product.first
-  end
+
   describe "create" do
-  
+    before do
+    @product = products(:one)
+    @order = orders(:one)
+  end
     it "can create a new order item" do
       
       order_item_data = {
         order_item: {
           product_id: @product.id,
-          quantity: 2, 
+          quantity: 2,
+          order_id: @order.id
         }
       }
       
@@ -38,6 +40,7 @@ describe OrderItemsController do
         order_item: {
           product_id: -1,
           quantity: 1,
+          order_id: @order.id
         }
       }
       
