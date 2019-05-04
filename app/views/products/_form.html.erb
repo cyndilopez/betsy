@@ -43,13 +43,15 @@
   <div>
     <%= f.label :categories %>
     <%if Category.all == []%>
-    <p>No categories to display at the time. Add one!</p>
+    No categories to display at the time. Add one!
     <%else%>
     <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
     <%end%>
+  </div>
+  <div>
     <%= link_to "Add new category", new_category_path, class: "btn btn-primary" %>
-
-
+  </div>
+  <div>
   <%= f.submit "Create!", class: "btn btn-success btn-block" %>
-
-<% end %>
+  </div>
+  <% end %>

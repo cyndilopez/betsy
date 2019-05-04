@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-
+    @product.merchant_id = session[:merchant_id]
     successful = @product.save
     if successful
       flash[:status] = :success
@@ -70,6 +70,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :photoURL, :stock, :merchant_id)
+    params.require(:product).permit(:name, :description, :price, :photoURL, :stock, :merchant_id, category_ids: [])
   end
 end
