@@ -5,11 +5,8 @@ class CategoriesController < ApplicationController
 
   def create
     name = params["category"]["name"]
-    p name
-    p current_merchant
     @category = Category.new(name: name)
     successful = @category.save
-    p @category.valid?
     if successful
       flash[:status] = :success
       flash[:message] = "Saved category with id #{@category.id} successfully"
