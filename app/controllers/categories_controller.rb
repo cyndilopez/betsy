@@ -4,15 +4,19 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    name = params[:name]
+    name = params["category"]["name"]
+    p name
+    p current_merchant
     @category = Category.new(name: name)
-    @category.save
-    if @category
+    successful = @category.save
+    p @category.valid?
+    if successful
       flash[:status] = :success
-      flash[:message] = "Saved category with id #{category.id} successfully"
+      flash[:message] = "Saved category with id #{@category.id} successfully"
     else
       flash[:status] = :error
       flash[:message] = "Could not save the category"
     end
+    redirect_to root_path
   end
 end

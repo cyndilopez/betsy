@@ -23,4 +23,10 @@ class ApplicationController < ActionController::Base
     end
     return nil
   end
+
+  def current_merchant
+    merchant_id = session[:merchant_id]
+    merchant = Merchant.find_by(id: merchant_id)
+    return merchant
+  end
 end
