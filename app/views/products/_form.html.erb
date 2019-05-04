@@ -49,9 +49,12 @@
     <%end%>
   </div>
   <div>
-    <%= link_to "Add new category", new_category_path, class: "btn btn-primary" %>
+    <%= f.label :category, "Add New Category" %>
+    <%# <%= link_to "Add new category", new_category_path, class: "btn btn-primary" %>
+    <%= f.text_field :category, product_categories_path(product_id: @product.id), method: :patch%>
   </div>
   <div>
   <%= f.submit "Create!", class: "btn btn-success btn-block" %>
   </div>
   <% end %>
+
