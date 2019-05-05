@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
       @order.save
     end
     
-    product = Product.find(params[:product_id])
+    # product = Product.find(params[:product_id])
 
     @order_item = OrderItem.new(order_items_params)
     @order_item.order_id = @order.id

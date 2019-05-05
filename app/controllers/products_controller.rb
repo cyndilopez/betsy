@@ -3,7 +3,16 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    if params[:category]
+      @products = Product.where(:category => params[:category])
+      if @products.empty?
+        flash[:error] = "Sorry, no products in this category"
+      else
+        flash[:notice] = "#{@products.count} in this category"
+      end
+    else
+      @products = Product.all
+    end 
   end
 
   def show
@@ -22,6 +31,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+
 
     successful = @product.save
     if successful
