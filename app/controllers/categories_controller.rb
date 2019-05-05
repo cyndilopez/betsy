@@ -16,4 +16,8 @@ class CategoriesController < ApplicationController
     end
     redirect_to root_path
   end
+  
+  def index
+    @categories = Category.all
+  end
 end
