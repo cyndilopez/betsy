@@ -33,6 +33,16 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find_by(id: params[:id])
-    head :not_found unless @merchant
+
+    unless @merchant
+      head :not_found
+      return
+    end
+
+    unless session[:merchant_id] == @merchant.id
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to view this merchant's page."
+      redirect_to root_path
+    end
   end
 end
