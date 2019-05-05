@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:show, :edit, :update]
+  skip_before_action :require_login, only: [:root, :index, :show]
+
   def root
   end
 
@@ -7,13 +10,13 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
+    # @product = Product.find_by(id: params[:id])
 
-    if @product
-      product_id = @product.id
-    else
-      head :not_found
-    end
+    # if @product
+    #   product_id = @product.id
+    # else
+    #   head :not_found
+    # end
   end
 
   def new
@@ -22,7 +25,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-
+    @product.merchant_id = session[:merchant_id]
     successful = @product.save
     if successful
       flash[:status] = :success
@@ -36,20 +39,20 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find_by(id: params[:id])
+    # @product = Product.find_by(id: params[:id])
 
-    unless @product
-      head :not_found
-    end
+    # unless @product
+    #   head :not_found
+    # end
   end
 
   def update
-    @product = Product.find_by(id: params[:id])
+    # @product = Product.find_by(id: params[:id])
 
-    unless @product
-      head :not_found
-      return
-    end
+    # unless @product
+    #   head :not_found
+    #   return
+    # end
 
     if @product.update(product_params)
       flash[:status] = :success
@@ -64,7 +67,9 @@ class ProductsController < ApplicationController
     end
   end
 
+  private
+
   def product_params
-    params.require(:product).permit(:name, :description, :price, :photoURL, :stock, :merchant_id)
+    params.require(:product).permit(:name, :description, :price, :photoURL, :stock, :merchant_id, category_ids: [])
   end
 end
