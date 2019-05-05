@@ -2,5 +2,36 @@
 <%# <%= image_tag("#{@product.photoURL}") %> 
 <ul>
   <li><%=@merchant.email %></li>
-
 </ul>
+
+<%# <%= session[:merchant_id]%>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>In Stock</th>
+      <% if session[:merchant_id] == @merchant.id %>
+        <th>Update</th>
+        <th>Display</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @merchant.products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= product.description %></td>
+        <td><%= product.stock %></td>
+        <% if session[:merchant_id] == @merchant.id %>
+          <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
+          <td>Public</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
