@@ -41,7 +41,7 @@ class MerchantsController < ApplicationController
 
     unless session[:merchant_id] == @merchant.id
       flash[:status] = :error
-      flash[:message] = "You must log in first."
+      flash[:message] = "You don't have permission to view this merchant's page."
       redirect_to root_path
     end
   end
