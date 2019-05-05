@@ -8,8 +8,6 @@ class OrderItemsController < ApplicationController
 
     # product = Product.find(params[:product_id])
     # @order_item = OrderItem.new(order_items_params)
-    @order_item.order_id = @order.id
-
     #   if @order_item.save
     #     session[:order_id] = @order.id
     #     flash[:status] = :success
@@ -23,7 +21,7 @@ class OrderItemsController < ApplicationController
     # end
 
     @order_item = OrderItem.new(order_items_params)
-
+    @order_item.order_id = @order.id
     product_quantity = @order_item.quantity
     order_item_id = Product.find_by(id: params[:product_id])
 
