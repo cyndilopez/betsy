@@ -13,10 +13,9 @@
       <th>Price</th>
       <th>Description</th>
       <th>In Stock</th>
-      <% if session[:merchant_id] == @merchant.id %>
+      <% session[:merchant_id] == @merchant.id %>
         <th>Update</th>
         <th>Display</th>
-      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -26,10 +25,8 @@
         <td><%= product.price %></td>
         <td><%= product.description %></td>
         <td><%= product.stock %></td>
-        <% if session[:merchant_id] == @merchant.id %>
-          <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
-          <td>Public</td>
-        <% end %>
+        <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
+        <td>Public</td>
       </tr>
     <% end %>
   </tbody>

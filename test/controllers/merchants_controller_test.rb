@@ -69,10 +69,31 @@ describe MerchantsController do
       must_respond_with :not_found
     end
 
-    it "works for a merchant that exists" do
+    it "works for a merchant that exists and is logged in" do
+      perform_login(@merchant)
       get merchant_path(@merchant.id)
 
       must_respond_with :ok
+    end
+
+    it "returns an error if a merchant tries to view a different merchant's page" do
+      unauthorized_merchant = Merchant.new(provider: "github", uid: 999999999, name: "unauthorized", username: "unauthorized", email: "nope@merchant.com")
+      unauthorized_merchant.save
+
+      perform_login(unauthorized_merchant)
+      expect(session[:merchant_id]).must_equal unauthorized_merchant.id
+
+      get merchant_path(@merchant)
+
+      expect(flash[:status]).must_equal :error
+      expect(flash[:message]).wont_be_nil
+    end
+
+    it "returns an error if a guest tries to view a merchant's page" do
+      get merchant_path(@merchant)
+
+      expect(flash[:status]).must_equal :error
+      expect(flash[:message]).wont_be_nil
     end
   end
 end
