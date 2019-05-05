@@ -42,4 +42,14 @@ describe Product do
       expect(product.errors.messages).must_include :merchant
     end
   end
+
+  describe "relations" do
+    it "has categories" do
+      product = products(:starbursts)
+      expect(product.categories.length).must_equal 2
+
+      category = categories(:confection)
+      expect(category.products.length).must_equal 1
+    end
+  end
 end
