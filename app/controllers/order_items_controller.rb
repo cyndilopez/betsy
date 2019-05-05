@@ -1,25 +1,42 @@
 class OrderItemsController < ApplicationController
   def create
     @order = current_order
-
     if @order == nil
       @order = Order.new
       @order.save
     end
-    
-    product = Product.find(params[:product_id])
 
-    @order_item = OrderItem.new(order_items_params)
+    # product = Product.find(params[:product_id])
+    # @order_item = OrderItem.new(order_items_params)
     @order_item.order_id = @order.id
 
-    if @order_item.save
+    #   if @order_item.save
+    #     session[:order_id] = @order.id
+    #     flash[:status] = :success
+    #     flash[:message] = "Added to cart!"
+    #     redirect_to product_path(@order_item.product_id)
+    #   else
+    #     flash.now[:status] = :error
+    #     flash.now[:message] = "Unable to add to cart :("
+    #     redirect_back(fallback_location: root_path)
+    #   end
+    # end
+
+    @order_item = OrderItem.new(order_items_params)
+
+    product_quantity = @order_item.quantity
+    order_item_id = Product.find_by(id: params[:product_id])
+
+    if product_quantity < order_item_id.stock
+      @order_item.reduce_product_stock(order_item_id)
       session[:order_id] = @order.id
+      @order_item.save
       flash[:status] = :success
       flash[:message] = "Added to cart!"
       redirect_to product_path(@order_item.product_id)
     else
       flash.now[:status] = :error
-      flash.now[:message] = "Unable to add to cart :("
+      flash.now[:message] = "Unable to add to cart, please try again later"
       redirect_back(fallback_location: root_path)
     end
   end
@@ -71,6 +88,4 @@ class OrderItemsController < ApplicationController
   def order_items_params
     params.require(:order_item).permit(:quantity, :product_id)
   end
-  
- 
 end
