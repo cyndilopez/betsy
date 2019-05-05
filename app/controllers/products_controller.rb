@@ -6,16 +6,16 @@ class ProductsController < ApplicationController
   end
 
   def index
-    if params[:category]
-      @products = Product.where(:category => params[:category])
-      if @products.empty?
-        flash[:error] = "Sorry, no products in this category"
-      else
-        flash[:notice] = "#{@products.count} in this category"
-      end
-    else
+    # if params[:category]
+    #   @products = Product.where(:category => params[:category])
+    #   if @products.empty?
+    #     flash[:error] = "Sorry, no products in this category"
+    #   else
+    #     flash[:notice] = "#{@products.count} in this category"
+    #   end
+    # else
       @products = Product.all
-    end 
+    # end 
   end
 
   def show

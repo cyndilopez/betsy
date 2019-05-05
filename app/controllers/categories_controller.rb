@@ -1,4 +1,8 @@
 class CategoriesController < ApplicationController
+  def index
+    @categories = Category.all
+  end
+  
   def new
     @category = Category.new
   end
@@ -17,7 +21,5 @@ class CategoriesController < ApplicationController
     redirect_to root_path
   end
   
-  def index
-    @categories = Category.all
-  end
+  
 end

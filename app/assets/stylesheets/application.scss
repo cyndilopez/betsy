@@ -7,6 +7,39 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+main {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 ul {
   list-style-type: none;
+  padding: 0;
+}
+
+.products {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 1rem;
+}
+
+.product {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.products ul {
+  display: block;  
+  width: 15vw;
+  height: 150px
+}
+
+.product .btn {
+  
 }
