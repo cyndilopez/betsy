@@ -2,8 +2,9 @@ class OrderItemsController < ApplicationController
   def create
     @order = current_order
     if @order == nil
-      @order = Order.new
+      @order = Order.new(status: "pending")
       @order.save
+      p @order
     end
 
     # product = Product.find(params[:product_id])
@@ -18,20 +19,29 @@ class OrderItemsController < ApplicationController
     #     flash.now[:message] = "Unable to add to cart :("
     #     redirect_back(fallback_location: root_path)
     #   end
-    # end
+    # ends
 
-    @order_item = OrderItem.new(order_items_params)
+    @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
-    product_quantity = @order_item.quantity
-    order_item_id = Product.find_by(id: params[:product_id])
+    p @order_item
+    # product_quantity = @order_item.quantity
 
-    if product_quantity < order_item_id.stock
-      @order_item.reduce_product_stock(order_item_id)
+    order_item_id = Product.find_by(id: params[:product_id]) # maybe called it product
+    product_quantity = 1
+    @order_item.quantity = 1
+    if product_quantity <= order_item_id.stock
+      # @order_item.reduce_product_stock
       session[:order_id] = @order.id
-      @order_item.save
-      flash[:status] = :success
-      flash[:message] = "Added to cart!"
-      redirect_to product_path(@order_item.product_id)
+      successful = @order_item.save
+      if successful
+        flash[:status] = :success
+        flash[:message] = "Added to cart!"
+        redirect_to product_path(params[:product_id])
+      else
+        flash[:status] = :error
+        flash[:message] = "Could not add item to cart: #{@order_item.errors.messages}"
+        redirect_to root_path
+      end
     else
       flash.now[:status] = :error
       flash.now[:message] = "Unable to add to cart, please try again later"
