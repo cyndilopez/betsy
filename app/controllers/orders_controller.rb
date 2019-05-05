@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :find_order, except: [:create]
+
   def create
     @order = Order.new(status: params[:status])
     if @order.save
@@ -34,6 +36,18 @@ class OrdersController < ApplicationController
 
   private
 
+  def order_params
+    params.require(:order).permit(
+      :status,
+      :name,
+      :email,
+      :address,
+      :cc_num,
+      :cc_cvv,
+      :cc_expiration
+    )
+  end
+
   def find_order
     @order = Order.find_by(id: params[:id])
     render_404 unless @order
@@ -41,9 +55,5 @@ class OrdersController < ApplicationController
 
   def complete_order
     self.status = "paid"
-  end
-
-  def order_params
-    params.require(:order).permit(:status)
   end
 end
