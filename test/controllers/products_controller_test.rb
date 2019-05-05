@@ -36,6 +36,7 @@ describe ProductsController do
     before do
       perform_login(merchants(:jenkins))
     end
+    
     describe "new" do
       it "can get to the new form page" do
         get new_product_path

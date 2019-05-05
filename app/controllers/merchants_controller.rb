@@ -32,4 +32,19 @@ class MerchantsController < ApplicationController
     flash[:message] = "Successfully logged out"
     redirect_to root_path
   end
+
+  def show
+    @merchant = Merchant.find_by(id: params[:id])
+
+    unless @merchant
+      head :not_found
+      return
+    end
+
+    unless session[:merchant_id] == @merchant.id
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to view this merchant's page."
+      redirect_to root_path
+    end
+  end
 end
