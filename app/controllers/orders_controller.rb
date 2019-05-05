@@ -25,6 +25,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    @order.destroy
+    flash[:status] = :success
+    flash[:message] = "Your order has been cancelled."
+    redirect_to root_path
+  end
+
   private
 
   def find_order
