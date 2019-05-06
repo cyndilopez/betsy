@@ -1,8 +1,8 @@
 <h2><%= @product.name %></h2>
 <%# <%= image_tag("#{@product.photoURL}") %> 
 <ul>
-  <li></li>
   <li><%=@product.description %></li>
   <li><%=@product.price %></li>
+
   <li><%= link_to "Add to cart", product_order_items_path(@product), method: :post, class: "btn btn-primary btn-lg" %></li>
 </ul>

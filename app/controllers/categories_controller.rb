@@ -1,10 +1,12 @@
 class CategoriesController < ApplicationController
+
   skip_before_action :require_login, only: :index
 
   def index
     @categories = Category.all
     @product = Product.find_by(id: params["product_id"])
   end
+
 
   def new
     @category = Category.new
@@ -25,4 +27,6 @@ class CategoriesController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  
 end
