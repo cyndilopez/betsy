@@ -4,7 +4,7 @@
   <ul>
   <% (Category.all).each do |cat| %>
     <%= cat.name %>
-      <li><%= link_to "#{cat.name}", categories_path(:category=>"#{cat.name}") %></li>
+      <li><%= link_to "#{cat.name}", products_path(:category=>"#{cat.name}") %></li>
   <%end%>
   </ul>
 </section>

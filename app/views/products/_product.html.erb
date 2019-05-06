@@ -1,7 +1,7 @@
 
 
 <%# <%= image_tag("#{@product.photoURL}") %> 
-<article class="product">
+<section class="product">
   <ul>
     <li><%= image_tag "#{product.photoURL}" %></li>
     <li><h5><%= product.name %></h5></li>
@@ -9,4 +9,4 @@
     <li><%= product.price %></li>
   </ul>
   <%= link_to "Add to cart", order_items_path, method: :post, class: "btn btn-primary" %>
-</article>
+</section>
