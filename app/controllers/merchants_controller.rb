@@ -1,7 +1,6 @@
 class MerchantsController < ApplicationController
   skip_before_action :require_login
 
-
   def create
     auth_hash = request.env["omniauth.auth"]
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
