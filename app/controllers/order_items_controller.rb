@@ -47,19 +47,26 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order_item = OrderItem.find_by(id: params[:id])
+    params[:order_items].each do |id, qty|
+      p id
+      p qty
+      # @order_item = OrderItem.find_by(id: params[:id])
+      @order_item = OrderItem.find_by(id: id)
 
-    if @order_item.update(quantity: params["quantity"])
-      flash[:status] = :success
-      flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
-      redirect_to order_path(@order_item.order)
-      # @order_item.reload
-    else
-      flash.now[:status] = :error
-      flash.now[:message] = "Unable to update"
+      # if @order_item.update(quantity: params["quantity"])
+      if @order_item.update(quantity: qty)
+        flash[:status] = :success
+        flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
+        # @order_item.reload
+      else
+        flash.now[:status] = :error
+        flash.now[:message] = "Unable to update"
 
-      render :edit
+        # render :edit
+      end
     end
+    redirect_to order_path(@order_item.order)
+
   end
 
   def destroy
