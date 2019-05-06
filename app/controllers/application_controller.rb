@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
     if session[:order_id]
       Order.find_by(id: session[:order_id])
     end
-    return nil
   end
 
   def current_merchant

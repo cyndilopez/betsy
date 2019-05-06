@@ -3,16 +3,18 @@ class OrderItemsController < ApplicationController
 
   def create
     @order = current_order
+    p @order
     if @order == nil
       @order = Order.new(status: "pending")
       @order.save
     end
-
+    p @order
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
     # product_quantity = @order_item.quantity
 
     product = Product.find_by(id: params[:product_id])
+    p product
     @order_quantity = 1
     @order_item.quantity = @order_quantity
     if @order_quantity <= product.stock
