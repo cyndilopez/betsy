@@ -32,8 +32,15 @@
               <a class="dropdown-item" href="/products">By seller</a>
             </div>
           </li>
+<<<<<<< HEAD
           <li><%= link_to "Cart", order_path(session[:order_id]), class: "nav-link active" %></li>
           <li><%= link_to "Merchants", merchants_path(session[:merchant_id]), class: "nav-link active" %></li>
+=======
+          <li><%= link_to "Cart", orders_path(session[:order_id]), class: "nav-link active" %></li>
+          <%if session[:merchant_id] %>
+            <li><%= link_to "Merchants", merchant_path(Merchant.find_by(id: session[:merchant_id])), class: "nav-link active" %></li>
+          <%end%>
+>>>>>>> cfc0d3c29c64758d9879d4b39c20f6c34d8dc4fb
           
         <%if session[:merchant_id] %>
           <li><%= link_to "Logout", logout_path, class: "nav-link", method: :delete %></li>
