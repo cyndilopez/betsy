@@ -34,7 +34,7 @@
           </li>
           <li><%= link_to "Cart", orders_path(session[:order_id]), class: "nav-link active" %></li>
           <%if session[:merchant_id] %>
-            <li><%= link_to "Merchants", merchants_path(session[:merchant_id]), class: "nav-link active" %></li>
+            <li><%= link_to "Merchants", merchant_path(Merchant.find_by(id: session[:merchant_id])), class: "nav-link active" %></li>
           <%end%>
           
         <%if session[:merchant_id] %>
