@@ -2,13 +2,23 @@ require "test_helper"
 
 describe CategoriesController do
   describe "Guest Users" do
-    # describe "index" do
-    #   it "renders the page" do
-    #     get categories_path
+    describe "new" do
+      it "requires a user to be logged in" do
+        get new_category_path
+        must_redirect_to root_path
+      end
+    end
 
-    #     must_respond_with :success
-    #   end
-    # end
+    describe "create" do
+      it "requires a user to be logged in" do
+        product = products(:starbursts)
+        category_data = {
+          name: "new category",
+        }
+        post product_categories_path(product.id), params: category_data
+        must_redirect_to root_path
+      end
+    end
   end
   describe "Logged in Users" do
     before do
@@ -23,12 +33,6 @@ describe CategoriesController do
     end
 
     describe "create" do
-      # it "creates a new category" do
-      #   category_data = {
-      #     category: {
-      #       name: "new category",
-      #     },
-      #   }
       it "creates a new category" do
         category_data = {
 
@@ -40,7 +44,6 @@ describe CategoriesController do
           post product_categories_path(product.id), params: category_data
         }.must_change "Category.count", +1
 
-        # must_redirect_to root_path
         expect(flash[:status]).must_equal :success
         expect(flash[:message]).wont_be_nil
 

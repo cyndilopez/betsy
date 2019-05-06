@@ -39,22 +39,9 @@
     <%= f.label :photoURL, "Product photo URL" %>
     <%= f.text_field :photoURL, placeholder: "http://image-host.com/yourimage.png" %>
   </div>
-  
+
   <div>
-    <%= f.label :categories %>
-    <%if Category.all == []%>
-    No categories to display at the time. Add one!
-    <%else%>
-    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
-    <%end%>
-  </div>
-  <div>
-    <%= f.label :category, "Add New Category" %>
-    <%# <%= link_to "Add new category", new_category_path, class: "btn btn-primary" %>
-    <%# <%= f.text_field :category, product_categories_path(product_id: @product.id), method: :patch%> 
-  </div>
-  <div>
-  <%= f.submit "Create!", class: "btn btn-success btn-block" %>
+  <%= f.submit "Create!", class: "btn btn-primary" %>
   </div>
   <% end %>
 
