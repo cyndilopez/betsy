@@ -4,39 +4,33 @@ class OrderItemsController < ApplicationController
   def create
     @order = current_order
     if @order == nil
-      @order = Order.new
+      @order = Order.new(status: "pending")
       @order.save
     end
 
-    # product = Product.find(params[:product_id])
-    # @order_item = OrderItem.new(order_items_params)
-    #   if @order_item.save
-    #     session[:order_id] = @order.id
-    #     flash[:status] = :success
-    #     flash[:message] = "Added to cart!"
-    #     redirect_to product_path(@order_item.product_id)
-    #   else
-    #     flash.now[:status] = :error
-    #     flash.now[:message] = "Unable to add to cart :("
-    #     redirect_back(fallback_location: root_path)
-    #   end
-    # end
-
-    @order_item = OrderItem.new(order_items_params)
+    @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
-    product_quantity = @order_item.quantity
-    order_item_id = Product.find_by(id: params[:product_id])
+    # product_quantity = @order_item.quantity
 
-    if product_quantity < order_item_id.stock
-      @order_item.reduce_product_stock(order_item_id)
+    product = Product.find_by(id: params[:product_id])
+    @order_quantity = 1
+    @order_item.quantity = @order_quantity
+    if @order_quantity <= product.stock
+      # @order_item.reduce_product_stock
       session[:order_id] = @order.id
-      @order_item.save
-      flash[:status] = :success
-      flash[:message] = "Added to cart!"
-      redirect_to product_path(@order_item.product_id)
+      successful = @order_item.save
+      if successful
+        flash[:status] = :success
+        flash[:message] = "Added to cart!"
+        redirect_to root_path
+      else
+        flash[:status] = :error
+        flash[:message] = "Could not add item to cart: #{@order_item.errors.messages}"
+        redirect_to root_path
+      end
     else
       flash.now[:status] = :error
-      flash.now[:message] = "Unable to add to cart, please try again later"
+      flash.now[:message] = "Unable to add to cart, not enough items in stock."
       redirect_back(fallback_location: root_path)
     end
   end
@@ -53,11 +47,11 @@ class OrderItemsController < ApplicationController
   def update
     @order_item = OrderItem.find_by(id: params[:id])
 
-    if @order_item.update(order_items_params)
+    if @order_item.update(quantity: params["quantity"])
       flash[:status] = :success
-      flash[:message] = "Updated #{@order_item.id}"
-
-      @order_item.reload
+      flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
+      redirect_to order_path(@order_item.order)
+      # @order_item.reload
     else
       flash.now[:status] = :error
       flash.now[:message] = "Unable to update"
@@ -67,7 +61,7 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    order_item_id = params[:id]
+    product = params[:id]
     @order_item = OrderItem.find_by(id: params[:id])
 
     if @order_item.destroy

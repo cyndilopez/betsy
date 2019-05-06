@@ -6,37 +6,35 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# seed_merchants = [
-#   {
-#     username: "Ninou",
-#     email: "Ninou@email.com"
-#   },
-#   {
-#     username: "Bebop",
-#     email: "Bebop.Kim@email.com"
-#   },
-#   {
-#     username: "Swayze",
-#     email: "Swayze@email.com"
-#   },
-# ]
+seed_merchants = [
+  {
+    username: "Ninou",
+    email: "Ninou@email.com",
+  },
+  {
+    username: "Bebop",
+    email: "Bebop.Kim@email.com",
+  },
+  {
+    username: "Swayze",
+    email: "Swayze@email.com",
+  },
+]
 
+merchant_failures = []
+seed_merchants.each do |seed_merchant|
+  merchant = Merchant.new(username: seed_merchant[:username], email: seed_merchant[:email])
+  successful = merchant.save
+  if successful
+    puts "Created merchant: #{merchant.inspect}"
+  else
+    merchant_failures << merchant
+    puts "Failed to save merchant: #{merchant.inspect}"
+  end
+end
 
-# merchant_failures = []
-# seed_merchants.each do |seed_merchant|
-#   merchant = Merchant.new(username: seed_merchant[:username], email: seed_merchant[:email])
-#   successful = merchant.save
-#   if successful
-#     puts "Created merchant: #{merchant.inspect}"
-#   else
-#     merchant_failures << merchant
-#     puts "Failed to save merchant: #{merchant.inspect}"
-#   end
-# end
-
-# puts "Added #{Merchant.count} merchant records"
-# puts "#{merchant_failures.length} merchants failed to save"
-
+puts "Added #{Merchant.count} merchant records"
+puts "#{merchant_failures.length} merchants failed to save"
 
 seed_products = [
   {

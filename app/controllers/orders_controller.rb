@@ -2,18 +2,22 @@ class OrdersController < ApplicationController
   skip_before_action :require_login
   before_action :find_order, except: [:create]
 
-  def create
-    @order = Order.new(status: params[:status])
-    if @order.save
-      redirect_to order_path(@order_id)
-    else
-      flash.now[:status] = :error
-      flash.now[:message] = "Unable to save order"
-      render :edit
-    end
+  def show
+    @order_items = @order.order_items
   end
 
-  def update
+  # def create # ??????
+  #   @order = Order.new(status: params[:status])
+  #   if @order.save
+  #     redirect_to order_path(@order_id)
+  #   else
+  #     flash.now[:status] = :error
+  #     flash.now[:message] = "Unable to save order"
+  #     render :edit
+  #   end
+  # end
+
+  def update #complete order
     @order.update(order_params)
     @order.complete_order
 
@@ -28,8 +32,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy # or can ibe update to change status to cancel
     @order.destroy
+    # @order.status = 'cancelled'
     flash[:status] = :success
     flash[:message] = "Your order has been cancelled."
     redirect_to root_path
