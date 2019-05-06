@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :products do
     resources :categories, only: [:index, :create]
   end
-  
+
+  get "categories/:id/products", to: "categories#categories", as: "categories_products"
+
   resources :merchants, only: [:index, :show]
   resources :orders
   get "/auth/github", as: "github_login"
