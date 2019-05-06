@@ -15,7 +15,7 @@
       <th>In Stock</th>
       <% session[:merchant_id] == @merchant.id %>
         <th>Update</th>
-        <th>Display</th>
+        <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +26,7 @@
         <td><%= product.description %></td>
         <td><%= product.stock %></td>
         <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
-        <td>Public</td>
+        <td><%= product.active ? "Retire" : "Display" %></td>
       </tr>
     <% end %>
   </tbody>
