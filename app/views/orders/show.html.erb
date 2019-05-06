@@ -1,10 +1,13 @@
 <% @order_items.each do |order_item|%>
-  <%=order_item.product.name%>
-  <%=order_item.product.price%>
+  <br>
+  <p><%=order_item.product.name%></p>
+  <p>Price: <%=order_item.product.price%></p>
   <p>Quantity: <%=order_item.quantity%></p>
   <%= form_tag order_item_path(order_item), method: :patch%>
-  <%= text_field_tag :quantity%>
-  <%# <%= text_field_tag "order_items[#{order_item.id}]", order_item.%> 
+  <%# <%= text_field_tag :quantity%> 
+  <%= text_field_tag "order_items[#{order_item.id}]", order_item.quantity, :id => "order_items_#{order_item.id}" %>
+  <br>
+<% end %>
+  <br>
   <%= submit_tag%>
 
-<% end %>
