@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
     if successful
       flash[:status] = :success
       flash[:message] = "Successfully saved #{@product.name} to the database."
-      redirect_to products_path
+      redirect_to product_categories_path(@product.id)
     else
       flash.now[:status] = :error
       flash.now[:message] = "Could not save product!"
