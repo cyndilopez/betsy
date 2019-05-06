@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   has_many :order_items, inverse_of: :order
+  has_many :products, :through => :order_item
 
   validates :status, presence: true
 

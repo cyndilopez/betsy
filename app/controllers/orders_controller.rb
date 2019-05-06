@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
   before_action :find_order, except: [:create]
 
+  def show
+    @order_items = @order.order_items
+  end
+
   # def create # ??????
   #   @order = Order.new(status: params[:status])
   #   if @order.save
@@ -27,7 +31,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def destroy # or can ibe update to change status to cancel 
+  def destroy # or can ibe update to change status to cancel
     @order.destroy
     # @order.status = 'cancelled'
     flash[:status] = :success
