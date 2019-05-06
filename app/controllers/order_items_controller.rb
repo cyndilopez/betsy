@@ -51,7 +51,6 @@ class OrderItemsController < ApplicationController
       flash[:status] = :success
       flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
       redirect_to order_path(@order_item.order)
-      # @order_item.reload
     else
       flash.now[:status] = :error
       flash.now[:message] = "Unable to update"
