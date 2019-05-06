@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-05-06T12:07:58-07:00">2019-05-06T12:07:58-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-05-06T12:54:58-07:00">2019-05-06T12:54:58-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.46
+         1.51
        </span>
     </span> hits/line)
   </h2>
@@ -57,7 +57,7 @@
         <td>18</td>
         <td>14</td>
         <td>4</td>
-        <td>2.4</td>
+        <td>2.5</td>
       </tr>
       
       <tr>
@@ -87,7 +87,7 @@
         <td>51</td>
         <td>18</td>
         <td>33</td>
-        <td>0.5</td>
+        <td>0.7</td>
       </tr>
       
       <tr>
@@ -410,8 +410,8 @@
           <code class="ruby">  def current_order</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="21">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="21">
+          <span class="hits">3</span>
           
           <code class="ruby">    if session[:order_id]</code>
         </li>
@@ -1055,26 +1055,26 @@
           <code class="ruby">  def create</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="5">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="5">
+          <span class="hits">3</span>
           
           <code class="ruby">    @order = current_order</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="6">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="6">
+          <span class="hits">3</span>
           
           <code class="ruby">    if @order == nil</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="7">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="7">
+          <span class="hits">3</span>
           
           <code class="ruby">      @order = Order.new(status: &quot;pending&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="8">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="8">
+          <span class="hits">3</span>
           
           <code class="ruby">      @order.save</code>
         </li>
@@ -1091,14 +1091,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="11">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="11">
+          <span class="hits">3</span>
           
           <code class="ruby">    @order_item = OrderItem.new(product_id: params[&quot;product_id&quot;])</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="12">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="12">
+          <span class="hits">3</span>
           
           <code class="ruby">    @order_item.order_id = @order.id</code>
         </li>
@@ -1115,26 +1115,26 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="15">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="15">
+          <span class="hits">3</span>
           
           <code class="ruby">    product = Product.find_by(id: params[:product_id])</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="16">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="16">
+          <span class="hits">3</span>
           
           <code class="ruby">    @order_quantity = 1</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="17">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="17">
+          <span class="hits">3</span>
           
           <code class="ruby">    @order_item.quantity = @order_quantity</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="18">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="18">
+          <span class="hits">3</span>
           
           <code class="ruby">    if @order_quantity &lt;= product.stock</code>
         </li>
