@@ -62,6 +62,7 @@ class ProductsController < ApplicationController
     #   head :not_found
     #   return
     # end
+    order_item_update = params["order_item"]
 
     if @product.update(product_params)
       flash[:status] = :success
