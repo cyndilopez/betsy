@@ -1,5 +1,7 @@
 <h1>The Sweetness</h1>
 <%=link_to "All Products", products_path%>
+
 <% if OrderItem.all != []%>
 <%= link_to "View my Cart", order_path(session[:order_id])%>
 <% end %>
+

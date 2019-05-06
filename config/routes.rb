@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     resources :order_items, only: [:create]
   end
   resources :categories, only: [:new, :create]
+  resources :products do
+    resources :categories, only: [:index, :create]
+  end
   resources :merchants, only: [:index, :show]
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
