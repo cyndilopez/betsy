@@ -175,7 +175,21 @@ describe ProductsController do
   end
 
   describe "update_status" do
+    before do
+      @product = products(:jelly_beans)
+      perform_login(merchants(:bob))
+    end
     it "updates the 'display' column to false if a product is inactive" do
+      #Assumption
+      expect(@product.active).must_equal true
+      expect(session[:merchant_id]).must_equal merchants(:bob).id
+
+      #Act
+      patch update_status_product_path(@product)
+      @product.reload
+
+      #Assert
+      expect(@product.active).must_equal false
     end
 
     it "updates the 'display' column to true if a product is active" do
