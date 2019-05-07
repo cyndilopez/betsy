@@ -16,11 +16,11 @@
     <% @order_items.each do |order_item|%>
       <tr>
         <th scope="row"><%=link_to order_item.product.name, product_path(order_item.product)%></th>
-        <td><%= order_item.product.price %></td>
+        <td>$<%= order_item.product.price %></td>
         <td><%= form_tag order_item_path(order_item), method: :patch%>
         <%= text_field_tag "order_items[#{order_item.id}]", order_item.quantity, :id => "order_items_#{order_item.id}" %></td>
         <td><em><%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %></em></td>
-        <td><%= order_item.subtotal %></td>
+        <td>$<%= order_item.subtotal %></td>
       </tr>
     <% end %>
     <tr class="spacer">
@@ -35,7 +35,7 @@
         <td></td>
         <td></td>
         <th scope="row">Cart Total</th>
-        <th id="total"><%= @order.total %></th>
+        <th id="total">$<%= @order.total %></th>
       </tr>
   </tbody>
 </table>
