@@ -6,13 +6,10 @@ describe MerchantsController do
     @merchant = merchants(:jenkins)
   end
   describe "index" do
-    it "can retrieve the index" do
+    it "can render without crashing" do
       get merchants_path
 
-      must_response_with :ok
-    end
-
-    it "can render even if there are no merchants" do
+      must_respond_with :ok
     end
   end
   describe "auth callback" do
