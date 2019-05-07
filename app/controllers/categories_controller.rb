@@ -1,9 +1,9 @@
 class CategoriesController < ApplicationController
   skip_before_action :require_login, only: [:index, :categories]
 
-  def index
+  def select_categories
     @categories = Category.all
-    @product = Product.find_by(id: params["product_id"])
+    @product = Product.find_by(id: params["id"])
   end
 
   def new

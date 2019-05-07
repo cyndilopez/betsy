@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   resources :products do
     resources :order_items, only: [:create]
   end
-  resources :categories, only: [:index, :new, :create]
+  resources :categories, only: [:new, :create]
+
   resources :products do
-    resources :categories, only: [:index, :create]
+    resources :categories, only: [:create]
   end
+
+  get "products/:id/categories", to: "categories#select_categories", as: "product_select_categories"
 
   get "categories/:id/products", to: "categories#categories", as: "categories_products"
 
