@@ -51,4 +51,13 @@ class MerchantsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def merchants
+    @merchant = Merchant.find_by(id: params[:id])
+    if @merchant
+      @products_by_merchants = Merchant.filter_by_merchant(params)
+    else
+      head :not_found
+    end
+  end
 end
