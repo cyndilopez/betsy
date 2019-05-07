@@ -27,5 +27,11 @@
 /config/master.key
 /coverage/
 
+# Ignore coverage
+/coverage/
+
 # Ignore environment
 .env
+
+# Ignore simple cov
+/coverage/

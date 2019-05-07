@@ -1,23 +1,59 @@
-<%if @order_items != []%>
-<% @order_items.each do |order_item|%>
-  <br>
-  <p><%=link_to order_item.product.name, product_path(order_item.product)%></p>
-  <p>Price: <%=order_item.product.price%></p>
-  <p>Quantity: <%=order_item.quantity%></p>
-  <%= form_tag order_item_path(order_item), method: :patch%>
-  <%# <%= text_field_tag :quantity%> 
-  <%= text_field_tag "order_items[#{order_item.id}]", order_item.quantity, :id => "order_items_#{order_item.id}" %>
-  <%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %>
-  <br>
-<% end %>
-  <br>
-  <%= submit_tag%>
+<h1>Your cart</h1>
+
+<table class="table table-borderless">
+  <thead class="order-items-header">
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col"></th>
+      <th scope="col">Subtotal</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  <%if @order_items != []%>
+    <% @order_items.each do |order_item|%>
+      <tr>
+        <td scope="row"><%=link_to order_item.product.name, product_path(order_item.product)%></t>
+        <td>$<%= order_item.product.price %></td>
+        <td><%= form_tag order_item_path(order_item), method: :patch%>
+        <%= text_field_tag "order_items[#{order_item.id}]", order_item.quantity, :id => "order_items_#{order_item.id}" %></td>
+        <td><em><%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %></em></td>
+        <td>$<%= order_item.subtotal %></td>
+      </tr>
+    <% end %>
+    <tr class="spacer">
+        <td></td>
+        <td></td>
+        <td></td>
+        <th scope="row"> </th>
+        <td></td>
+      </tr>
+      <tr class="total">
+        <td></td>
+        <td></td>
+        <td></td>
+        <th scope="row">Cart Total</th>
+        <th id="total">$<%= @order.total %></th>
+      </tr>
+      <tr class="submit">
+        <td></td>
+        <td></td>
+        <td></td>
+        <th scope="row">
+        <td><%= submit_tag("Save changes", class: "btn btn-table") %></td>
+      </tr>
+  </tbody>
+</table>
+  
   <%else%>
-  <h1>Your cart is empty</h1>
-  <%= link_to "Back to Home", root_path, method: :get%>
+    <h3>Your cart is empty</h3>
+    <%= link_to "Back to Home", root_path, method: :get%>
   <%end%>
   <div>
   <%= link_to "Checkout", order_checkout_path(@order), method: :get%>
   <div>
+
 
 

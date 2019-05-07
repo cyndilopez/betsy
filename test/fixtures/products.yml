@@ -6,6 +6,7 @@ one:
   price: 1.5
   photoURL: MyString
   stock: 1
+  active: true
 
 two:
   name: MyString
@@ -13,6 +14,7 @@ two:
   price: 1.5
   photoURL: MyString
   stock: 1
+  active: true
 
 starbursts:
   name: Starburst minis
@@ -22,6 +24,7 @@ starbursts:
   stock: 10
   merchant: bob
   categories: cake, confection
+  active: false
 
 jelly_beans:
   name: Jelly Belly
@@ -31,6 +34,7 @@ jelly_beans:
   stock: 20
   merchant: bob
   categories: cake
+  active: true
 
 cupcakes:
   name: Cuppy Cake

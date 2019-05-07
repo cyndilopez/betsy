@@ -15,9 +15,15 @@ class OrderItem < ApplicationRecord
     return self.product.update(stock: current_stock)
   end
 
-  private
-
+  def subtotal
+    self.unit_price * self.quantity
+  end
+  
   def unit_price
     self.product.price
   end
+  
+  private
+
+
 end

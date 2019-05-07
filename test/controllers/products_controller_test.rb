@@ -188,4 +188,52 @@ describe ProductsController do
       end
     end
   end
+
+  describe "update_status" do
+    before do
+      @product = products(:jelly_beans)
+      perform_login(merchants(:bob))
+    end
+    it "updates the 'active' column to false if a merchant marks it as inactive" do
+      #Assumption
+      expect(@product.active).must_equal true
+      expect(session[:merchant_id]).must_equal merchants(:bob).id
+
+      #Act
+      patch update_status_product_path(@product)
+      @product.reload
+
+      #Assert
+      expect(@product.active).must_equal false
+    end
+
+    it "updates the 'active' column to true if a merchant marks it as active" do
+      @product.active = false
+      @product.save
+      expect(@product.active).must_equal false
+
+      patch update_status_product_path(@product)
+      @product.reload
+
+      expect(@product.active).must_equal true
+    end
+
+    it "won't let an unauthorized merchant alter another merchant's product" do
+      # Arrange/Assumptions
+      different_product = products(:one)
+      expect(different_product.active).must_equal true
+
+      setup = session[:merchant_id] != different_product.merchant_id
+      expect(setup).must_equal true
+
+      # Act
+      patch update_status_product_path(different_product)
+      different_product.reload
+
+      # Assert
+      expect(different_product.active).must_equal true
+      expect(flash[:status]).must_equal :error
+      expect(flash[:message]).wont_be_nil
+    end
+  end
 end
