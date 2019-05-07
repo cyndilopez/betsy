@@ -1,3 +1,4 @@
+<%if @order_items != []%>
 <% @order_items.each do |order_item|%>
   <br>
   <p><%=order_item.product.name%></p>
@@ -6,8 +7,12 @@
   <%= form_tag order_item_path(order_item), method: :patch%>
   <%# <%= text_field_tag :quantity%> 
   <%= text_field_tag "order_items[#{order_item.id}]", order_item.quantity, :id => "order_items_#{order_item.id}" %>
+  <%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %>
   <br>
 <% end %>
   <br>
   <%= submit_tag%>
+  <%else%>
+  <h1>Your cart is empty</h1>
+  <%end%>
 

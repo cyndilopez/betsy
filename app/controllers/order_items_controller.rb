@@ -66,7 +66,6 @@ class OrderItemsController < ApplicationController
       end
     end
     redirect_to order_path(@order_item.order)
-
   end
 
   def destroy
@@ -75,14 +74,14 @@ class OrderItemsController < ApplicationController
 
     if @order_item.destroy
       flash[:status] = :success
-      flash[:messages] = "Successfully Deleted"
+      flash[:message] = "Successfully Deleted"
 
-      render :edit
+      redirect_to order_path(session[:order_id])
     else
       flash.now[:status] = :error
-      flash.now[:messages] = "Unable to delete"
+      flash.now[:message] = "Unable to delete"
 
-      render :edit
+      redirect_to root_path
     end
   end
 
