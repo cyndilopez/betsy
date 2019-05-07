@@ -192,7 +192,15 @@ describe ProductsController do
       expect(@product.active).must_equal false
     end
 
-    it "updates the 'display' column to true if a product is active" do
+    it "updates the 'active' column to true if a merchant marks it as active" do
+      @product.active = false
+      @product.save
+      expect(@product.active).must_equal false
+
+      patch update_status_product_path(@product)
+      @product.reload
+
+      expect(@product.active).must_equal true
     end
 
     it "won't let an unauthorized merchant alter another merchant's product" do
