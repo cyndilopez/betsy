@@ -7,15 +7,22 @@ Rails.application.routes.draw do
   resources :products do
     resources :order_items, only: [:create]
   end
-  resources :categories, only: [:index, :new, :create]
+  resources :categories, only: [:new, :create]
+
   resources :products do
-    resources :categories, only: [:index, :create]
+    resources :categories, only: [:create]
   end
+
+  get "products/:id/categories", to: "categories#select_categories", as: "product_select_categories"
 
   get "categories/:id/products", to: "categories#categories", as: "categories_products"
 
   resources :merchants, only: [:index, :show, :create]
   resources :orders
+
+  get "orders/:id/checkout", to: "orders#checkout", as: "order_checkout"
+  get "orders/:id/confirmation", to: "orders#confirmation", as: "order_confirmation"
+
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
