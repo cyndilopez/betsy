@@ -97,14 +97,20 @@ describe Order do
       order.status = "cancelled"
       expect(order.valid?).must_equal false
     end
+  end
 
-    # describe "relations" do
-    #   it "has order items" do
-    #     order_item = order.order_items(:starbursts)
-    #     expect(order.order_item.quantity).must_equal 1
+  describe "relations" do
+    it "has order items" do
+      expect(order.order_items.first).must_be_instance_of OrderItem
+      expect(order.order_items.length).must_equal 1
 
-    #     category = categories(:confection)
-    #     expect(category.products.length).must_equal 1
-    #   end
+      # describe "relations" do
+      #   it "has categories" do
+      #     product = products(:starbursts)
+      #     expect(product.categories.length).must_equal 2
+
+      #     category = categories(:confection)
+      #     expect(category.products.length).must_equal 1
+    end
   end
 end
