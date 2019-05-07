@@ -14,8 +14,8 @@ class ProductsController < ApplicationController
     #     flash[:notice] = "#{@products.count} in this category"
     #   end
     # else
-      @products = Product.all
-    # end 
+    @products = Product.all
+    # end
   end
 
   def show
@@ -62,6 +62,7 @@ class ProductsController < ApplicationController
     #   head :not_found
     #   return
     # end
+    order_item_update = params["order_item"]
 
     if @product.update(product_params)
       flash[:status] = :success
@@ -74,6 +75,26 @@ class ProductsController < ApplicationController
 
       render :edit, status: :bad_request
     end
+  end
+
+  def update_status
+    product_id = params[:id].to_i
+    @product = Product.find_by(id: product_id)
+
+    if @product.nil?
+      head :not_found
+      return
+    end
+
+    if !@product.active
+      @product.active = true
+    else
+      @product.active = false
+    end
+
+    @product.save
+
+    redirect_to merchant_path(Merchant.find_by(id: session[:merchant_id]))
   end
 
   private

@@ -48,31 +48,36 @@ ul {
 
 li {
   align-self: auto;
-  padding: 10px;
 }
 
 .products {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  // align-items: flex-start;
+  align-items: flex-start;
   margin: 2rem;
-  width: 100vw;
+  width: inherit;
   height: auto;
 }
 
+.product {
+  margin: 2rem;
+}
+
+img {
+  margin-bottom: .5rem
+}
 
 .products ul {
   display: block;
   flex-flow: column wrap;  
   width: 20vw;
-  height: 30vh;
+  height: auto;
   // justify-content: flex-start;
 }
 
 
-
-.product .btn {
+.btn {
   // margin-bottom: auto;
   vertical-align: baseline;
   background-color: #FF99CB;

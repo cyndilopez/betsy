@@ -11,10 +11,14 @@ Rails.application.routes.draw do
   resources :products do
     resources :categories, only: [:index, :create]
   end
-  
-  resources :merchants, only: [:index, :show]
+
+  get "categories/:id/products", to: "categories#categories", as: "categories_products"
+
+  resources :merchants, only: [:index, :show, :create]
   resources :orders
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
+
+  patch "/products/:id/toggle_active", to: "products#update_status", as: "update_status_product"
 end

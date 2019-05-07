@@ -3,8 +3,7 @@
 <section class="list-of-filters">
   <ul>
   <% (Category.all).each do |cat| %>
-    <%= cat.name %>
-      <li><%= link_to "#{cat.name}", products_path(:category=>"#{cat.name}") %></li>
+      <li><%= link_to "#{cat.name}", categories_products_path(cat) %></li>
   <%end%>
   </ul>
 </section>
