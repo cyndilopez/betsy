@@ -31,3 +31,12 @@ jelly_beans:
   stock: 20
   merchant: bob
   categories: cake
+
+cupcakes:
+  name: Cuppy Cake
+  description: It's delicious and portable!
+  price: 6.00
+  photoURL:
+  stock: 10
+  merchant: jenkins
+  categories: cake

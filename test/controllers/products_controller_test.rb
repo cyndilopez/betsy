@@ -104,10 +104,13 @@ describe ProductsController do
 
     describe "edit" do
       before do
-        @product = Product.first
+        @product = merchants(:jenkins).products.first
         perform_login(merchants(:jenkins))
       end
-      it "responds with OK for a real product" do
+      it "responds with OK for a real product and an authorized merchant" do
+        expect(session[:merchant_id]).must_equal merchants(:jenkins).id
+        expect(@product.merchant_id).must_equal merchants(:jenkins).id
+
         get edit_product_path(@product)
 
         must_respond_with :ok
