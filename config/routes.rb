@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :orders
 
   get "orders/:id/checkout", to: "orders#checkout", as: "order_checkout"
+  get "orders/:id/confirmation", to: "orders#confirmation", as: "order_confirmation"
 
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
