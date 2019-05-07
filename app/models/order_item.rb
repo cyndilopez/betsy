@@ -6,11 +6,8 @@ class OrderItem < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
-  def add_product_stock
-    product = Product.find_by(id: self.product)
-    add_product_stock = product.stock + self.quantity
-    product.update(stock: add_product)
-    return add_product_stock
+  def subtotal
+    self.unit_price * self.quantity
   end
 
   def reduce_product_stock
@@ -21,7 +18,7 @@ class OrderItem < ApplicationRecord
   def subtotal
     self.unit_price * self.quantity
   end
-
+  
   def unit_price
     self.product.price
   end
