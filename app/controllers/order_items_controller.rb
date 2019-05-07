@@ -3,22 +3,17 @@ class OrderItemsController < ApplicationController
 
   def create
     @order = current_order
-    p @order
     if @order == nil
       @order = Order.new(status: "pending")
       @order.save
     end
-    p @order
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
-    # product_quantity = @order_item.quantity
 
     product = Product.find_by(id: params[:product_id])
-    p product
     @order_quantity = 1
     @order_item.quantity = @order_quantity
     if @order_quantity <= product.stock
-      # @order_item.reduce_product_stock
       session[:order_id] = @order.id
       successful = @order_item.save
       if successful
@@ -48,24 +43,24 @@ class OrderItemsController < ApplicationController
 
   def update
     params[:order_items].each do |id, qty|
-      p id
-      p qty
-      # @order_item = OrderItem.find_by(id: params[:id])
       @order_item = OrderItem.find_by(id: id)
-
-      # if @order_item.update(quantity: params["quantity"])
-      if @order_item.update(quantity: qty)
-        flash[:status] = :success
-        flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
-        # @order_item.reload
+      stock = @order_item.product.stock
+      if qty.to_i <= stock
+        if @order_item.update(quantity: qty)
+          flash[:status] = :success
+          flash[:message] = "Successfully updated order"
+          redirect_to order_path(@order_item.order)
+        else
+          flash.now[:status] = :error
+          flash.now[:message] = "Unable to update order: #{@order_item.errors.messages}"
+          redirect_to root_path
+        end
       else
-        flash.now[:status] = :error
-        flash.now[:message] = "Unable to update"
-
-        # render :edit
+        flash[:status] = :error
+        flash[:message] = "Unable to add #{@order_item.product.name} to cart, not enough items in stock."
+        redirect_to order_path(@order_item.order)
       end
     end
-    redirect_to order_path(@order_item.order)
   end
 
   def destroy
@@ -74,7 +69,7 @@ class OrderItemsController < ApplicationController
 
     if @order_item.destroy
       flash[:status] = :success
-      flash[:message] = "Successfully Deleted"
+      flash[:message] = "Successfully deleted item"
 
       redirect_to order_path(session[:order_id])
     else
