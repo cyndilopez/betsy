@@ -19,16 +19,21 @@ class OrdersController < ApplicationController
 
   def update #complete order
     @order.update(order_params)
-    @order.complete_order
-
-    if @order.save
+    @order.status = "paid"
+    successful = @order.save
+    if successful
       flash[:status] = :success
       flash[:message] = "Thanks for shopping with us! Please save your order number - ##{@order.id}."
       redirect_to order_path(@order.id)
     else
-      flash[:alert] = @order.errors
-      render :edit
+      flash[:status] = :error
+      flash[:message] = "Can't checkout, #{@order.errors.messages}"
+      redirect_to root_path
     end
+  end
+
+  def checkout
+    @order = Order.find_by(id: params[:id])
   end
 
   def destroy # will be set back to pending
@@ -60,7 +65,7 @@ class OrdersController < ApplicationController
     render_404 unless @order
   end
 
-  def complete_order
+  def self.complete_order
     self.status = "paid"
   end
 
