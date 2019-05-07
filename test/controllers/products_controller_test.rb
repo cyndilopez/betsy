@@ -179,7 +179,7 @@ describe ProductsController do
       @product = products(:jelly_beans)
       perform_login(merchants(:bob))
     end
-    it "updates the 'display' column to false if a product is inactive" do
+    it "updates the 'active' column to false if a merchant marks it as inactive" do
       #Assumption
       expect(@product.active).must_equal true
       expect(session[:merchant_id]).must_equal merchants(:bob).id
