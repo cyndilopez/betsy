@@ -44,6 +44,7 @@ class OrderItemsController < ApplicationController
 
   def update
     params[:order_items].each do |id, qty|
+
       @order_item = OrderItem.find_by(id: id)
       stock = @order_item.product.stock
       if qty.to_i <= stock

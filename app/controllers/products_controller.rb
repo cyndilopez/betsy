@@ -14,8 +14,8 @@ class ProductsController < ApplicationController
     #     flash[:notice] = "#{@products.count} in this category"
     #   end
     # else
-      @products = Product.all
-    # end 
+    @products = Product.all
+    # end
   end
 
   def show
@@ -53,6 +53,12 @@ class ProductsController < ApplicationController
     # unless @product
     #   head :not_found
     # end
+
+    unless session[:merchant_id] == @product.merchant_id
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit this product."
+      redirect_to root_path
+    end
   end
 
   def update
@@ -77,6 +83,25 @@ class ProductsController < ApplicationController
     end
   end
 
+  def update_status
+    product_id = params[:id].to_i
+    @product = Product.find_by(id: product_id)
+
+    if @product.nil?
+      head :not_found
+      return
+    end
+
+    if !@product.active
+      @product.active = true
+    else
+      @product.active = false
+    end
+
+    @product.save
+
+    redirect_to merchant_path(Merchant.find_by(id: session[:merchant_id]))
+  end
 
   private
 
