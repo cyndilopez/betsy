@@ -44,3 +44,11 @@ cupcakes:
   stock: 10
   merchant: jenkins
   categories: cake
+
+no_stock:
+  name: MyString
+  description: MyString
+  price: 1.5
+  photoURL: MyString
+  stock: 0
+  active: true

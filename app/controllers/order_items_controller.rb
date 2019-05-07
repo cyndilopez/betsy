@@ -16,6 +16,10 @@ class OrderItemsController < ApplicationController
     @order_item.order_id = @order.id
 
     product = Product.find_by(id: params[:product_id])
+    unless product
+      head :not_found
+      return
+    end
     @order_quantity = 1
     @order_item.quantity = @order_quantity
     if @order_quantity <= product.stock
