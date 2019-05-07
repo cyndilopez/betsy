@@ -86,6 +86,13 @@ class ProductsController < ApplicationController
       return
     end
 
+    unless session[:merchant_id] == @product.merchant_id
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit this merchant's product."
+      redirect_to root_path
+      return
+    end
+
     if !@product.active
       @product.active = true
     else
@@ -103,8 +110,8 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description, :price, :photoURL, :stock, :merchant_id, category_ids: [])
   end
 
-  def select_active_products
-    products = Product.all
-    @products = products.select { |p| p.active }
-  end
+  # def select_active_products
+  #   products = Product.all
+  #   @products = products.select { |p| p.active }
+  # end
 end

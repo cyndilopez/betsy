@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
 
-  patch "/products/:id/toggle_active", to: "products#update_status", as: "update_status_product"
+  patch "/products/:id/update_status", to: "products#update_status", as: "update_status_product"
 end

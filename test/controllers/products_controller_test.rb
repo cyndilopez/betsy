@@ -36,7 +36,7 @@ describe ProductsController do
     before do
       perform_login(merchants(:jenkins))
     end
-    
+
     describe "new" do
       it "can get to the new form page" do
         get new_product_path
@@ -171,6 +171,17 @@ describe ProductsController do
 
         must_respond_with :bad_request
       end
+    end
+  end
+
+  describe "update_status" do
+    it "updates the 'display' column to false if a product is inactive" do
+    end
+
+    it "updates the 'display' column to true if a product is active" do
+    end
+
+    it "won't let an unauthorized merchant alter another merchant's product" do
     end
   end
 end
