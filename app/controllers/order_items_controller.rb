@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
+  skip_before_action :verify_authenticity_token
 
   def create
     @order = current_order
@@ -49,18 +50,18 @@ class OrderItemsController < ApplicationController
         if @order_item.update(quantity: qty)
           flash[:status] = :success
           flash[:message] = "Successfully updated order"
-          redirect_to order_path(@order_item.order)
+          # redirect_to order_path(@order_item.order)
         else
           flash.now[:status] = :error
           flash.now[:message] = "Unable to update order: #{@order_item.errors.messages}"
-          redirect_to root_path
+          # redirect_to root_path
         end
       else
         flash[:status] = :error
         flash[:message] = "Unable to add #{@order_item.product.name} to cart, not enough items in stock."
-        redirect_to order_path(@order_item.order)
       end
     end
+    redirect_to order_path(@order_item.order)
   end
 
   def destroy
