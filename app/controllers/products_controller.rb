@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     #     flash[:notice] = "#{@products.count} in this category"
     #   end
     # else
-    @products = Product.all
+    @products = Product.all.select { |p| p.active }
     # end
   end
 
@@ -101,5 +101,10 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :description, :price, :photoURL, :stock, :merchant_id, category_ids: [])
+  end
+
+  def select_active_products
+    products = Product.all
+    @products = products.select { |p| p.active }
   end
 end

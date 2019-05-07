@@ -29,8 +29,8 @@ class ApplicationController < ActionController::Base
     return merchant
   end
 
-  def select_active_products(products)
-    active_products = products.select { |p| p.active }
-    return active_products
-  end
+  # def select_active_products
+  #   products = Product.all
+  #   @products = products.select { |p| p.active }
+  # end
 end
