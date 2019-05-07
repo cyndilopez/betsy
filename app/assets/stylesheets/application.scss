@@ -90,7 +90,12 @@ img {
   background-color: rgb(255, 174, 213);
 }
 
+.list-group {
+  margin-bottom: 2rem;
+}
 .list-group-item {
+  margin-left: 0px;
+  padding-left: .25rem;
   border: 0px;
   align-self: flex-start
 }

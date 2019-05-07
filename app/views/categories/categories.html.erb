@@ -1,10 +1,10 @@
 <% @products_by_categories.each do |product| %>
 <h2><%= product.name %></h2>
 <%# <%= image_tag("#{@product.photoURL}") %> 
-<ul>
-  <li><%=product.description %></li>
-  <li><%=product.price %></li>
+<ul class="list-group">
+  <li class="list-group-item">Price: <%=product.price %></li>
+  <li class="list-group-item">Description: <%=product.description %></li>
 
-  <li><%= link_to "Add to cart", product_order_items_path(product), method: :post, class: "btn btn-primary btn-lg" %></li>
+  <li class="list-group-item"><%= link_to "Add to cart", product_order_items_path(product), method: :post, class: "btn btn-primary btn-lg" %></li>
 </ul>
 <%end%>
