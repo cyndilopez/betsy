@@ -204,6 +204,21 @@ describe ProductsController do
     end
 
     it "won't let an unauthorized merchant alter another merchant's product" do
+      # Arrange/Assumptions
+      different_product = products(:one)
+      expect(different_product.active).must_equal true
+
+      setup = session[:merchant_id] != different_product.merchant_id
+      expect(setup).must_equal true
+
+      # Act
+      patch update_status_product_path(different_product)
+      different_product.reload
+
+      # Assert
+      expect(different_product.active).must_equal true
+      expect(flash[:status]).must_equal :error
+      expect(flash[:message]).wont_be_nil
     end
   end
 end
