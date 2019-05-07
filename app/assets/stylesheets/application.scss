@@ -87,3 +87,8 @@ img {
 .btn:hover {
   background-color: rgb(255, 174, 213);
 }
+
+.list-group-item {
+  border: 0px;
+  align-self: flex-start
+}
