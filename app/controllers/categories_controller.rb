@@ -27,6 +27,11 @@ class CategoriesController < ApplicationController
   end
 
   def categories
-    @products_by_categories = Category.filter_by_category(params)
+    @category = Category.find_by(id: params[:id])
+    if @category
+      @products_by_categories = Category.filter_by_category(params)
+    else
+      head :not_found
+    end
   end
 end
