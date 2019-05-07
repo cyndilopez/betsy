@@ -1,7 +1,7 @@
 <%if @order_items != []%>
 <% @order_items.each do |order_item|%>
   <br>
-  <p><%=order_item.product.name%></p>
+  <p><%=link_to order_item.product.name, product_path(order_item.product)%></p>
   <p>Price: <%=order_item.product.price%></p>
   <p>Quantity: <%=order_item.quantity%></p>
   <%= form_tag order_item_path(order_item), method: :patch%>

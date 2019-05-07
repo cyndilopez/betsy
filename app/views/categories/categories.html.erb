@@ -1,6 +1,6 @@
 <h1><%=@category.name%></h1>
 <% @products_by_categories.each do |product| %>
-<h2><%= product.name %></h2>
+<h2><%= link_to product.name, product_path(product) %></h2>
 <%# <%= image_tag("#{@product.photoURL}") %> 
 <ul class="list-group">
   <li class="list-group-item">Price: <%=product.price %></li>

@@ -4,7 +4,7 @@
 <section class="product">
   <ul>
     <li><%= image_tag "#{product.photoURL}" %></li>
-    <li><h5><%= product.name %></h5></li>
+    <li><h5><%= link_to product.name, product_path(product) %></h5></li>
     <li><%= product.description %></li>
     <li><%= product.price %></li>
    <%if product.stock == 0%>
