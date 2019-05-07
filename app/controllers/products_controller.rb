@@ -53,6 +53,12 @@ class ProductsController < ApplicationController
     # unless @product
     #   head :not_found
     # end
+
+    unless session[:merchant_id] == @product.merchant_id
+      flash[:status] = :error
+      flash[:message] = "You don't have permission to edit this product."
+      redirect_to root_path
+    end
   end
 
   def update

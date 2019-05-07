@@ -22,7 +22,6 @@ class OrdersController < ApplicationController
     @order.complete_order
 
     if @order.save
-      # refresh to delete cc data
       flash[:status] = :success
       flash[:message] = "Thanks for shopping with us! Please save your order number - ##{@order.id}."
       redirect_to order_path(@order.id)
@@ -32,9 +31,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  def destroy # or can ibe update to change status to cancel
-    @order.destroy
-    # @order.status = 'cancelled'
+  def destroy # will be set back to pending
+    @order.update
+    @order.pending_order
+
     flash[:status] = :success
     flash[:message] = "Your order has been cancelled."
     redirect_to root_path
@@ -50,7 +50,8 @@ class OrdersController < ApplicationController
       :address,
       :cc_num,
       :cc_cvv,
-      :cc_expiration
+      :cc_expiration,
+      :zip_code
     )
   end
 
@@ -61,5 +62,9 @@ class OrdersController < ApplicationController
 
   def complete_order
     self.status = "paid"
+  end
+
+  def pending_order
+    self.status = "pending"
   end
 end

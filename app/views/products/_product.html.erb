@@ -4,9 +4,13 @@
 <section class="product">
   <ul>
     <li><%= image_tag "#{product.photoURL}" %></li>
-    <li><h5><%= product.name %></h5></li>
+    <li><h5><%= link_to product.name, product_path(product) %></h5></li>
     <li><%= product.description %></li>
     <li><%= product.price %></li>
-  </ul>
+   <%if product.stock == 0%>
+  <li><a class="text-white bg-dark">Out of Stock</a></li>
+    </ul>
+  <%else%>
   <%= link_to "Add to cart", product_order_items_path(product), method: :post, class: "btn btn-primary" %>
+  <%end%>
 </section>

@@ -31,3 +31,6 @@
 
 # Ignore environment
 .env
+
+# Ignore simple cov
+/coverage/

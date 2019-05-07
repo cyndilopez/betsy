@@ -1,7 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  status: MyString
+  status: pending 
+  name: Cyndi Cotton-Candy
+  email: cyndi@ada.edu
+  address: Cupcake St 200 
+  cc_num: 1234567891012141 
+  cc_cvv: 123
+  cc_expiration: 12/2025
+  zip_code: 12345
 
 two:
-  status: MyString
+  status: paid  
+  name: Jansen Candy
+  email: jansen@ada.edu
+  address: Carrotcake St 200 
+  cc_num: 1114567891012141 
+  cc_cvv: 456
+  cc_expiration: 12/2030
+  zip_code: 56789
+  

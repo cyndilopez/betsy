@@ -25,4 +25,15 @@ describe Category do
       expect(category.products.length).must_equal 1
     end
   end
+
+  describe "#filter_by_category" do
+    it "finds the products associated with a category" do
+      category = categories(:cake)
+      category_data = {
+        id: category.id,
+      }
+      products = Category.filter_by_category(category_data)
+      expect(products.length).must_equal 2
+    end
+  end
 end
