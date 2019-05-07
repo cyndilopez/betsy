@@ -28,4 +28,9 @@ class ApplicationController < ActionController::Base
     merchant = Merchant.find_by(id: merchant_id)
     return merchant
   end
+
+  # def select_active_products
+  #   products = Product.all
+  #   @products = products.select { |p| p.active }
+  # end
 end

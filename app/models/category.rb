@@ -4,6 +4,6 @@ class Category < ApplicationRecord
 
   def self.filter_by_category(params)
     category = Category.find_by(id: params[:id])
-    @products = category.products
+    @products = category.products.select { |p| p.active }
   end
 end
