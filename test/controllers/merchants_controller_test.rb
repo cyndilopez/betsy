@@ -5,6 +5,16 @@ describe MerchantsController do
   before do
     @merchant = merchants(:jenkins)
   end
+  describe "index" do
+    it "can retrieve the index" do
+      get merchants_path
+
+      must_response_with :ok
+    end
+
+    it "can render even if there are no merchants" do
+    end
+  end
   describe "auth callback" do
     before do
       @start_count = Merchant.count
