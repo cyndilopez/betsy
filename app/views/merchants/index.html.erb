@@ -1,0 +1,11 @@
+<h1>Index for Merchants</h1>
+
+<ul>
+  <% @merchants.each do |merchant|%>
+  <li>
+    <p>
+      <%= merchant.username %>
+    </p>
+  </li>
+  <% end %>
+</ul>
