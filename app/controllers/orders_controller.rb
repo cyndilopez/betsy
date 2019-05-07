@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
       flash[:status] = :success
       flash[:message] = "Thanks for shopping with us! Please save your order number - ##{@order.id}."
       redirect_to order_confirmation_path(@order)
-      session[:order_id] = nil
+      # session[:order_id] = nil
     else
       flash[:status] = :error
       flash[:message] = "Can't checkout, #{@order.errors.messages}"

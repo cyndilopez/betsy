@@ -8,6 +8,7 @@ class OrderItemsController < ApplicationController
       @order = Order.new(status: "pending")
       @order.save
     end
+    p @order.errors.messages
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
 
