@@ -14,4 +14,9 @@ class Merchant < ApplicationRecord
 
     return merchant
   end
+
+  def self.filter_by_merchant(params)
+    merchant = Merchant.find_by(id: params[:id])
+    @products = merchant.products.select { |p| p.active }
+  end
 end

@@ -4,7 +4,7 @@
   <% @merchants.each do |merchant|%>
   <li>
     <p>
-      <%= merchant.username %>
+      <%= link_to merchant.username, root_path %>
     </p>
   </li>
   <% end %>
