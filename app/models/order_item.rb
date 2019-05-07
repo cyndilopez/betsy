@@ -22,9 +22,11 @@ class OrderItem < ApplicationRecord
     self.unit_price * self.quantity
   end
 
-  private
-
   def unit_price
     self.product.price
   end
+  
+  private
+
+
 end
