@@ -71,7 +71,11 @@ li {
 }
 
 img {
-  margin-bottom: .5rem
+  margin: 0;
+}
+
+div {
+  margin: 0;
 }
 
 .products ul {
@@ -82,6 +86,10 @@ img {
   // justify-content: flex-start;
 }
 
+input.btn {
+  width: auto;
+  margin-top: 1.5rem;
+}
 
 .btn {
   // margin-bottom: auto;
@@ -106,8 +114,9 @@ img {
 }
 
 .table {
- width: 95vw;
- margin: 2rem 1rem;
+ width: 80vw;
+ margin-top: 2rem;
+ margin-left: 2rem;
  padding: 5rem;
  border: 0;
 }
@@ -124,12 +133,108 @@ img {
   font-style: regular;
 }
 
+.total {
+  border-top: 1px solid;
+}
+
 input[type=text] {
   background-color: rgba(255, 255, 255, 0.212);
   border: 1px solid gray;
-  width: 2rem;
+  width: auto;
+  align-self: left;
 }
 
 #total {
   color: rgb(56, 56, 56);
+}
+
+header#homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img.carousel {
+  object-fit: cover;
+  width: 90vw;
+  height: 50vh;
+}
+
+div.carousel {
+  display: flex;
+  margin: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+div.carousel-item {
+  height: 20vh;
+  margin: 0
+}
+
+
+.value-button {
+  display: inline-block;
+  border: 0px;
+  margin: 0px;
+  // width: 40px;
+  // height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  // padding: 11px 0;
+  background: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+  margin-right: -4px;
+  border-radius: 0 8px 8px 0;
+  font-size: 20px;
+}
+
+form #increase {
+  margin-left: -4px;
+  border-radius: 0 8px 8px 0;
+  font-size: 20px;
+}
+
+form #input-wrap {
+  margin: 0px;
+  padding: 0px;
+}
+
+input {
+  text-align: left;
+  border: none;
+  margin: 0px;
+  width: 40px;
+
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+header.logo {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  margin-top: 2rem;
+}
+
+img.logo {
+  width: 30%;
+  height: 30%;
 }

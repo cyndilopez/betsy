@@ -1,0 +1,42 @@
+<%= form_with model: @order, :method => :patch,  class: 'product-form' do |f| %>
+
+  <div class= "form-group">
+    <%= f.label :name, "Name on Credit Card" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  
+  <div>
+    <%= f.label :email, "Email" %>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :address, "Address" %>
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+ 
+  <div>
+    <%= f.label :cc_num, "Credit Card Number" %>
+    <%= f.text_area :cc_num, placeholder: "1234567890123456", class: "form-control"%>
+  </div>
+
+  <div>
+    <%= f.label :cc_cvv, "CVV" %>
+    <%= f.text_field :cc_cvv, placeholder: "123", class: "form-control" %>
+  </div>
+
+   <div>
+    <%= f.label :cc_expiration, "Expiration" %>
+    <%= f.text_field :cc_expiration, placeholder: "mm/yyyy", class: "form-control"%>
+  </div>
+
+  <div>
+    <%= f.label :zip_code, "Zip Code" %>
+    <%= f.text_field :zip_code, placeholder: "98105", class: "form-control"%>
+  </div>
+
+  <div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+

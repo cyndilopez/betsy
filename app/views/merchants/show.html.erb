@@ -6,7 +6,7 @@
 
 <%# <%= session[:merchant_id]%>
 
-<table class="table">
+<table class="table table-borderless">
   <thead>
     <tr>
       <th>Name</th>
@@ -34,7 +34,13 @@
         <td><%= product.description %></td>
         <td><%= product.stock %></td>
         <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
-        <td><%= link_to product.active ? "Active" : "Inactive", update_status_product_path(product), class: "btn btn-primary", method: :patch %></td>
+        <td>
+          <% if product.active? %>
+          <%= link_to "Active", update_status_product_path(product), class: "btn btn-primary", method: :patch %>
+          <% else %>
+          <%= link_to "Inactive", update_status_product_path(product), class: "btn btn-primary inactive", method: :patch %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
