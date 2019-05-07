@@ -6,9 +6,12 @@ class OrderItemsController < ApplicationController
     @order = current_order
     if @order == nil
       @order = Order.new(status: "pending")
-      @order.save
+      successful = @order.save
+      if !successful
+        flash[:status] = :error
+        flash[:message] = "Could not create order: #{@order.errors.messages}"
+      end
     end
-    p @order.errors.messages
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
 
@@ -34,18 +37,8 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  def edit
-    @order_item = OrderItem.find_by(id: params[:id])
-
-    unless @order_item
-      head :not_found
-      return
-    end
-  end
-
   def update
     params[:order_items].each do |id, qty|
-
       @order_item = OrderItem.find_by(id: id)
       stock = @order_item.product.stock
       if qty.to_i <= stock

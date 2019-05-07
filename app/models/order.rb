@@ -29,4 +29,12 @@ class Order < ApplicationRecord
     end
     return total
   end
+
+
+
+  def product_update
+    self.order_items.each do |order_item|
+      order_item.reduce_product_stock
+    end
+  end
 end

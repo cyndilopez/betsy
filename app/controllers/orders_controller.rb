@@ -1,20 +1,21 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login
-  before_action :find_order, except: [:create]
+  before_action :find_order
 
   def show
     @order_items = @order.order_items
   end
 
-  def update #complete order
+  def update
     @order.update(order_params)
     @order.status = "paid"
     successful = @order.save
     if successful
       flash[:status] = :success
       flash[:message] = "Thanks for shopping with us! Please save your order number - ##{@order.id}."
+      @order.product_update
       redirect_to order_confirmation_path(@order)
-      # session[:order_id] = nil
+      session[:order_id] = nil
     else
       flash[:status] = :error
       flash[:message] = "Can't checkout, #{@order.errors.messages}"
@@ -25,15 +26,6 @@ class OrdersController < ApplicationController
       @order_items = @order.order_items
     end
   end
-
-  # def destroy # will be set back to pending
-  #   @order.update
-  #   @order.pending_order
-
-  #   flash[:status] = :success
-  #   flash[:message] = "Your order has been cancelled."
-  #   redirect_to root_path
-  # end
 
   private
 
@@ -53,13 +45,5 @@ class OrdersController < ApplicationController
   def find_order
     @order = Order.find_by(id: params[:id])
     render_404 unless @order
-  end
-
-  def self.complete_order
-    self.status = "paid"
-  end
-
-  def pending_order
-    self.status = "pending"
   end
 end
