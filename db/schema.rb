@@ -8,9 +8,7 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 2019_05_06_184104) do
+# It's strongly recommended that you check this file into your version control system
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +50,13 @@ ActiveRecord::Schema.define(version: 2019_05_06_184104) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "email"
+    t.string "address"
+    t.bigint "cc_num"
+    t.integer "cc_expiration"
+    t.string "zip_code"
+    t.integer "cc_cvv"
   end
 
   create_table "products", force: :cascade do |t|

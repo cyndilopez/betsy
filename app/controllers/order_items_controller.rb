@@ -50,10 +50,7 @@ class OrderItemsController < ApplicationController
     params[:order_items].each do |id, qty|
       p id
       p qty
-      # @order_item = OrderItem.find_by(id: params[:id])
       @order_item = OrderItem.find_by(id: id)
-
-      # if @order_item.update(quantity: params["quantity"])
       if @order_item.update(quantity: qty)
         flash[:status] = :success
         flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
@@ -61,8 +58,6 @@ class OrderItemsController < ApplicationController
       else
         flash.now[:status] = :error
         flash.now[:message] = "Unable to update"
-
-        # render :edit
       end
     end
     redirect_to order_path(@order_item.order)
