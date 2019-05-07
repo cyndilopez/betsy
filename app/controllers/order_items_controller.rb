@@ -3,16 +3,18 @@ class OrderItemsController < ApplicationController
 
   def create
     @order = current_order
+    p @order
     if @order == nil
       @order = Order.new(status: "pending")
       @order.save
     end
-
+    p @order
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
     # product_quantity = @order_item.quantity
 
     product = Product.find_by(id: params[:product_id])
+    p product
     @order_quantity = 1
     @order_item.quantity = @order_quantity
     if @order_quantity <= product.stock
@@ -45,18 +47,21 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order_item = OrderItem.find_by(id: params[:id])
-
-    if @order_item.update(quantity: params["quantity"])
-      flash[:status] = :success
-      flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
-      redirect_to order_path(@order_item.order)
-    else
-      flash.now[:status] = :error
-      flash.now[:message] = "Unable to update"
-
-      render :edit
+    params[:order_items].each do |id, qty|
+      p id
+      p qty
+      @order_item = OrderItem.find_by(id: id)
+      if @order_item.update(quantity: qty)
+        flash[:status] = :success
+        flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
+        # @order_item.reload
+      else
+        flash.now[:status] = :error
+        flash.now[:message] = "Unable to update"
+      end
     end
+    redirect_to order_path(@order_item.order)
+
   end
 
   def destroy

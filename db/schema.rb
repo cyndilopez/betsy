@@ -8,9 +8,7 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 2019_05_06_233755) do
+# It's strongly recommended that you check this file into your version control system
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_233755) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "merchant_id"
+    t.boolean "active", default: true
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
