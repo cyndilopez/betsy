@@ -44,10 +44,12 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 li {
   align-self: auto;
+  margin: 10px;
 }
 
 .products {
@@ -86,4 +88,14 @@ img {
 
 .btn:hover {
   background-color: rgb(255, 174, 213);
+}
+
+.list-group {
+  margin-bottom: 2rem;
+}
+.list-group-item {
+  margin-left: 0px;
+  padding-left: .25rem;
+  border: 0px;
+  align-self: flex-start
 }

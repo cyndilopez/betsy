@@ -1,7 +1,12 @@
 require "test_helper"
 
 describe OrdersController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "show" do
+    it "renders the page" do
+      order = orders(:one)
+      get order_path(order)
+
+      must_respond_with :success
+    end
+  end
 end

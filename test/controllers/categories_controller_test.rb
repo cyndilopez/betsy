@@ -19,7 +19,22 @@ describe CategoriesController do
         must_redirect_to root_path
       end
     end
+
+    describe "categories" do
+      it "renders the page" do
+        category = categories(:cake)
+        get categories_products_path(category)
+        must_respond_with :success
+      end
+
+      it "returns a 404 if can't find category" do
+        category_id = -1
+        get categories_products_path(category_id)
+        must_respond_with :not_found
+      end
+    end
   end
+
   describe "Logged in Users" do
     before do
       merchant = merchants(:jenkins)

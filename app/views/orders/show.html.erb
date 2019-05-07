@@ -1,13 +1,19 @@
+<%if @order_items != []%>
 <% @order_items.each do |order_item|%>
   <br>
-  <p><%=order_item.product.name%></p>
+  <p><%=link_to order_item.product.name, product_path(order_item.product)%></p>
   <p>Price: <%=order_item.product.price%></p>
   <p>Quantity: <%=order_item.quantity%></p>
   <%= form_tag order_item_path(order_item), method: :patch%>
   <%# <%= text_field_tag :quantity%> 
   <%= text_field_tag "order_items[#{order_item.id}]", order_item.quantity, :id => "order_items_#{order_item.id}" %>
+  <%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %>
   <br>
 <% end %>
   <br>
   <%= submit_tag%>
+  <%else%>
+  <h1>Your cart is empty</h1>
+  <%= link_to "Back to Home", root_path, method: :get%>
+  <%end%>
 
