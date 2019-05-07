@@ -36,7 +36,7 @@ describe ProductsController do
     before do
       perform_login(merchants(:jenkins))
     end
-    
+
     describe "new" do
       it "can get to the new form page" do
         get new_product_path
@@ -105,6 +105,7 @@ describe ProductsController do
     describe "edit" do
       before do
         @product = Product.first
+        perform_login(merchants(:jenkins))
       end
       it "responds with OK for a real product" do
         get edit_product_path(@product)
@@ -118,6 +119,17 @@ describe ProductsController do
         get edit_product_path(product_id)
 
         must_respond_with :not_found
+      end
+
+      it "doesn't allow a user to edit another merchant's product" do
+        product_id = merchants(:bob).products.first.id
+
+        expect(session[:merchant_id]).must_equal merchants(:jenkins).id
+
+        get edit_product_path(product_id)
+
+        expect(flash[:status]).must_equal :error
+        expect(flash[:message]).wont_be_nil
       end
     end
 
