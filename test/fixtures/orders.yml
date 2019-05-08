@@ -19,4 +19,7 @@ two:
   cc_cvv: 456
   cc_expiration: 12/2030
   zip_code: 56789
+
+three:
+  status: pending
   

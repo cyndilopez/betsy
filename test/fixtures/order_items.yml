@@ -9,3 +9,8 @@ two:
   product: two
   order: two
   quantity: 1
+
+three:
+  product: starbursts
+  order: three
+  quantity: 2
