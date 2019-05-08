@@ -16,7 +16,7 @@
     <% @order_items.each do |order_item|%>
       <tr>
         <%= form_tag order_item_path(order_item), method: :patch%>
-        <td scope="row"><%=link_to order_item.product.name, product_path(order_item.product)%></t>
+        <td scope="row"><%=link_to order_item.product.name, product_path(order_item.product)%></td>
         <td>$<%= order_item.product.price %></td>  
    
         <td>
