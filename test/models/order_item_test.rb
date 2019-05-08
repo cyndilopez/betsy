@@ -44,5 +44,3 @@ describe OrderItem do
   end
 
 end
-  
-

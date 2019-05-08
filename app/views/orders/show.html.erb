@@ -20,8 +20,8 @@
         <td>$<%= order_item.product.price %></td>  
    
         <td>
-          <div class="value-button" onclick="decreaseValue(event)" value="Decrease Value">-</div>
-          <input type="quantity" id="order-item<%= order_item.id %>" value="<%= order_item.quantity%>" name="order_items[<%=order_item.id%>]"  />
+          <div class="value-button" onclick="decreaseValue('<%= order_item.id %>')" value="Decrease Value">-</div>
+          <input type="quantity" id="order-item<%= order_item.id %>" value="<%= order_item.quantity %>" name="order_items[<%= order_item.id %>]"  />
           <div class="value-button" onclick="increaseValue('<%= order_item.id %>')" value="Increase Value">+</div>
         </td>
         <td><em><%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %></em></td>
