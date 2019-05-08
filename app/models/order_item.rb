@@ -1,6 +1,9 @@
 class OrderItem < ApplicationRecord
   belongs_to :product
+  has_one :merchant, through: :product
   belongs_to :order
+  
+
 
   validates :order, presence: true
 

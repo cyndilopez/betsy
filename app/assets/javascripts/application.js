@@ -9,9 +9,9 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.  
-  //= require jquery3
-  //= require popper
-  //= require bootstrap-sprockets
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
 
 //
 //= require rails-ujs
@@ -19,3 +19,19 @@
 //= require turbolinks
 //= require_tree .
 
+
+function increaseValue(id) {
+  console.log(id)
+  var value = parseInt(document.getElementById('order-item' + id).value, 10);
+  value = isNaN(value) ? 0 : value;
+  value++;
+  document.getElementById('order-item' + id).value = value;
+}
+
+function decreaseValue(id) {
+  var value = parseInt(document.getElementById('order-item' + id).value, 10);
+  value = isNaN(value) ? 0 : value;
+  value < 1 ? value = 1 : '';
+  value--;
+  document.getElementById('order-item' + id).value = value;
+}
