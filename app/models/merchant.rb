@@ -23,15 +23,15 @@ class Merchant < ApplicationRecord
         puts item
       end
     end
-
   end
   
-  def self.orders_list
-    
-  end
   
   def self.total_revenue
-    self.orders
+    total_revenue = 0
+    self.order_items.each do |item|
+      total_revenue += item.subtotal
+    end
+    return total_revenue
   end
   
 end
