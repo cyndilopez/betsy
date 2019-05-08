@@ -18,6 +18,11 @@ describe OrderItem do
       expect(order_item.valid?).must_equal false
     end
 
+    it "requires a quantity" do
+      order_item.quantity = nil
+      expect(order_item.valid?).must_equal false
+    end
+
     it "has a quantity that is an integer and greater than zero" do
       cases = ["string", 1.45, :tree, -1, -1.45]
       cases.each do |item|
