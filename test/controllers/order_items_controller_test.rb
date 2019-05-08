@@ -128,4 +128,34 @@ describe OrderItemsController do
       must_redirect_to order_path(@order)
     end
   end
+
+  describe "destroy" do
+    before do
+      @product = products(:one)
+      @order = orders(:one)
+
+      @order_item_data = {
+        order_item: {
+          product_id: @product.id,
+          quantity: 2,
+          order_id: @order.id,
+        },
+      }
+      post product_order_items_path(@product), params: @order_item_data
+    end
+    it "can destroy an item" do
+      start_count = OrderItem.count
+      order_item = order_items(:one)
+      delete order_item_path(order_item)
+      expect(OrderItem.count).must_equal start_count - 1
+      expect(flash[:status]).must_equal :success
+      expect(flash[:message]).wont_be_nil
+      must_redirect_to order_path(session[:order_id])
+    end
+
+    it "renders 404 for non-existing order-item" do
+      delete order_item_path(-1)
+      must_respond_with :not_found
+    end
+  end
 end

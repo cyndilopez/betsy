@@ -7,14 +7,9 @@ class OrderItemsController < ApplicationController
     if @order == nil
       @order = Order.new(status: "pending")
       successful = @order.save
-      if !successful
-        flash[:status] = :error
-        flash[:message] = "Could not create order: #{@order.errors.messages}"
-      end
     end
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
-
     product = Product.find_by(id: params[:product_id])
     unless product
       head :not_found
@@ -24,16 +19,10 @@ class OrderItemsController < ApplicationController
     @order_item.quantity = @order_quantity
     if @order_quantity <= product.stock
       session[:order_id] = @order.id
-      successful = @order_item.save
-      if successful
-        flash[:status] = :success
-        flash[:message] = "Added to cart!"
-        redirect_to root_path
-      else
-        flash[:status] = :error
-        flash[:message] = "Could not add item to cart: #{@order_item.errors.messages}"
-        redirect_to root_path
-      end
+      @order_item.save
+      flash[:status] = :success
+      flash[:message] = "Added to cart!"
+      redirect_to root_path
     else
       flash.now[:status] = :error
       flash.now[:message] = "Unable to add to cart, not enough items in stock."
@@ -65,18 +54,14 @@ class OrderItemsController < ApplicationController
   def destroy
     product = params[:id]
     @order_item = OrderItem.find_by(id: params[:id])
-
-    if @order_item.destroy
-      flash[:status] = :success
-      flash[:message] = "Successfully deleted item"
-
-      redirect_to order_path(session[:order_id])
-    else
-      flash.now[:status] = :error
-      flash.now[:message] = "Unable to delete"
-
-      redirect_to root_path
+    unless @order_item
+      head :not_found
+      return
     end
+    @order_item.destroy
+    flash[:status] = :success
+    flash[:message] = "Successfully deleted item"
+    redirect_to order_path(session[:order_id])
   end
 
   private
