@@ -3,7 +3,7 @@
 <h2><%= link_to product.name, product_path(product) %></h2>
 <%# <%= image_tag("#{@product.photoURL}") %> 
 <ul class="list-group">
-  <li class="list-group-item">Price: <%=product.price %></li>
+  <li class="list-group-item">Price: <%=number_to_currency(product.price) %></li>
   <li class="list-group-item">Description: <%=product.description %></li>
   <%if product.stock == 0%>
   <li class="text-white bg-dark">Out of Stock</li>

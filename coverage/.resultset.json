@@ -1,0 +1,175 @@
+{
+  "MiniTest": {
+    "coverage": {
+      "/Users/cylopez/Documents/betsy/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/helpers/categories_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/helpers/merchants_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/helpers/order_items_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/helpers/orders_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/helpers/products_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/helpers/reviews_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/models/order.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        287,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/models/review.rb": [
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/models/product.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/models/category.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/models/merchant.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/cylopez/Documents/betsy/app/models/order_item.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1557349216
+  }
+}

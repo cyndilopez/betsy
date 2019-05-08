@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :find_order
 
   def show
-    @order_items = @order.order_items
+    @order_items = @order.order_items.order(:created_at)
   end
 
   def update
