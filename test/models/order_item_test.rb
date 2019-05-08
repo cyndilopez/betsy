@@ -25,6 +25,17 @@ describe OrderItem do
     
   end
   
+  describe "subtotal" do
+    it "calculates a subtotal" do
+      product = products(:starbursts)
+      order = orders(:two)
+      price = product.price
+      order_item = OrderItem.new(product: product, order: order, quantity: 5)
+      total = price * 5
+      
+      expect(order_item.subtotal).must_equal total
+    end
+  end
 
 end
   
