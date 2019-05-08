@@ -61,7 +61,32 @@ describe OrderItemsController do
       expect(order.order_items).wont_be_nil
       expect(order_item.order_id).must_equal order.id
     end
-
   end
 
+  describe "update" do
+    it "can update" do
+      order_item1 = order_items(:one)
+      order_item2 = order_items(:two)
+      quantity = 2
+      id1 = order_item1.id.to_s
+      id2 = order_item2.id.to_s
+      params = {
+        order_items: {
+          id1 => quantity,
+          id2 => quantity,
+        },
+      }
+
+      patch order_item_path(order_item1), params: params
+
+      order_item1.reload
+      order_item2.reload
+      order = order_item2.order
+      expect(order_item1.quantity).must_equal 2
+      expect(order_item2.quantity).must_equal 2
+      expect(flash[:status]).must_equal :success
+      expect(flash[:message]).wont_be_nil
+      must_redirect_to order_path(order)
+    end
+  end
 end

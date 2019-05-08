@@ -46,14 +46,13 @@ class OrderItemsController < ApplicationController
       @order_item = OrderItem.find_by(id: id)
       stock = @order_item.product.stock
       if qty.to_i <= stock
-        if @order_item.update(quantity: qty)
+        successful = @order_item.update(quantity: qty)
+        if successful
           flash[:status] = :success
           flash[:message] = "Successfully updated order"
-          # redirect_to order_path(@order_item.order)
         else
           flash.now[:status] = :error
           flash.now[:message] = "Unable to update order: #{@order_item.errors.messages}"
-          # redirect_to root_path
         end
       else
         flash[:status] = :error

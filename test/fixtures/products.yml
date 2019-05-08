@@ -13,7 +13,7 @@ two:
   description: MyString
   price: 1.5
   photoURL: MyString
-  stock: 1
+  stock: 2
   active: true
 
 starbursts:
