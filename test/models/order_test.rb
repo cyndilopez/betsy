@@ -13,6 +13,21 @@ describe Order do
       expect(order.valid?).must_equal false
     end
 
+    it "is invalid with a one character name" do
+      order.name = "1M"
+      expect(order.valid?).must_equal false
+    end
+
+    it "is valid for a name" do
+      order.name = "Mary-Ann Johnson"
+      expect(order.valid?).must_equal true
+    end
+
+    it "is valid for a name" do
+      order.name = "Li"
+      expect(order.valid?).must_equal true
+    end
+
     it "is invalid without an email" do
       order.email = nil
       expect(order.valid?).must_equal false
@@ -54,7 +69,7 @@ describe Order do
     end
 
     it "is invalid for an incorrect input of cc_cvv" do
-      order.cc_cvv = "ABC!2"
+      order.cc_cvv = "ABC! 2"
       expect(order.valid?).must_equal false
     end
 
@@ -103,14 +118,18 @@ describe Order do
     it "has order items" do
       expect(order.order_items.first).must_be_instance_of OrderItem
       expect(order.order_items.length).must_equal 1
+    end
+  end
 
-      # describe "relations" do
-      #   it "has categories" do
-      #     product = products(:starbursts)
-      #     expect(product.categories.length).must_equal 2
+  describe "its not pending" do
+    it "finds not pending orders" do
+      expect(order.is_not_pending).must_equal true
+    end
+  end
 
-      #     category = categories(:confection)
-      #     expect(category.products.length).must_equal 1
+  describe "total" do
+    it "knows the order total do" do
+      expect(order.total).must_be_close_to 10.59
     end
   end
 end

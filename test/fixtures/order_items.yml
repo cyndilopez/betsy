@@ -3,7 +3,7 @@
 one:
   product: starbursts
   order: one
-  quantity: 1
+  quantity: 3
 
 two:
   product: jelly_beans
