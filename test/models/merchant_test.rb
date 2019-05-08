@@ -48,7 +48,45 @@ describe Merchant do
       merchant = merchants(:bob)
       expect(merchant.order_items.first).must_be_instance_of OrderItem
     end
-  
   end
   
+  
+  describe "total revenue method" do
+    it "calculates the merchant's total revenue" do
+      merchant = merchants(:bob)
+      order_items = merchant.order_items
+      costs = []
+      order_items.each do |item|
+        costs << item.subtotal
+      end
+      
+      total = costs.sum
+      
+      expect(merchant.total_revenue).must_be_kind_of Float
+      expect(merchant.total_revenue).must_equal total
+    end
+    
+    # it "updates the merchant's total revenue" do
+    #   merchant = merchants(:bob)
+    #   product = merchant.products.first
+    #   order = orders(:one)
+    #   total_revenue = merchant.total_revenue
+    #   # order_item = merchant.order_items.first
+      
+    #     order_item_data = {
+    #       order_item: {
+    #         quantity: 2,
+    #         order_id: order.id,
+    #         product_id: product.id
+    #       }
+    #     }
+      
+    #   updated_revenue = total_revenue + (product.price) * 2
+      
+      
+    #   post product_order_items_path, params: order_item_data
+      
+    #   expect(total_revenue).must_equal updated_revenue
+    # end
+  end
 end
