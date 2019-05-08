@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get "products/:id/categories", to: "categories#select_categories", as: "product_select_categories"
 
   get "categories/:id/products", to: "categories#categories", as: "categories_products"
+  get "merchants/:id/products", to: "merchants#merchants", as: "merchants_products"
 
   resources :merchants, only: [:index, :show, :create]
   resources :orders, only: [:show, :update]

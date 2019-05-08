@@ -1,0 +1,11 @@
+<h1>Index for Merchants</h1>
+
+<ul>
+  <% @merchants.each do |merchant|%>
+  <li>
+    <p>
+      <%= link_to merchant.username, merchants_products_path(merchant) %>
+    </p>
+  </li>
+  <% end %>
+</ul>
