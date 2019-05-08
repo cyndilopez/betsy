@@ -44,4 +44,16 @@ describe Merchant do
       expect(merchant.products.length).must_equal 2
     end
   end
+
+  describe "filter_by_merchant" do
+    it "finds the products associated with a merchant" do
+      merchant = merchants(:bob)
+      merchant_data = {
+        id: merchant.id,
+      }
+      products = Merchant.filter_by_merchant(merchant_data)
+      number_of_active_products = merchant.products.where(active: true).count
+      expect(products.length).must_equal number_of_active_products
+    end
+  end
 end
