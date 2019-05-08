@@ -1,1 +1,11 @@
 <h1>Index for Categories</h1>
+
+<ul>
+  <% @categories.each do |category|%>
+  <li>
+    <p>
+      <%= link_to category.name, categories_products_path(category) %>
+    </p>
+  </li>
+  <% end %>
+</ul>
