@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :order_items, only: [:create]
   end
-  resources :categories, only: [:new, :create]
+  resources :categories, only: [:new, :create, :index]
 
   resources :products do
     resources :categories, only: [:create]
