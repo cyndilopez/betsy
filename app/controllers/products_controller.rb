@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
       flash[:status] = :success
       flash[:message] = "Successfully updated product #{@product.name}"
 
-      redirect_to product_path(@product)
+      redirect_to merchant_path(@product.merchant)
     else
       flash.now[:status] = :error
       flash.now[:message] = "Could not save product #{@product.name}"
