@@ -7,7 +7,7 @@ one:
   address: Cupcake St 200 
   cc_num: 1234567891012141 
   cc_cvv: 123
-  cc_expiration: 12/2025
+  cc_expiration: 122025
   zip_code: 12345
 
 two:
@@ -17,7 +17,7 @@ two:
   address: Carrotcake St 200 
   cc_num: 1114567891012141 
   cc_cvv: 456
-  cc_expiration: 12/2030
+  cc_expiration: 122030
   zip_code: 56789
 
 three:

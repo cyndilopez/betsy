@@ -1,22 +1,24 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
-  skip_before_action :verify_authenticity_token
 
   def create
     @order = current_order
+    p @order
     if @order == nil
       @order = Order.new(status: "pending")
       successful = @order.save
     end
+    p @order
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
+
     product = Product.find_by(id: params[:product_id])
     unless product
       head :not_found
       return
     end
     @order_quantity = 1
-    @order_item.quantity = @order_quantity
+    @order_item.quantity = @order_quantity 
     if @order_quantity <= product.stock
       session[:order_id] = @order.id
       @order_item.save
