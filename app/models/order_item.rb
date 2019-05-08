@@ -16,13 +16,11 @@ class OrderItem < ApplicationRecord
   def reduce_product_stock
     current_stock = self.product.stock - self.quantity
     return self.product.update(stock: current_stock)
-  end
-  
+  end  
+
   def unit_price
     self.product.price
   end
-  
+
   private
-
-
 end

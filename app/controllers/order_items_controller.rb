@@ -6,33 +6,25 @@ class OrderItemsController < ApplicationController
     p @order
     if @order == nil
       @order = Order.new(status: "pending")
-      @order.save
+      successful = @order.save
     end
     p @order
     @order_item = OrderItem.new(product_id: params["product_id"])
     @order_item.order_id = @order.id
-    # product_quantity = @order_item.quantity
 
     product = Product.find_by(id: params[:product_id])
-    p product
+    unless product
+      head :not_found
+      return
+    end
     @order_quantity = 1
-    @order_item.quantity = @order_quantity
-    
+    @order_item.quantity = @order_quantity 
     if @order_quantity <= product.stock
-      # @order_item.reduce_product_stock
       session[:order_id] = @order.id
-      successful = @order_item.save
-      
-      if successful
-        flash[:status] = :success
-        flash[:message] = "Added to cart!"
-        redirect_to root_path
-      else
-        flash[:status] = :error
-        flash[:message] = "Could not add item to cart: #{@order_item.errors.messages}"
-        redirect_to root_path
-      end
-    
+      @order_item.save
+      flash[:status] = :success
+      flash[:message] = "Added to cart!"
+      redirect_to root_path
     else
       flash.now[:status] = :error
       flash.now[:message] = "Unable to add to cart, not enough items in stock."
@@ -40,38 +32,38 @@ class OrderItemsController < ApplicationController
     end
   end
 
-
   def update
-    @order_item = OrderItem.find_by(id: params[:id])
-
-    if @order_item.update(quantity: params["quantity"])
-      flash[:status] = :success
-      flash[:message] = "Updated order id: #{@order_item.id}, order-item quantity now: #{@order_item.quantity}"
-      redirect_to order_path(@order_item.order)
-      # @order_item.reload
-    else
-      flash.now[:status] = :error
-      flash.now[:message] = "Unable to update"
-
-      redirect_to order_path
+    params[:order_items].each do |id, qty|
+      @order_item = OrderItem.find_by(id: id)
+      stock = @order_item.product.stock
+      if qty.to_i <= stock
+        successful = @order_item.update(quantity: qty)
+        if successful
+          flash[:status] = :success
+          flash[:message] = "Successfully updated order"
+        else
+          flash.now[:status] = :error
+          flash.now[:message] = "Unable to update order: #{@order_item.errors.messages}"
+        end
+      else
+        flash[:status] = :error
+        flash[:message] = "Unable to add #{@order_item.product.name} to cart, not enough items in stock."
+      end
     end
+    redirect_to order_path(@order_item.order)
   end
 
   def destroy
     product = params[:id]
     @order_item = OrderItem.find_by(id: params[:id])
-
-    if @order_item.destroy
-      flash[:status] = :success
-      flash[:messages] = "Successfully Deleted"
-
-      render :edit
-    else
-      flash.now[:status] = :error
-      flash.now[:messages] = "Unable to delete"
-
-      render :edit
+    unless @order_item
+      head :not_found
+      return
     end
+    @order_item.destroy
+    flash[:status] = :success
+    flash[:message] = "Successfully deleted item"
+    redirect_to order_path(session[:order_id])
   end
 
   private
