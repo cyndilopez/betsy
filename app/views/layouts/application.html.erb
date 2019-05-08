@@ -54,8 +54,7 @@
   </header>
     
     
-      <% if flash[:messages] or flash[:message]%>
-    <section>
+  <% if flash[:messages] or flash[:message]%>
       <div class="alert alert-<%= flash[:status].to_s == "error" ? "warning" : flash[:status] %>">
         <%= flash[:status].to_s == "error" ? "A problem occurred: " : "" %><%= flash[:message] %>
         <% if flash[:messages] %>
@@ -67,8 +66,6 @@
             <% end %>
           </ul>
         <% end %>
-      </div>
-    </section>
   <% end %>
 
     <main>
