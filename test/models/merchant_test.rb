@@ -45,19 +45,10 @@ describe Merchant do
     end
     
     it "has many order items" do
-      merchant = merchants(:jenkins)
-      expect(merchant.order_items).wont_be_nil
+      merchant = merchants(:bob)
+      expect(merchant.order_items.first).must_be_instance_of OrderItem
     end
+  
   end
-  
-  
-  # describe "order items method" do
-  #   it "prints a list of order items belonging to the merchant" do
-  #     merchant = merchants(:jenkins)
-      
-  #     expect(merchant.order_items).wont_be_nil
-  #     expect(merchant.order_items).must_be_instance_of OrderItem
-  #   end
-  # end
   
 end
