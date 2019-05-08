@@ -1,6 +1,9 @@
 class OrderItem < ApplicationRecord
   belongs_to :product
+  has_one :merchant, through: :product
   belongs_to :order
+  
+
 
   validates :order, presence: true
 
@@ -21,11 +24,6 @@ class OrderItem < ApplicationRecord
   
   def unit_price
     self.product.price
-  end
-  
-  def merchant
-    product = Product.find(self.product_id)
-    return Merchant.find(product.merchant_id)
   end
   
   private

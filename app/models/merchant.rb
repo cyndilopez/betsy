@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :products
+  has_many :order_items, through: :products
 
   validates :username, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
@@ -15,18 +16,16 @@ class Merchant < ApplicationRecord
     return merchant
   end
   
-  def order_items
-    products = self.products
+  # def order_items
+  #   products = self.products
     
-    products.each do |product|
-      product.order_items.each do |item|
-        puts item
-      end
-    end
-  end
+  #   products.each do |product|
+  #     puts product.order_items
+  #   end
+  # end
   
   
-  def self.total_revenue
+  def total_revenue
     total_revenue = 0
     self.order_items.each do |item|
       total_revenue += item.subtotal
