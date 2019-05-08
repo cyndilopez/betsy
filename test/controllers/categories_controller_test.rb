@@ -1,6 +1,13 @@
 require "test_helper"
 
 describe CategoriesController do
+  describe "index" do
+    it "can render without crashing" do
+      get categories_path
+
+      must_respond_with :ok
+    end
+  end
   describe "Guest Users" do
     describe "new" do
       it "requires a user to be logged in" do
