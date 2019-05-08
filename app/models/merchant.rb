@@ -50,7 +50,11 @@ class Merchant < ApplicationRecord
   end
   
   def self.orders
-    self.order_items.where()
+    self.products.map do |product|
+      product.order_items.each do |order_item|
+        order_item.orders
+      end
+    end
   end
   
 end
