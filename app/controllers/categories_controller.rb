@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
     if successful
       flash[:status] = :success
       flash[:message] = "Saved category with id #{@category.id} successfully"
-      redirect_to product_categories_path(@product.id)
+      redirect_to edit_product_path(@product.id)
     else
       flash[:status] = :error
       flash[:message] = "Could not save the category: #{@category.errors.messages}"

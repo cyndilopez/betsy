@@ -13,7 +13,26 @@
   </section>
 <% end %>
 
+ <div class="form-group">
+     <%= form_tag(product_categories_path(params[:id]), :method => "post") do%>
+     <%= label_tag(:name, "Add New Category") %>
+     <%= text_field_tag :name, "", class: "form-control" %>
+     <%= submit_tag("Create", class: "btn btn-primary") %>
+    <% end %>
+ </div>
+
 <%= form_with model: @product, class: 'product-form' do |f| %>
+
+ <div>
+    <%= f.label :categories %>
+    <%if Category.all == []%>
+      No categories to display at the time. Add one!
+    <%else%>
+    <div class="col-md-4 checkbox-list">
+      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name)%>
+    </div>
+    <% end %>
+  </div>
 
   <div>
     <%= f.label :name, "Product name" %>
@@ -38,17 +57,6 @@
   <div>
     <%= f.label :photoURL, "Product photo URL" %>
     <%= f.text_field :photoURL, placeholder: "http://image-host.com/yourimage.png" %>
-  </div>
-
-  <div>
-    <%= f.label :categories %>
-    <%if Category.all == []%>
-      No categories to display at the time. Add one!
-    <%else%>
-    <div class="col-md-4 checkbox-list">
-      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name)%>
-    </div>
-    <% end %>
   </div>
 
   <div>

@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @merchant.products.each do |product| %>
+      <% @merchant.products.order(:id).each do |product| %>
         <tr>
           <td><%= product.name %></td>
           <td>
