@@ -15,8 +15,23 @@ class Merchant < ApplicationRecord
     return merchant
   end
   
+  def order_items
+    products = self.products
+    
+    products.each do |product|
+      product.order_items.each do |item|
+        puts item
+      end
+    end
+
+  end
+  
   def self.orders_list
     
+  end
+  
+  def self.total_revenue
+    self.orders
   end
   
 end

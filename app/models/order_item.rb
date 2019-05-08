@@ -23,6 +23,11 @@ class OrderItem < ApplicationRecord
     self.product.price
   end
   
+  def merchant
+    product = Product.find(self.product_id)
+    return Merchant.find(product.merchant_id)
+  end
+  
   private
 
 
