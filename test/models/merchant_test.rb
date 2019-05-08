@@ -43,6 +43,59 @@ describe Merchant do
       merchant = merchants(:bob)
       expect(merchant.products.length).must_equal 2
     end
+    
+    it "has many order items" do
+      merchant = merchants(:bob)
+      expect(merchant.order_items.first).must_be_instance_of OrderItem
+    end
+  end
+  
+  
+  describe "total revenue method" do
+    it "calculates the merchant's total revenue" do
+      merchant = merchants(:bob)
+      order_items = merchant.order_items
+      costs = []
+      order_items.each do |item|
+        costs << item.subtotal
+      end
+      
+      total = costs.sum
+      
+      expect(merchant.total_revenue).must_be_kind_of Float
+      expect(merchant.total_revenue).must_equal total
+    end
+    
+    it "updates the merchant's total revenue" do
+      merchant = merchants(:bob)  
+      total_revenue = merchant.total_revenue
+      order_item = merchant.order_items.first
+      quantity = order_item.quantity + 2
+      product = order_item.product
+      order = order_item.order
+      
+        order_item_data = {
+          order_item: {
+            quantity: quantity,
+            order_id: order.id,
+            product_id: product.id
+          }
+        }
+      
+      updated_revenue = total_revenue + (product.price) * 2
+      puts "old #{merchant.order_items}"
+      
+ 
+      order_item.update!(order_item_data[:order_item])
+      merchant.reload
+      order_item.reload
+     
+      expect(merchant.total_revenue).must_equal updated_revenue
+    end
+    
+    it "updates total_revenue if the order item is removed" do
+      skip
+    end
   end
 
   describe "filter_by_merchant" do

@@ -1,5 +1,6 @@
 class Merchant < ApplicationRecord
   has_many :products
+  has_many :order_items, through: :products
 
   validates :username, uniqueness: true, presence: true
   validates :email, uniqueness: true, presence: true
@@ -19,4 +20,15 @@ class Merchant < ApplicationRecord
     merchant = Merchant.find_by(id: params[:id])
     @products = merchant.products.select { |p| p.active }
   end
+
+  
+  def total_revenue
+    total_revenue = 0
+    self.order_items.each do |item|
+      total_revenue += item.subtotal
+    end
+    return total_revenue
+  end
+  
+
 end

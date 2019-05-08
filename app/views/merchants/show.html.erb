@@ -1,48 +1,52 @@
 <h2><%= @merchant.name %></h2>
 <%# <%= image_tag("#{@product.photoURL}") %> 
-<ul>
-  <li><%=@merchant.email %></li>
-</ul>
+
+  <p><%=@merchant.email %></p>
 
 <%# <%= session[:merchant_id]%>
-
-<table class="table table-borderless">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>In Stock</th>
-      <% session[:merchant_id] == @merchant.id %>
-        <th>Update</th>
-        <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @merchant.products.each do |product| %>
+<br><section class="merchant-products">
+  <table class="table table-borderless">
+    <h5>Products</h5>
+    <thead>
       <tr>
-        <td><%= product.name %></td>
-        <td>
-          <% product.categories.each do |category| %>
-            <li>
-              <%= category.name %>
-            </li>
-          <%end %>
-        </td>
-        <td><%= product.price %></td>
-        <td><%= product.description %></td>
-        <td><%= product.stock %></td>
-        <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
-        <td>
-          <% if product.active? %>
-          <%= link_to "Active", update_status_product_path(product), class: "btn btn-primary", method: :patch %>
-          <% else %>
-          <%= link_to "Inactive", update_status_product_path(product), class: "btn btn-primary inactive", method: :patch %>
-          <% end %>
-        </td>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>In Stock</th>
+        <% session[:merchant_id] == @merchant.id %>
+          <th>Update</th>
+          <th>Status</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @merchant.products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td>
+            <% product.categories.each do |category| %>
+              <li>
+                <%= category.name %>
+              </li>
+            <%end %>
+          </td>
+          <td><%= product.price %></td>
+          <td><%= product.description %></td>
+          <td><%= product.stock %></td>
+          <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
+          <td>
+            <% if product.active? %>
+            <%= link_to "Active", update_status_product_path(product), class: "btn btn-primary", method: :patch %>
+            <% else %>
+            <%= link_to "Inactive", update_status_product_path(product), class: "btn btn-primary inactive", method: :patch %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
 
+<section class="order-fulfillment">
+  
+</section>

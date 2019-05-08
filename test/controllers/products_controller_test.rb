@@ -67,9 +67,9 @@ describe ProductsController do
         }.must_change "Product.count", +1
 
         must_respond_with :redirect
-        must_redirect_to products_path
 
         product = Product.last
+
         expect(product.name).must_equal product_data[:product][:name]
         expect(product.id).wont_be_nil
 

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "merchants/:id/products", to: "merchants#merchants", as: "merchants_products"
 
   resources :merchants, only: [:index, :show, :create]
-  resources :orders
+  resources :orders, only: [:show, :update]
 
   get "orders/:id/checkout", to: "orders#checkout", as: "order_checkout"
   get "orders/:id/confirmation", to: "orders#confirmation", as: "order_confirmation"
