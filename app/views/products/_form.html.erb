@@ -41,7 +41,18 @@
   </div>
 
   <div>
-  <%= f.submit "Create!", class: "btn btn-primary" %>
+    <%= f.label :categories %>
+    <%if Category.all == []%>
+      No categories to display at the time. Add one!
+    <%else%>
+    <div class="col-md-4 checkbox-list">
+      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name)%>
+    </div>
+    <% end %>
+  </div>
+
+  <div>
+  <%= f.submit button_text, class: "btn btn-primary" %>
   </div>
   <% end %>
 
