@@ -64,12 +64,16 @@ describe OrderItemsController do
   end
 
   describe "update" do
+    before do
+      @order_item1 = order_items(:one)
+      @order_item2 = order_items(:two)
+      @order = @order_item2.order
+    end
+
     it "can update" do
-      order_item1 = order_items(:one)
-      order_item2 = order_items(:two)
       quantity = 2
-      id1 = order_item1.id.to_s
-      id2 = order_item2.id.to_s
+      id1 = @order_item1.id.to_s
+      id2 = @order_item2.id.to_s
       params = {
         order_items: {
           id1 => quantity,
@@ -77,16 +81,51 @@ describe OrderItemsController do
         },
       }
 
-      patch order_item_path(order_item1), params: params
+      patch order_item_path(@order_item1), params: params
 
-      order_item1.reload
-      order_item2.reload
-      order = order_item2.order
-      expect(order_item1.quantity).must_equal 2
-      expect(order_item2.quantity).must_equal 2
+      @order_item1.reload
+      @order_item2.reload
+      expect(@order_item1.quantity).must_equal 2
+      expect(@order_item2.quantity).must_equal 2
       expect(flash[:status]).must_equal :success
       expect(flash[:message]).wont_be_nil
-      must_redirect_to order_path(order)
+      must_redirect_to order_path(@order)
+    end
+
+    it "only updates if amount ordered is less than or equal to amount in stock" do
+      quantity = 200
+      id1 = @order_item1.id.to_s
+      id2 = @order_item2.id.to_s
+      params = {
+        order_items: {
+          id1 => quantity,
+          id2 => quantity,
+        },
+      }
+
+      patch order_item_path(@order_item1), params: params
+
+      expect(flash[:status]).must_equal :error
+      expect(flash[:message]).must_include "Unable to add"
+      must_redirect_to order_path(@order)
+    end
+
+    it "only updates for valid data" do
+      quantity = -1
+      id1 = @order_item1.id.to_s
+      id2 = @order_item2.id.to_s
+      params = {
+        order_items: {
+          id1 => quantity,
+          id2 => quantity,
+        },
+      }
+
+      patch order_item_path(@order_item1), params: params
+
+      expect(flash[:status]).must_equal :error
+      expect(flash[:message]).must_include "Unable to update"
+      must_redirect_to order_path(@order)
     end
   end
 end
