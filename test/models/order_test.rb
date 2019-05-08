@@ -53,4 +53,22 @@ describe Order do
       expect(order.valid?).must_equal false
     end
   end
+  
+  describe "order status tests" do
+    it "finds all Paid orders" do
+      order = orders(:two)
+      pending = orders(:one)
+      expect(Order.paid_orders).wont_be_nil
+      expect(Order.paid_orders).must_include order
+      expect(Order.paid_orders).wont_include pending
+    end
+    
+    it "finds all Pending orders" do
+      order = orders(:two)
+      pending = orders(:one)
+      expect(Order.pending_orders).wont_be_nil
+      expect(Order.pending_orders).must_include pending
+      expect(Order.pending_orders).wont_include order
+    end
+  end
 end

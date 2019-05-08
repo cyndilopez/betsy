@@ -25,4 +25,32 @@ class Merchant < ApplicationRecord
     return total_revenue
   end
   
+  def total_revenue_by_status
+    
+  end
+  
+  def paid_order_items
+    paid = []
+    self.order_items.each do |order_item|
+      if order_item.order.status == "paid"
+        paid << order_item
+      end
+    end
+    return paid
+  end
+  
+  def pending_order_items
+    pending = []
+    self.order_items.each do |order_item|
+      if order_item.order.status == "pending"
+        pending << order_item
+      end
+    end
+    return pending
+  end
+  
+  def self.orders
+    self.order_items.where()
+  end
+  
 end

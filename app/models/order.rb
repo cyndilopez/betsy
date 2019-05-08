@@ -36,4 +36,13 @@ class Order < ApplicationRecord
       order_item.reduce_product_stock
     end
   end
+  
+  def self.paid_orders
+    return self.where(status: "paid")
+  end
+  
+  def self.pending_orders
+    return self.where(status: "pending")
+  end
+  
 end
