@@ -9,3 +9,8 @@ two:
   product: jelly_beans
   order: two
   quantity: 1
+
+three:
+  product: starbursts
+  order: three
+  quantity: 2

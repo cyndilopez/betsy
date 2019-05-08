@@ -19,7 +19,7 @@
    <div class="form-group">
      <%= form_tag(product_categories_path(params[:id]), :method => "post") do%>
      <%= label_tag(:name, "Add New Category") %>
-     <%= text_field_tag :name, "New Category", class: "form-control" %>
+     <%= text_field_tag :name, "", class: "form-control" %>
      <%= submit_tag("Create", class: "btn btn-primary") %>
     <% end %>
   </div>
