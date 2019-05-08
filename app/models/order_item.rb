@@ -21,12 +21,10 @@ class OrderItem < ApplicationRecord
   def subtotal
     self.unit_price * self.quantity
   end
-  
+
   def unit_price
     self.product.price
   end
-  
+
   private
-
-
 end
