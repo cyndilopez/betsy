@@ -1,9 +1,29 @@
-<% @order_items.each do |order_item|%>
-  <br>
-  <p><%=link_to order_item.product.name, product_path(order_item.product)%></p>
-  <p>Quantity: <%=order_item.quantity%></p>
-  <p>Subtotal: </p>
-<% end %>
-<p>Total price: </p>
-<p>Order placed on: <%=@order.updated_at.strftime("%B %d %Y at %I:%M %p")%>
-<p>Order status: <%=@order.status.capitalize%></p>
+<article class="confirmation">
+  <section class="order-title">
+    <h3>Order #<%= @order.id %></h3>
+    <h5><%=@order.updated_at.strftime("%B %d, %Y at %I:%M %p")%></h5>
+    <h6><strong>Status:</strong> <%= @order.status.capitalize %></h6>
+    <h6><strong>Total:</strong> <%= number_to_currency(@order.total) %></h6>
+  </section>
+  
+<table class="table table-borderless">
+  <thead class="order-items-header">  
+  </thead>
+  
+  <% @order_items.each do |order_item|%>
+    <th class="product-name"><%=link_to order_item.product.name, product_path(order_item.product)%></th>
+    <tr>
+     <td>Quantity</td> 
+     <td><%= order_item.quantity %></td>
+    </tr>
+    <tr>
+     <td>Subtotal</td>
+     <td><%= number_to_currency(order_item.subtotal) %></td>
+    </tr>
+  <% end %>
+    <tr>
+    <th>Order total </th>
+    <td><%= number_to_currency(@order.total) %></td>
+    </tr>
+ 
+</article>

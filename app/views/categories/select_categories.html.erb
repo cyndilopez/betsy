@@ -1,4 +1,5 @@
 <%= form_with model: @product do |f| %>
+ Product is: <%= @product %>
 
    <div>
       <%= f.label :categories %>
@@ -9,13 +10,14 @@
         <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name)%>
         </div>
         <%=f.submit "Add Selected", class: "btn btn-primary"%>
-        <%end%> 
-   </div>
+</div>
+  <%end%> 
+
 
 <%end%>
     <br>
    <div class="form-group">
-     <%= form_tag(product_categories_path, :method => "post") do%>
+     <%= form_tag(product_categories_path(params[:id]), :method => "post") do%>
      <%= label_tag(:name, "Add New Category") %>
      <%= text_field_tag :name, "New Category", class: "form-control" %>
      <%= submit_tag("Create", class: "btn btn-primary") %>
