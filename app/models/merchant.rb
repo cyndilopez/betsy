@@ -14,4 +14,9 @@ class Merchant < ApplicationRecord
 
     return merchant
   end
+  
+  def self.orders_list
+    
+  end
+  
 end

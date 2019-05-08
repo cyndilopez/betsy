@@ -42,6 +42,7 @@ footer {
   grid-area: footer;
 }
 
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -131,6 +132,17 @@ input.btn {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-style: regular;
+}
+
+.table th {
+  color: #FF99CB;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+strong {
+  font-weight: 600;
 }
 
 .total {
