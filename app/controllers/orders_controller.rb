@@ -18,7 +18,9 @@ class OrdersController < ApplicationController
       session[:order_id] = nil
     else
       flash[:status] = :error
-      flash[:message] = "Can't checkout, #{@order.errors.messages}"
+      err = []
+      error_messages = @order.errors.messages.each { |name, probs| probs.each { |problem| err << "#{name}: #{problem}" } }
+      flash[:message] = "Can't checkout, " + err[0].to_s.upcase
       redirect_to root_path
     end
 
