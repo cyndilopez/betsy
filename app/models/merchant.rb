@@ -36,31 +36,31 @@ class Merchant < ApplicationRecord
   end
   
   def paid_order_items
-    paid = []
+    revenue = 0
     self.order_items.each do |order_item|
       if order_item.order.status == "paid"
-        paid << order_item
+        revenue += order_item.subtotal
       end
     end
-    return paid
+    return revenue
   end
   
   def pending_order_items
-    pending = []
+    revenue = 0
     self.order_items.each do |order_item|
       if order_item.order.status == "pending"
-        pending << order_item
+        revenue += order_item.subtotal
       end
     end
-    return pending
+    return revenue
   end
   
-  def self.orders
-    self.products.map do |product|
-      product.order_items.each do |order_item|
-        order_item.orders
-      end
-    end
-  end
+  # def self.orders
+  #   self.products.map do |product|
+  #     product.order_items.each do |order_item|
+  #       order_item.orders
+  #     end
+  #   end
+  # end
   
 end
