@@ -31,7 +31,6 @@ class ReviewsController < ApplicationController
       @review = Review.new(review_params)
       @review.product = @product
       successful = @review.save
-      p successful
       if @review.save
         flash[:status] = :success
         flash[:message] = "Your review was added succesfully!"

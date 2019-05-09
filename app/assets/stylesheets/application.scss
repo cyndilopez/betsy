@@ -1,6 +1,8 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+@import "font-awesome";
+
 
 
 body {
@@ -247,4 +249,12 @@ section.logo {
 img.logo {
   width: 30%;
   height: 30%;
+}
+
+.fa-star {
+  color: rgb(107, 11, 116); 
+}
+
+.fa-star-o {
+  color: rgb(107, 11, 116); 
 }

@@ -4,7 +4,3 @@ class Review < ApplicationRecord
   validates :comment, presence: true
   validates :rating, numericality: { only_integer: true }, inclusion: 1..5
 end
-
-def blank_stars
-  5 - rating.to_i
- end
