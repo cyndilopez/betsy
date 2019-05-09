@@ -9,16 +9,8 @@ describe ProductsController do
         must_respond_with :success
       end
 
-      it "renders even if there are zero products" do
-        products = Product.all
-        products.each do |product|
-          product.destroy
-        end
-        Product.all.must_be_empty
-        get products_path
-
-        must_respond_with :success
-      end
+      # it "renders even if there are zero products" do
+      # end
     end
 
     describe "show" do
@@ -36,25 +28,6 @@ describe ProductsController do
         get product_path(product_id)
 
         must_respond_with :ok
-      end
-    end
-
-    describe "create" do
-      it "requires a user to be logged in " do
-        product_data = {
-          product: {
-            name: "amy's test name",
-            description: "description",
-            price: 4.99,
-            photoURL: "github.com",
-            stock: 8,
-            merchant_id: Merchant.first,
-          },
-        }
-
-        expect {
-          post products_path, params: product_data
-        }.wont_change "Product.count"
       end
     end
   end

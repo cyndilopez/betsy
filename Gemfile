@@ -84,4 +84,3 @@ end
 
 gem "omniauth"
 gem "omniauth-github"
-gem "font-awesome-rails"

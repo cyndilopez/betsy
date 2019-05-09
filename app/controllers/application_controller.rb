@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def current_merchant1
-  #   merchant_id = session[:merchant_id]
-  #   merchant = Merchant.find_by(id: merchant_id)
-  #   return merchant
-  # end
+  def current_merchant
+    merchant_id = session[:merchant_id]
+    merchant = Merchant.find_by(id: merchant_id)
+    return merchant
+  end
 
   # def select_active_products
   #   products = Product.all

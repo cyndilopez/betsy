@@ -113,18 +113,6 @@ describe Order do
       expect(order.valid?).must_equal false
     end
   end
-
-  describe "relations" do
-    it "has order items" do
-      expect(order.order_items.first).must_be_instance_of OrderItem
-      expect(order.order_items.length).must_equal 1
-    end
-
-    it "has product" do
-      expect(order.products.first).must_be_instance_of Product
-      expect(order.products.count).must_equal 1
-    end
-  end
   
   describe "order status tests" do
     it "finds all Paid orders" do
@@ -155,16 +143,11 @@ describe Order do
       expect(order.total).must_be_close_to 10.59
     end
   end
-
-  describe "product update" do
-    it "updates the product stock after creating order" do
-      product = order.order_items[0].product
-      product_stock_initial = order.order_items[0].product.stock
-      order_item_quantity = order.order_items[0].quantity
-      order.product_update
-      product.reload
-      expect(product.stock).must_equal product_stock_initial - order_item_quantity
-    end
-  end
-
+  
+   describe "relations" do
+     it "has order items" do
+       expect(order.order_items.first).must_be_instance_of OrderItem
+       expect(order.order_items.length).must_equal 1
+     end
+   end
 end

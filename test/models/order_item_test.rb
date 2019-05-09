@@ -4,40 +4,15 @@ describe OrderItem do
   let(:order_item) { order_items(:one) }
 
   describe "validations" do
-    it "is valid for product, order and quantity" do
+    it "is valid for product and order" do
       expect(order_item.valid?).must_equal true
-    end
-
-    it "requires an order" do
-      order_item.order_id = nil
-      expect(order_item.valid?).must_equal false
-    end
-
-    it "requires a product" do
-      order_item.product_id = nil
-      expect(order_item.valid?).must_equal false
-    end
-
-    it "requires a quantity" do
-      order_item.quantity = nil
-      expect(order_item.valid?).must_equal false
-    end
-
-    it "has a quantity that is an integer and greater than zero" do
-      cases = ["string", 1.45, :tree, -1, -1.45]
-      cases.each do |item|
-        order_item.quantity = item
-        expect(order_item.valid?).must_equal false
-      end
     end
 
     it "has a product price" do
-      order_item.product.price = "10.99"
+      order_item.unit_price = "10.99"
       expect(order_item.valid?).must_equal true
     end
-  end
 
-  describe "relations" do
     it "belongs to a product" do
       expect(order_item.product).wont_be_nil
       expect(order_item.product).must_be_instance_of Product

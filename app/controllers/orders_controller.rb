@@ -3,14 +3,13 @@ class OrdersController < ApplicationController
   before_action :find_order
 
   def show
-    @order_items = @order.order_items.order(:created_at)
+    @order_items = @order.order_items
   end
 
   def update
     @order.update(order_params)
     @order.status = "paid"
     successful = @order.save
-    p @order.errors.messages
     if successful
       flash[:status] = :success
       flash[:message] = "Thanks for shopping with us! Please save your order number - ##{@order.id}."
@@ -19,9 +18,7 @@ class OrdersController < ApplicationController
       session[:order_id] = nil
     else
       flash[:status] = :error
-      err = []
-      error_messages = @order.errors.messages.each { |name, probs| probs.each { |problem| err << "#{name}: #{problem}" } }
-      flash[:message] = "Can't checkout, " + err[0].to_s.upcase
+      flash[:message] = "Can't checkout, #{@order.errors.messages}"
       redirect_to root_path
     end
 
