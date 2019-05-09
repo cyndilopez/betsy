@@ -51,16 +51,15 @@
 
 </table>
     <%= submit_tag "Save", class: "btn btn-table" %>
-
+  <div>
+    <%= link_to "Checkout", order_checkout_path(@order), method: :get%>
+  <div>
 
   <%else%>
     <h3>Your cart is empty</h3>
     <%= link_to "Back to Home", root_path, method: :get %>
   <%end%> 
 
-  <div>
-    <%= link_to "Checkout", order_checkout_path(@order), method: :get%>
-  <div>
 
 
 
