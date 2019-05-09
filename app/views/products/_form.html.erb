@@ -13,49 +13,49 @@
   </section>
 <% end %>
 
-
 <%= form_with model: @product, class: 'product-form' do |f| %>
 
- 
-
- <div>
-    <%= f.label :categories %>
+<p>
+    <%= f.label :categories, "Select categories" %>
     <%if Category.all == []%>
       No categories to display at the time. Add one!
     <%else%>
-    <div class="col-md-4 checkbox-list">
-      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name)%>
-    </div>
+    <%# <div class="col-md-4 checkbox-list"> %>
+      <ul class="horizontal-group">
+      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) do |c| %>
+      <li> <%=  c.check_box  %><%= c.label %></li>
+      <% end %>
+      </ul>
+</p>
     <% end %>
-  </div>
 
-  <div>
+ <p>
     <%= f.label :name, "Product name" %>
     <%= f.text_field :name, placeholder: "Sweetness pencil pouch" %>
-  </div>
+ </p>
   
-  <div>
+ <p>
     <%= f.label :price, "Unit price" %>
     <%= f.text_field :price, placeholder: "$" %>
-  </div>
+ </p>
 
-  <div>
+ <p>
     <%= f.label :stock, "Quantity in stock" %>
     <%= f.text_field :stock, placeholder: "45" %>
-  </div>
+ </p>
  
-  <div>
+ <p>
     <%= f.label :description, "Description" %>
     <%= f.text_area :description, placeholder: "Carrying size pencil pouch" %>
-  </div>
+ </p>
 
-  <div>
+ <p>
     <%= f.label :photoURL, "Product photo URL" %>
     <%= f.text_field :photoURL, placeholder: "http://image-host.com/yourimage.png" %>
-  </div>
+ </p>
 
-  <div>
+ <p>
   <%= f.submit button_text, class: "btn btn-primary" %>
-  </div>
+ </p>
   <% end %>
 
