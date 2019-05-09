@@ -1,42 +1,39 @@
+<div>
+<h2>Credit Card Information</h2>
+</div>
 <%= form_with model: @order, :method => :patch,  class: 'product-form' do |f| %>
-
-  <div class= "form-group">
-    <%= f.label :name, "Name on Credit Card" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  
-  <div>
-    <%= f.label :email, "Email" %>
-    <%= f.text_field :email, class: "form-control" %>
-  </div>
-
-  <div>
-    <%= f.label :address, "Address" %>
-    <%= f.text_field :address, class: "form-control" %>
-  </div>
- 
-  <div>
-    <%= f.label :cc_num, "Credit Card Number" %>
-    <%= f.text_area :cc_num, placeholder: "1234567890123456", class: "form-control"%>
-  </div>
-
-  <div>
-    <%= f.label :cc_cvv, "CVV" %>
-    <%= f.text_field :cc_cvv, placeholder: "123", class: "form-control" %>
-  </div>
-
-   <div>
-    <%= f.label :cc_expiration, "Expiration" %>
-    <%= f.text_field :cc_expiration, placeholder: "mm/yyyy", class: "form-control"%>
-  </div>
-
-  <div>
-    <%= f.label :zip_code, "Zip Code" %>
-    <%= f.text_field :zip_code, placeholder: "98105", class: "form-control"%>
-  </div>
-
-  <div>
-  <%= f.submit "Submit", class: "btn btn-primary" %>
-  </div>
-  <% end %>
+  <form>
+    <div class="form-group">
+      <label for= "Checkout" >Name on Credit Card</label>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <label for="Email">Address</label>
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <label for="Email">Credit Card Number</label>
+      <%= f.text_field :cc_num, placeholder: "1234567890123456", class: "form-control"%>
+    </div>
+    <div class="form-group">
+      <label for="Email">CVV</label>
+      <%= f.text_field :cc_cvv, placeholder: "123", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <label for="Email">Expiration</label>
+      <%= f.text_field :cc_expiration, placeholder: "MMYYYY", class: "form-control"%>
+    </div>
+    <div class = "form-group-row">
+      <label for="zip_code">Zip Code</label>
+      <%= f.text_field :zip_code, placeholder: "98105", class: "form-control"%>
+    </div>
+    <div class = "form-group-row">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+  </form>
+<% end %>
 
