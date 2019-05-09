@@ -3,6 +3,9 @@
 one:
   rating: 1
   product: one
+  name: "user"
+  comment: "input review here"
+  rating: 3
 
 two:
   rating: 1
