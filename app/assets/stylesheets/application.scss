@@ -229,7 +229,7 @@ header#homepage {
 
 img.carousel {
   object-fit: cover;
-  width: 90vw;
+  width: inherit;
   height: 50vh;
 }
 
@@ -303,7 +303,6 @@ input[type=number]::-webkit-outer-spin-button {
 section.logo {
   display: flex;
   justify-content: center;
-  width: 100vw;
   margin-top: 2rem;
 }
 
