@@ -25,14 +25,20 @@ class Merchant < ApplicationRecord
     return total_revenue
   end
   
-  def total_revenue_by_status
+  def total_revenue_by_status(status)
+    orders = self.orders.where(status: status)
+      orders.each do |order|
+        order.order  
+     end
     
   end
   
   def paid_order_items
     paid = []
+    revenue = 0
     self.order_items.each do |order_item|
       if order_item.order.status == "paid"
+        order_item.unit_price += revenue
         paid << order_item
       end
     end
