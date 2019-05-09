@@ -17,6 +17,9 @@
 <%@product.reviews.each do |review|%>
 <ul>
 <li><%=review.rating%> out of 5 stars</li>
+<% review.rating.to_i.times do  %>
+ <span class="glyphicon glyphicon-star"></span>
+<% end %>
 <li><%=review.name%></li>
 <li><%=review.created_at.strftime("%B %d, %Y at %I:%M %p")%></li>
 <li><%=review.comment%></li>
