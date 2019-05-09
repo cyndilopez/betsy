@@ -1,6 +1,4 @@
 <h2><%= @merchant.name %></h2>
-<%# <%= image_tag("#{@product.photoURL}") %> 
-
   <p><%=@merchant.email %></p>
 
 <%# <%= session[:merchant_id]%>
@@ -10,7 +8,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Category</th>
+        <th>Categories</th>
         <th>Price</th>
         <th>Description</th>
         <th>In Stock</th>
@@ -24,11 +22,13 @@
         <tr>
           <td><%= product.name %></td>
           <td>
+        
             <% product.categories.each do |category| %>
-              <li>
+
                 <%= category.name %>
-              </li>
+
             <%end %>
+
           </td>
           <td><%= product.price %></td>
           <td><%= product.description %></td>

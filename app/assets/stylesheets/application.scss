@@ -5,21 +5,17 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  letter-spacing: .65px;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
     "header header"
     "main main"
-    "footer footer"
 }
 
 main {
+  margin: 3rem;
   grid-area: main;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 2rem;
 }
 
 header {
@@ -30,12 +26,21 @@ a {
   color: rgb(56, 56, 56);
 }
 
+a:hover {
+  opacity: .6;
+    filter: alpha(opacity=60)
+}
+
 .navbar {
   background-color: white;
 }
 
+.bg-light {
+  background-color: white !important;
+}
+
 .navbar-brand img {
-  width: 200px
+  width: 160px
 }
 
 footer {
@@ -53,6 +58,7 @@ ul {
 }
 
 li {
+  list-style-type: none;
   align-self: auto;
   margin: 10px;
 }
@@ -69,6 +75,54 @@ li {
 
 .product {
   margin: 2rem;
+}
+
+pre {
+  font-family: 'Montserrat';
+  font-size: 1rem;
+}
+
+.card {
+  border-radius: 0;
+  border: none;
+  width: 20vw;
+}
+
+.card-body {
+  padding: 1.25rem 0;
+}
+
+@media (min-width: 576px) {
+  .card-deck {
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  /* line 154, /Users/Amy/.rvm/gems/ruby-2.5.1/gems/bootstrap-4.1.3/assets/stylesheets/bootstrap/_card.scss */
+  .card-deck .card {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 0;
+
+    width: 20vw;
+  }
+}
+
+// .card-columns {
+//    @include media-breakpoint-only(md) {
+//     column-count: 4;
+//   }
+//   @include media-breakpoint-only(lg) {
+//     column-count: 2;
+//   }
+//   @include media-breakpoint-only(xl) {
+//     column-count: 4;
+//   }
+// }
+
+.card-img-top {
+  border-radius: 0;
 }
 
 img {
@@ -96,7 +150,10 @@ input.btn {
   // margin-bottom: auto;
   vertical-align: baseline;
   background-color: #FF99CB;
+  color: white;
   border: none;
+  margin-top: 1.5rem;
+  border-radius: 0;
 }
 
 .btn:hover {
@@ -105,6 +162,7 @@ input.btn {
 
 .list-group {
   margin-bottom: 2rem;
+  list-style: none;
 }
 .list-group-item {
   margin-left: 0px;
@@ -115,9 +173,7 @@ input.btn {
 }
 
 .table {
- width: 80vw;
  margin-top: 2rem;
- margin-left: 2rem;
  padding: 5rem;
  border: 0;
 }
@@ -137,7 +193,8 @@ input.btn {
 .table th {
   color: #FF99CB;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: .75rem;
+  letter-spacing: 1.5px;
   font-weight: 600;
 }
 
@@ -145,8 +202,10 @@ strong {
   font-weight: 600;
 }
 
-.total {
-  border-top: 1px solid;
+td.total {
+  border-top: 6px solid  black;
+  width: 23vw;
+  padding-top: 1rem;
 }
 
 input[type=text] {
@@ -156,8 +215,8 @@ input[type=text] {
   align-self: left;
 }
 
-#total {
-  color: rgb(56, 56, 56);
+input[id^="order-item"] {
+  text-align: center;
 }
 
 header#homepage {
@@ -239,7 +298,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
-header.logo {
+section.logo {
   display: flex;
   justify-content: center;
   width: 100vw;

@@ -1,8 +1,8 @@
-<h1><%=@category.name%></h1>
-<% if @products_by_categories == [] %>
-  <p> No products are available in this category. </p>
+<h1><%=@merchant.username%></h1>
+<% if @products_by_merchants == [] %>
+<p> No products from this merchant. </p>
 <% end %>
-<% @products_by_categories.each do |product| %>
+<% @products_by_merchants.each do |product| %>
 <h2><%= link_to product.name, product_path(product) %></h2>
 <%# <%= image_tag("#{@product.photoURL}") %> 
 <ul class="list-group">

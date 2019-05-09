@@ -1,3 +1,4 @@
+<%if @order_items%>
 <article class="confirmation">
   <section class="order-title">
     <h3>Order #<%= @order.id %></h3>
@@ -18,8 +19,8 @@
   <thead class="order-items-header">  
   </thead>
   
-  <% @order_items.each do |order_item|%>
-    <th class="product-name"><%=link_to order_item.product.name, product_path(order_item.product)%></th>
+  <% @order_items.each do |order_item| %>
+    <th class="product-name"><%= link_to order_item.product.name, product_path(order_item.product) %></th>
     <tr>
      <td>Quantity</td> 
      <td><%= order_item.quantity %></td>
@@ -33,5 +34,8 @@
     <th>Order total </th>
     <td><%= number_to_currency(@order.total) %></td>
     </tr>
- 
+  <% else %>
+Nothing in Cart to show
+  <% end %>
 </article>
+
