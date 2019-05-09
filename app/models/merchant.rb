@@ -30,13 +30,14 @@ class Merchant < ApplicationRecord
     return total_revenue
   end
   
-  def total_revenue_by_status(status)
-    orders = self.orders.where(status: status)
-      orders.each do |order|
-        order.order  
-     end
-    
-  end
+  # def total_revenue_by_status(status)
+  #   total = 0
+  #   orders = self.orders.where(status: status)
+  #     orders.each do |order|
+  #       order.order_items. 
+  #    end  
+  #   # revenue += order.order_items.where(merchant_id: merchant.id).subtotal
+  # end
   
   def paid_order_items
     paid = []
@@ -47,25 +48,27 @@ class Merchant < ApplicationRecord
         paid << order_item
       end
     end
-    return paid
+    return revenue
   end
   
   def pending_order_items
+    revenue = 0
     pending = []
     self.order_items.each do |order_item|
       if order_item.order.status == "pending"
+        order_item.unit_price += revenue
         pending << order_item
       end
     end
-    return pending
+    return revenue
   end
   
-  def self.orders
-    self.products.map do |product|
-      product.order_items.each do |order_item|
-        order_item.orders
-      end
-    end
-  end
+  # def self.orders
+  #   self.products.map do |product|
+  #     product.order_items.each do |order_item|
+  #       order_item.orders
+  #     end
+  #   end
+  # end
   
 end

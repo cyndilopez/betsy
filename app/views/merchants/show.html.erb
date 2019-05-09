@@ -49,5 +49,6 @@
 
 <section class="order-fulfillment">
  <p>Total revenue: <%= number_to_currency(@merchant.total_revenue) %></p>
- <p>Revenue from Completed Orders: <%= number_to_currency(@merchant.pending_order_items.sum) %>
+ <p>Revenue from Completed Orders: <%= number_to_currency(@merchant.paid_order_items) %></p>
+ <p>Revenue from Pending Orders: <%= number_to_currency(@merchant.pending_order_items) %></p>
 </section>
