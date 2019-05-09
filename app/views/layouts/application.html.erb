@@ -53,10 +53,10 @@
     </nav>
   </header>
     
-<div class="container">    
+<div class="row">    
   <% if flash[:messages] or flash[:message] %>
-    <div class="alert alert-info">
-      <%= flash[:status].to_s == "error" ? "A problem occurred: " : "" %><%= flash[:message] %>
+    <div class="alert alert-info col-md-4 " align="center">
+      <%= flash[:status].to_s == "error" ? "A problem occurred: " : "" %><span><%= flash[:message] %></span>
       <% if flash[:messages] %>
         <ul>
           <% flash[:messages].each do |name, problems| %>
@@ -66,8 +66,9 @@
           <% end %>
         </ul>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
 
     <main>
     <%= yield %>

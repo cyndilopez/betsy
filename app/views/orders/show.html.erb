@@ -1,3 +1,5 @@
+  <%if @order_items != []%>
+
 <h1>Your cart</h1>
 <%= form_tag order_item_path(@order_items.first), method: :patch%>
 
@@ -11,7 +13,6 @@
       <th scope="col">Subtotal</th>
     </tr>
   </thead>
-  <%if @order_items != []%>
 
   <tbody>
 
