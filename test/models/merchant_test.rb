@@ -43,14 +43,13 @@ describe Merchant do
       merchant = merchants(:bob)
       expect(merchant.products.length).must_equal 2
     end
-    
+
     it "has many order items" do
       merchant = merchants(:bob)
       expect(merchant.order_items.first).must_be_instance_of OrderItem
     end
   end
-  
-  
+
   describe "total revenue method" do
     it "calculates the merchant's total revenue" do
       merchant = merchants(:bob)
@@ -59,42 +58,45 @@ describe Merchant do
       order_items.each do |item|
         costs << item.subtotal
       end
-      
+
       total = costs.sum
-      
+
       expect(merchant.total_revenue).must_be_kind_of Float
-      expect(merchant.total_revenue).must_equal total
+      expect(merchant.total_revenue).must_be_close_to total
     end
-    
+
     it "updates the merchant's total revenue" do
-      merchant = merchants(:bob)  
+      merchant = merchants(:bob)
       total_revenue = merchant.total_revenue
       order_item = merchant.order_items.first
       quantity = order_item.quantity + 2
       product = order_item.product
       order = order_item.order
-      
-        order_item_data = {
-          order_item: {
-            quantity: quantity,
-            order_id: order.id,
-            product_id: product.id
-          }
-        }
-      
+
+      order_item_data = {
+        order_item: {
+          quantity: quantity,
+          order_id: order.id,
+          product_id: product.id,
+        },
+      }
+
       updated_revenue = total_revenue + (product.price) * 2
-      puts "old #{merchant.order_items}"
-      
- 
       order_item.update!(order_item_data[:order_item])
       merchant.reload
       order_item.reload
-     
       expect(merchant.total_revenue).must_equal updated_revenue
     end
-    
+
     it "updates total_revenue if the order item is removed" do
-      skip
+      merchant = merchants(:bob)
+      initial_total_revenue = merchant.total_revenue
+      order_item_to_delete = merchant.order_items.first
+      price_order_item_to_delete = order_item_to_delete.product.price * order_item_to_delete.quantity
+      order_item_to_delete.destroy
+      merchant.reload
+      after_total_revenue = merchant.total_revenue
+      expect(after_total_revenue).must_be_close_to initial_total_revenue - price_order_item_to_delete
     end
   end
 

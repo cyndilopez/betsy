@@ -1,4 +1,5 @@
 <h1>Your cart</h1>
+<%= form_tag order_item_path(@order_items.first), method: :patch%>
 
 <table class="table table-borderless">
   <thead class="order-items-header">
@@ -10,50 +11,56 @@
       <th scope="col">Subtotal</th>
     </tr>
   </thead>
-  
-  <tbody>
   <%if @order_items != []%>
-    <% @order_items.each do |order_item|%>
+
+  <tbody>
+
+    <% @order_items.each do |order_item| %>
       <tr>
-        <%= form_tag order_item_path(order_item), method: :patch%>
         <td scope="row"><%=link_to order_item.product.name, product_path(order_item.product)%></td>
-        <td>$<%= order_item.product.price %></td>  
-   
+        <td><%= number_to_currency(order_item.product.price) %></td>  
         <td>
           <div class="value-button" onclick="decreaseValue('<%= order_item.id %>')" value="Decrease Value">-</div>
-          <input type="quantity" id="order-item<%= order_item.id %>" value="<%= order_item.quantity %>" name="order_items[<%= order_item.id %>]"  />
+          <input type="quantity" name="order_items[<%= order_item.id %>]" id="order-item<%= order_item.id %>" value="<%= order_item.quantity %>">
           <div class="value-button" onclick="increaseValue('<%= order_item.id %>')" value="Increase Value">+</div>
         </td>
         <td><em><%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %></em></td>
-        <td>$<%= order_item.subtotal %></td>
+        <td><%=number_to_currency(order_item.subtotal)%></td>
       </tr>
+
     <% end %>
-    
-    <tr class="spacer">
-        <td colspan="5">
-      </tr>
+
       <tr class="spacer">
-        <td colspan="4">
-        <td class="total"><pre><strong>Cart Total:</strong>   <%= number_to_currency(@order.total) %></pre></td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th scope="row"> </th>
+        <td></td>
       </tr>
-      <tr class="submit">
+
+      <tr class="total">
         <td></td>
         <td></td>
         <td></td>
-        <th scope="row">
-        <td><%= submit_tag "Save changes", class: "btn btn-table"%>
-        <%= link_to "Checkout", order_checkout_path(@order), method: :get, class: "btn btn-secondary"%>
-        </td>
-        </th>
+        <th scope="row">Cart Total</th>
+        <th id="total"><%= number_to_currency(@order.total) %></th>
       </tr>
+
+
   </tbody>
+
 </table>
-  
+    <%= submit_tag "Save", class: "btn btn-table" %>
+  <div>
+    <%= link_to "Checkout", order_checkout_path(@order), method: :get%>
+  <div>
+
   <%else%>
     <h3>Your cart is empty</h3>
-    <%= link_to "Back to Home", root_path, method: :get%>
-  <%end%>
- 
+    <%= link_to "Back to Home", root_path, method: :get %>
+  <%end%> 
+
+
 
 
 

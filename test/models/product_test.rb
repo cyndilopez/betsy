@@ -51,5 +51,24 @@ describe Product do
       category = categories(:confection)
       expect(category.products.length).must_equal 1
     end
+
+    it "has order_items" do
+      product = products(:starbursts)
+      expect(product.order_items.count).must_equal 2
+      expect(product.order_items.first).must_be_instance_of OrderItem
+    end
+
+    it "has reviews" do
+      product = products(:one)
+      expect(product.reviews.count).must_equal 1
+      expect(product.reviews.first).must_be_instance_of Review
+    end
+
+    it "has a merchant" do
+      product = products(:cupcakes)
+      merchant = merchants(:jenkins)
+      expect(product.merchant).must_be_instance_of Merchant
+      expect(product.merchant.name).must_equal merchant.name
+    end
   end
 end
