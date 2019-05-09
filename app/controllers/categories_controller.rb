@@ -15,14 +15,22 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    name = params["name"]
+    if params["product_id"]
+      name = params["name"]
+    else
+      name = params["category"]["name"]
+    end
     @category = Category.new(name: name)
     @product = Product.find_by(id: params["product_id"])
     successful = @category.save
     if successful
       flash[:status] = :success
       flash[:message] = "Saved category with id #{@category.id} successfully"
-      redirect_to product_categories_path(@product.id)
+      if params["product_id"]
+        redirect_to edit_product_path(@product.id)
+      else
+        redirect_to new_product_path
+      end
     else
       flash[:status] = :error
       flash[:message] = "Could not save the category: #{@category.errors.messages}"

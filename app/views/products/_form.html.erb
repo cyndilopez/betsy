@@ -13,7 +13,21 @@
   </section>
 <% end %>
 
+
 <%= form_with model: @product, class: 'product-form' do |f| %>
+
+ 
+
+ <div>
+    <%= f.label :categories %>
+    <%if Category.all == []%>
+      No categories to display at the time. Add one!
+    <%else%>
+    <div class="col-md-4 checkbox-list">
+      <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name)%>
+    </div>
+    <% end %>
+  </div>
 
   <div>
     <%= f.label :name, "Product name" %>
@@ -41,7 +55,7 @@
   </div>
 
   <div>
-  <%= f.submit "Create!", class: "btn btn-primary" %>
+  <%= f.submit button_text, class: "btn btn-primary" %>
   </div>
   <% end %>
 
