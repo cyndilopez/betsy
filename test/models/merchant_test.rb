@@ -82,17 +82,21 @@ describe Merchant do
       }
 
       updated_revenue = total_revenue + (product.price) * 2
-      puts "old #{merchant.order_items}"
-
       order_item.update!(order_item_data[:order_item])
       merchant.reload
       order_item.reload
-
       expect(merchant.total_revenue).must_equal updated_revenue
     end
 
     it "updates total_revenue if the order item is removed" do
-      skip
+      merchant = merchants(:bob)
+      initial_total_revenue = merchant.total_revenue
+      order_item_to_delete = merchant.order_items.first
+      price_order_item_to_delete = order_item_to_delete.product.price * order_item_to_delete.quantity
+      order_item_to_delete.destroy
+      merchant.reload
+      after_total_revenue = merchant.total_revenue
+      expect(after_total_revenue).must_be_close_to initial_total_revenue - price_order_item_to_delete
     end
   end
 
