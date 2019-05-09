@@ -55,6 +55,15 @@ describe CategoriesController do
     end
 
     describe "create" do
+      it "requires a user to be logged in" do
+        product = products(:starbursts)
+        category_data = {
+          name: "new category",
+        }
+        post product_categories_path(product.id), params: category_data
+        must_respond_with :redirect
+      end
+
       it "creates a new category" do
         category_data = {
 
