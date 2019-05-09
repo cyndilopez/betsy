@@ -16,12 +16,12 @@
     <% @order_items.each do |order_item|%>
       <tr>
         <%= form_tag order_item_path(order_item), method: :patch%>
-        <td scope="row"><%=link_to order_item.product.name, product_path(order_item.product)%></t>
+        <td scope="row"><%=link_to order_item.product.name, product_path(order_item.product)%></td>
         <td>$<%= order_item.product.price %></td>  
    
         <td>
-          <div class="value-button" onclick="decreaseValue(event)" value="Decrease Value">-</div>
-          <input type="quantity" id="order-item<%= order_item.id %>" value="<%= order_item.quantity%>" name="order_items[<%=order_item.id%>]"  />
+          <div class="value-button" onclick="decreaseValue('<%= order_item.id %>')" value="Decrease Value">-</div>
+          <input type="quantity" id="order-item<%= order_item.id %>" value="<%= order_item.quantity %>" name="order_items[<%= order_item.id %>]"  />
           <div class="value-button" onclick="increaseValue('<%= order_item.id %>')" value="Increase Value">+</div>
         </td>
         <td><em><%= link_to 'Remove', order_item_path(order_item), method: :delete, confirm: 'are you sure?' %></em></td>
@@ -30,18 +30,11 @@
     <% end %>
     
     <tr class="spacer">
-        <td></td>
-        <td></td>
-        <td></td>
-        <th scope="row"> </th>
-        <td></td>
+        <td colspan="5">
       </tr>
-      <tr class="total">
-        <td></td>
-        <td></td>
-        <td></td>
-        <th scope="row">Cart Total</th>
-        <th id="total">$<%= @order.total %></th>
+      <tr class="spacer">
+        <td colspan="4">
+        <td class="total"><pre><strong>Cart Total:</strong>   <%= number_to_currency(@order.total) %></pre></td></td>
       </tr>
       <tr class="submit">
         <td></td>

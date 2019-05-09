@@ -66,28 +66,48 @@ describe Merchant do
       expect(merchant.total_revenue).must_equal total
     end
     
-    # it "updates the merchant's total revenue" do
-    #   merchant = merchants(:bob)
-    #   product = merchant.products.first
-    #   order = orders(:one)
-    #   total_revenue = merchant.total_revenue
-    #   # order_item = merchant.order_items.first
+    it "updates the merchant's total revenue" do
+      merchant = merchants(:bob)  
+      total_revenue = merchant.total_revenue
+      order_item = merchant.order_items.first
+      quantity = order_item.quantity + 2
+      product = order_item.product
+      order = order_item.order
       
-    #     order_item_data = {
-    #       order_item: {
-    #         quantity: 2,
-    #         order_id: order.id,
-    #         product_id: product.id
-    #       }
-    #     }
+        order_item_data = {
+          order_item: {
+            quantity: quantity,
+            order_id: order.id,
+            product_id: product.id
+          }
+        }
       
-    #   updated_revenue = total_revenue + (product.price) * 2
+      updated_revenue = total_revenue + (product.price) * 2
+      puts "old #{merchant.order_items}"
       
-      
-    #   post product_order_items_path, params: order_item_data
-      
-    #   expect(total_revenue).must_equal updated_revenue
-    # end
+ 
+      order_item.update!(order_item_data[:order_item])
+      merchant.reload
+      order_item.reload
+     
+      expect(merchant.total_revenue).must_equal updated_revenue
+    end
+    
+    it "updates total_revenue if the order item is removed" do
+      skip
+    end
+  end
+
+  describe "filter_by_merchant" do
+    it "finds the products associated with a merchant" do
+      merchant = merchants(:bob)
+      merchant_data = {
+        id: merchant.id,
+      }
+      products = Merchant.filter_by_merchant(merchant_data)
+      number_of_active_products = merchant.products.where(active: true).count
+      expect(products.length).must_equal number_of_active_products
+    end
   end
   
   describe "helper methods" do

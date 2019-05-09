@@ -5,6 +5,13 @@ describe MerchantsController do
   before do
     @merchant = merchants(:jenkins)
   end
+  describe "index" do
+    it "can render without crashing" do
+      get merchants_path
+
+      must_respond_with :ok
+    end
+  end
   describe "auth callback" do
     before do
       @start_count = Merchant.count
@@ -94,6 +101,20 @@ describe MerchantsController do
 
       expect(flash[:status]).must_equal :error
       expect(flash[:message]).wont_be_nil
+    end
+  end
+
+  describe "merchants" do
+    it "renders the page" do
+      merchant = merchants(:jenkins)
+      get merchants_products_path(merchant)
+      must_respond_with :ok
+    end
+
+    it "returns a 404 if can't find a merchant" do
+      merchant_id = -1
+      get merchants_products_path(merchant_id)
+      must_respond_with :not_found
     end
   end
 end

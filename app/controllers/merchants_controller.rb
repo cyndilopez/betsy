@@ -1,6 +1,10 @@
 class MerchantsController < ApplicationController
   skip_before_action :require_login
 
+  def index
+    @merchants = Merchant.all
+  end
+
   def create
     auth_hash = request.env["omniauth.auth"]
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
@@ -45,6 +49,15 @@ class MerchantsController < ApplicationController
       flash[:status] = :error
       flash[:message] = "You don't have permission to view this merchant's page."
       redirect_to root_path
+    end
+  end
+
+  def merchants
+    @merchant = Merchant.find_by(id: params[:id])
+    if @merchant
+      @products_by_merchants = Merchant.filter_by_merchant(params)
+    else
+      head :not_found
     end
   end
 end
