@@ -1,13 +1,18 @@
 class ReviewsController < ApplicationController
+  skip_before_action :require_login
+
   def new
     @product = Product.find_by(id: params[:product_id])
-    if !@merchant.nil? && @merchant.id == @product.merchant.id
-      flash[:error] = "You can't review your own product!"
-      redirect_to product_path(@product.id)
-    else
-      unless @product
-        head :not_found 
+    unless @product
+      head :not_found
+    end
+    if session[:merchant_id]
+      if session[:merchant_id] == @product.merchant.id
+        flash[:status] = :error
+        flash[:message] = "You can't review your own product!"
+        redirect_to product_path(@product.id)
       end
+    else
       @review = Review.new
     end
   end
@@ -16,14 +21,20 @@ class ReviewsController < ApplicationController
     @product = Product.find_by(id: params[:product_id])
     unless @product
       head :not_found
+      return
     end
-    if !@merchant.nil? && @merchant.id == @product.merchant.id
-      flash.now[:error] = "You can't review your own product!"
+    if session[:merchant_id] == @product.merchant.id
+      flash.now[:status] = :error
+      flash.now[:message] = "You can't review your own product!"
       redirect_to product_path(@product.id)
     else
       @review = Review.new(review_params)
+      @review.product = @product
+      successful = @review.save
+      p successful
       if @review.save
-        flash[:success] = "Your review was added succesfully!"
+        flash[:status] = :success
+        flash[:message] = "Your review was added succesfully!"
         redirect_to product_path(@review.product_id)
       else
         flash[:status] = :error
@@ -34,6 +45,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.permit(:rating, :comment, :product_id)
+    params.require(:review).permit(:rating, :comment, :name)
   end
 end

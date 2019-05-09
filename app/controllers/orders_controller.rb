@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
     @order.update(order_params)
     @order.status = "paid"
     successful = @order.save
+    p @order.errors.messages
     if successful
       flash[:status] = :success
       flash[:message] = "Thanks for shopping with us! Please save your order number - ##{@order.id}."

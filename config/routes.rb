@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   resources :products do
     resources :categories, only: [:create]
   end
-
-  resources :products do 
+  resources :reviews, only: [:index]
+  resources :products do
     resources :reviews, only: [:new, :create]
-  end 
+  end
 
   get "products/:id/categories", to: "categories#select_categories", as: "product_select_categories"
 

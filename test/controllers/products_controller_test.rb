@@ -48,7 +48,7 @@ describe ProductsController do
             price: 4.99,
             photoURL: "github.com",
             stock: 8,
-            merchant_id: @merchant.id,
+            merchant_id: Merchant.first,
           },
         }
 
