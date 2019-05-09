@@ -2,7 +2,7 @@ require "uri"
 
 class Order < ApplicationRecord
   has_many :order_items, inverse_of: :order
-  has_many :products, :through => :order_item
+  has_many :products, :through => :order_items
 
   #  validates that the attributes' values are included in a given set
   validates :status, presence: true, inclusion: { in: %w(pending paid) }
