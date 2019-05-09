@@ -187,7 +187,7 @@ describe ProductsController do
         patch product_path(@product), params: @product_data
 
         must_respond_with :redirect
-        must_redirect_to product_path(@product)
+        must_redirect_to merchant_path(@merchant)
 
         expect(flash[:status]).must_equal :success
         expect(flash[:message]).wont_be_nil

@@ -1,3 +1,11 @@
 <h1>Edit Product</h1>
+ 
+  <div class="form-group">
+     <%= form_tag(product_categories_path(params[:id]), :method => "post") do%>
+     <%= label_tag(:name, "Add New Category") %>
+     <%= text_field_tag :name, "", class: "form-control" %>
+     <%= submit_tag("Create", class: "btn btn-primary") %>
+    <% end %>
 
 <%= render partial: 'form', locals: { button_text: "Save changes" } %>
+
