@@ -113,13 +113,24 @@ describe Order do
       expect(order.valid?).must_equal false
     end
   end
-
-  describe "relations" do
-    it "has order items" do
-      expect(order.order_items.first).must_be_instance_of OrderItem
-      expect(order.order_items.length).must_equal 1
+  
+  describe "order status tests" do
+    it "finds all Paid orders" do
+      order = orders(:two)
+      pending = orders(:one)
+      expect(Order.paid_orders).wont_be_nil
+      expect(Order.paid_orders).must_include order
+      expect(Order.paid_orders).wont_include pending
     end
-  end
+    
+    it "finds all Pending orders" do
+      order = orders(:two)
+      pending = orders(:one)
+      expect(Order.pending_orders).wont_be_nil
+      expect(Order.pending_orders).must_include pending
+      expect(Order.pending_orders).wont_include order
+    end
+  end 
 
   describe "its not pending" do
     it "finds not pending orders" do
@@ -132,4 +143,11 @@ describe Order do
       expect(order.total).must_be_close_to 10.59
     end
   end
+  
+   describe "relations" do
+     it "has order items" do
+       expect(order.order_items.first).must_be_instance_of OrderItem
+       expect(order.order_items.length).must_equal 1
+     end
+   end
 end

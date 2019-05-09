@@ -109,4 +109,31 @@ describe Merchant do
       expect(products.length).must_equal number_of_active_products
     end
   end
+  
+  describe "helper methods" do
+    it "gets a list of pending order items" do
+      merchant = merchants(:bob)
+      merchant2 = merchants(:jenkins)
+      expect(merchant.pending_order_items.count).must_equal 1
+      
+      order_item = merchant.pending_order_items.first
+      expect(order_item.order.status).must_equal "pending"
+      expect(merchant2.pending_order_items.count).must_equal 0
+    end
+    
+    it "gets a list of paid order items" do
+      product = products(:cupcakes)
+      order_item = 
+      order = orders(:two)
+      
+      order_item = order.order_items.first
+      puts order_item
+      merchant = order_item.product.merchant
+      puts merchant
+      expect(merchant.paid_order_items.count).must_equal 1
+      
+      order_item = merchant.paid_order_items.first
+      expect(order_item.order.status).must_equal "paid"
+    end
+  end
 end

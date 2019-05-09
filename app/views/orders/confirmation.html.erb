@@ -6,6 +6,14 @@
     <h6><strong>Status:</strong> <%= @order.status.capitalize %></h6>
     <h6><strong>Total:</strong> <%= number_to_currency(@order.total) %></h6>
   </section>
+  <br>
+  <section class="customer-info">
+    <h6><strong><%= @order.name %></strong></h6>
+    <h6><%= @order.email %></h6>
+    <h6><%= @order.address %></h6>
+    <h6><%= @order.email %></h6>
+    <h6><%= @order.mask(@order.cc_num) %></h6>
+  </section>
   
 <table class="table table-borderless">
   <thead class="order-items-header">  
