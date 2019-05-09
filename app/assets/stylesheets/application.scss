@@ -87,7 +87,9 @@ pre {
 .card {
   border-radius: 0;
   border: none;
-  width: 20vw;
+  // width: 20vw;
+  min-width: 20%;
+  max-width: 30%;
 }
 
 .card-body {
@@ -106,8 +108,8 @@ pre {
     flex-direction: column;
 
     margin-bottom: 0;
-
-    width: 20vw;
+    min-width: 20%;
+    max-width: 30%;
   }
 }
 
@@ -138,7 +140,7 @@ div {
 .products ul {
   display: block;
   flex-flow: column wrap;  
-  width: 20vw;
+  width: 20%;
   height: auto;
   // justify-content: flex-start;
 }
@@ -206,7 +208,7 @@ strong {
 
 td.total {
   border-top: 6px solid  black;
-  width: 23vw;
+  width: 23%;
   padding-top: 1rem;
 }
 
