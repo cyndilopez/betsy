@@ -109,6 +109,8 @@ pre {
   }
 }
 
+
+
 // .card-columns {
 //    @include media-breakpoint-only(md) {
 //     column-count: 4;
@@ -172,6 +174,14 @@ input.btn {
 
 }
 
+.btn-secondary {
+  background-color: rgb(153, 236, 255);
+}
+
+.btn-secondary:hover {
+  background-color: rgb(153, 236, 255);
+}
+
 .table {
  margin-top: 2rem;
  padding: 5rem;
@@ -203,7 +213,7 @@ strong {
 }
 
 td.total {
-  border-top: 6px solid  black;
+  border-top: 6px solid  rgb(153, 236, 255);
   width: 23vw;
   padding-top: 1rem;
 }

@@ -41,7 +41,10 @@
         <td></td>
         <td></td>
         <th scope="row">
-        <td><%= submit_tag "Save changes", class: "btn btn-table" %></td>
+        <td><%= submit_tag "Save changes", class: "btn btn-table"%>
+        <%= link_to "Checkout", order_checkout_path(@order), method: :get, class: "btn btn-secondary"%>
+        </td>
+        </th>
       </tr>
   </tbody>
 </table>
@@ -50,9 +53,7 @@
     <h3>Your cart is empty</h3>
     <%= link_to "Back to Home", root_path, method: :get%>
   <%end%>
-  <div>
-  <%= link_to "Checkout", order_checkout_path(@order), method: :get%>
-  <div>
+ 
 
 
 
