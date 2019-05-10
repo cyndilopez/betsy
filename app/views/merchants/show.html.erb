@@ -1,11 +1,15 @@
 <h2><%= @merchant.name %></h2>
   <p><%=@merchant.email %></p>
+  <ul class="merchant-stats">
+    <li><strong>Total revenue:</strong> <%= number_to_currency(@merchant.total_revenue) %></li>
+    <li><span class="badge badge-pill badge-info"><%= @merchant.orders.where(status: "paid").count %></span><strong>Completed Orders:</strong> <%= number_to_currency(@merchant.paid_order_items) %></li>
+    <li><span class="badge badge-pill badge-info"><%= @merchant.orders.where(status: "pending").count %></span><strong>Pending Orders:</strong> <%= number_to_currency(@merchant.pending_order_items) %></li>
+  </ul>
 
-<%# <%= session[:merchant_id]%>
 <br><section class="merchant-products">
-  <table class="table table-borderless">
-    <h5>Products</h5>
-    <thead>
+  <table class="table">
+    <h4>My Products</h4>
+    <thead class="thead-light">
       <tr>
         <th>Name</th>
         <th>Categories</th>
@@ -24,13 +28,11 @@
           <td>
         
             <% product.categories.each do |category| %>
-
-                <%= category.name %>
-
+              <span class="badge badge-light"><%= category.name %></span>
             <%end %>
 
           </td>
-          <td><%= product.price %></td>
+          <td><%= number_to_currency(product.price) %></td>
           <td><%= product.description %></td>
           <td><%= product.stock %></td>
           <td><%= link_to "Update", edit_product_path(product), class: "btn btn-primary" %></td>
@@ -46,33 +48,24 @@
     </tbody>
   </table>
 </section>
+<br>
+<br>
 
-<section class="order-fulfillment">
- <p>Total revenue: <%= number_to_currency(@merchant.total_revenue) %></p>
- <p>Revenue from Completed Orders: <%= number_to_currency(@merchant.paid_order_items) %>
- <p>Revenue from Pending Orders: <%= number_to_currency(@merchant.pending_order_items) %>
-</section>
 
-<table class="table table-borderless">
-  <thead class="order-items-header">
+<h4>My Orders</h4>
+<table class="table">
+  <thead  class="thead-light">
     <tr>
-      <th scope="col">Number</th>
-      <th scope="col">Date</th>
-      <th scope="col">Product</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Subtotal</th>
+      <th scope="col">Order #</th>
+      <th scope="col">Created On</th>
       <th scope="col">Status</th>   
     </tr>
   </thead>
-
   <tbody>
-
     <% @merchant.orders.each do |order| %>
       <tr>
-        <td scope="row"><%=link_to order.id, order_path(order.id)%></td>
-        <td><%= order.created_at.strftime("%B %d, %Y") %></td>  
-        <%# <td><%= Product.order_items.where(order_id: order.id, merchant_id: @merchant.id).each { |product| product.name} %></td> %>
+        <td scope="row"><%= link_to "#00000#{order.id}", order_confirmation_path(order) %></td>
+        <td><%= link_to order.created_at.strftime("%B %d, %Y"), order_path(order.id) %></td> 
         <td><%= order.status %></td>   
       </tr>
-
     <% end %>

@@ -1,12 +1,6 @@
 <h1>Products</h1>
 
-<section class="list-of-filters">
-  <ul>
-  <% (Category.all).each do |cat| %>
-      <li><%= link_to "#{cat.name}", categories_products_path(cat) %></li>
-  <%end%>
-  </ul>
-</section>
+
 
 <div class="container-fluid">
   <div class="card-deck">

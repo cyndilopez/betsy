@@ -15,6 +15,9 @@ body {
     "main main"
 }
 
+div.page-container {
+  
+}
 main {
   margin: 3rem;
   grid-area: main;
@@ -26,6 +29,7 @@ header {
 
 a {
   color: rgb(56, 56, 56);
+  text-decoration: #FF99CB;
 }
 
 a:hover {
@@ -42,7 +46,7 @@ a:hover {
 }
 
 .navbar-brand img {
-  width: 160px
+  width: 140px
 }
 
 footer {
@@ -54,7 +58,7 @@ ul {
   list-style-type: none;
   padding: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -87,8 +91,7 @@ pre {
 .card {
   border-radius: 0;
   border: none;
-  // width: 20vw;
-  min-width: 20%;
+  min-width: 30%;
   max-width: 30%;
 }
 
@@ -106,9 +109,10 @@ pre {
   .card-deck .card {
     display: flex;
     flex-direction: column;
-
-    margin-bottom: 0;
-    min-width: 20%;
+    justify-content: space-between;
+    
+    margin-bottom: 2rem;
+    min-width: 30%;
     max-width: 30%;
   }
 }
@@ -127,7 +131,9 @@ pre {
 
 .card-img-top {
   border-radius: 0;
-  max-height: 30;
+  // max-height: 30%;
+  // max-width: 30%;
+  object-fit: fill;
 }
 
 img {
@@ -148,7 +154,6 @@ div {
 
 input.btn {
   width: auto;
-  margin-top: 1.5rem;
 }
 
 .btn {
@@ -157,7 +162,6 @@ input.btn {
   background-color: #FF99CB;
   color: white;
   border: none;
-  margin-top: 1.5rem;
   border-radius: 0;
 }
 
@@ -211,7 +215,8 @@ strong {
 td.total {
   border-top: 6px solid  black;
   width: 23%;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 input[type=text] {
@@ -323,26 +328,44 @@ img.logo {
   color: rgb(107, 11, 116); 
 }
 
-// div.alert {
-//   width: inherit;
-// }
 
-// div.d-flex align-items-baseline {
-//   display: inline-block;
-//   position: relative;
-//   flex-flow: row wrap;
-//   justify-content: flex-start;
-//   align-items: baseline;
-  
-// }
+div.alert {
+  width: inherit;
+}
 
-// div.d-flex align-items-end{
-//   align-self: flex-end;
-// }
+div.category-index {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;  
+}
 
-div.root-container {
+div.category-container {
+  background-color: pink;
+  opacity: .7;
+  margin-top: 2rem;
+  width: 70vw;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  
+  align-items: flex-start;
+  height: 60vh;
+  padding: 3rem 1.5rem;
+}
+
+.category-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 175px;
+  height: 40px;
+  border: 4px solid black;
+  color:  black;
+  margin: 1rem;
+}
+
+.category-box > h5 {
+  color: black;
+  font-weight: 600;
+  margin-top: 7px;
 }

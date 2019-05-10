@@ -1,4 +1,4 @@
-<h1><%=@category.name%></h1>
+<h1><%= @category.name.capitalize %> Products</h1>
 <% if @products_by_categories == [] %>
   <p> No products are available in this category. </p>
 <% end %>

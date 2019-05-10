@@ -1,11 +1,13 @@
-<h1>Index for Merchants</h1>
-
-<ul>
-  <% @merchants.each do |merchant|%>
-  <li>
-    <p>
-      <%= link_to merchant.username, merchants_products_path(merchant), class: "btn btn-primary" %>
-    </p>
-  </li>
-  <% end %>
-</ul>
+<div class="category-index">
+  <h1>Shop by Merchant</h1>
+  <div class="category-container">
+    
+      <% @merchants.each do |merchant|%>
+      <%= link_to merchants_products_path(merchant) do %>
+        <div class="category-box">
+          <h5><%= merchant.username %></h5>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
