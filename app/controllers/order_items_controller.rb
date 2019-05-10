@@ -26,7 +26,7 @@ class OrderItemsController < ApplicationController
       @order_item.save
       flash[:status] = :success
       flash[:message] = "Added to cart!"
-      redirect_to root_path
+      redirect_to products_path
     else
       flash.now[:status] = :error
       flash.now[:message] = "Unable to add to cart, not enough items in stock."

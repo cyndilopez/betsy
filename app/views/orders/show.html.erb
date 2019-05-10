@@ -53,15 +53,15 @@
 </table>
 <div>
     <%= submit_tag "Save", class: "btn btn-table" %>
-<div>
+</div>
 <br>
 <div>
     <%= link_to "Checkout", order_checkout_path(@order), method: :get, class: "btn btn-table"%>
-<div>
+</div>
 
   <%else%>
     <h3>Your cart is empty</h3>
-    <%= link_to "Back to Home", root_path, method: :get %>
+    <%= link_to "Back to Home", root_path, method: :get, class: "btn btn-primary" %>
   <%end%> 
 
 

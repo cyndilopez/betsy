@@ -32,3 +32,16 @@ ul.horizontal-group {
 //     display: inline;
 //     height: 10vh;
 // }
+
+
+.comment-wrapper .panel-body {
+    max-height:650px;
+    overflow:auto;
+}
+
+.comment-wrapper .media-list .media img {
+    width:100px;
+    height:100px;
+    border:2px solid #e5e7e8;
+}
+

@@ -23,7 +23,7 @@ describe OrderItemsController do
       expect(session[:order_id]).wont_be_nil
       expect(flash[:status]).must_equal :success
       must_respond_with :found
-      must_redirect_to root_path
+      must_redirect_to products_path
     end
 
     it "needs a valid product" do

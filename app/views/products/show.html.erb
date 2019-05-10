@@ -1,32 +1,48 @@
+<div class="card">
 <h2><%= @product.name %></h2>
-<%# <%= image_tag("#{@product.photoURL}") %> 
-<ul class="list-group">
-  <li class="list-group-item">Price: <%=number_to_currency(@product.price) %></li>
-  <li class="list-group-item">Quantity in stock: <%=@product.stock%></li>
-  <li class="list-group-item">Description: <%=@product.description %></li>
+   <%= image_tag "#{@product.photoURL}", alt: "product image", class: "card-img-top" %>
+<div class="card-body">
+  <h6 class="card-subtitle mb-2">Price: <%=number_to_currency(@product.price) %></h6>
+  <h6 class="card-subtitle mb-2">Quantity in stock: <%=@product.stock%></h6>
+  <h6 class="card-subtitle mb-2">Description: <%=@product.description %></h6>
 
-  <li class="list-group-item"><%= link_to "Add to cart", product_order_items_path(@product), method: :post, class: "btn btn-primary btn-lg" %></li>
-</ul>
+  <h6 class="card-subtitle mb-2"><%= link_to "Add to cart", product_order_items_path(@product), method: :post, class: "btn btn-primary btn-lg" %></h6>
+</div>
+</div>
+<%=link_to "Add Review", new_product_review_path(@product), class: "btn btn-primary"%>
 
-<%=link_to "Add Review", new_product_review_path(@product)%>
-<%if @product.reviews.count == 1%>
-<strong><%=@product.reviews.count%> Review</strong>
-<%else%>
-<strong><%=@product.reviews.count%> Reviews</strong>
-<%end%>
-<%@product.reviews.each do |review|%>
-<ul>
-<li><%=review.rating%> out of 5 stars</li>
-<% review.rating.to_i.times do  %>
- <i class="fa fa-star", aria-hidden="true"> </i>
-<% end %>
-<% (5-review.rating).to_i.times do  %>
- <i class="fa fa-star-o", aria-hidden="true"> </i>
-<% end %>
-<li><%=review.name%></li>
-<li><%=review.created_at.strftime("%B %d, %Y at %I:%M %p")%></li>
-<li><%=review.comment%></li>
-</ul>
-<% end %>
+<div class="row bootstrap snippets">
 
+      <div class="card">
+        <div class="card-title">
+          <%if @product.reviews.count == 1%>
+            <strong><%=@product.reviews.count%> Review</strong>
+          <%else%>
+            <strong><%=@product.reviews.count%> Reviews</strong>
+          <%end%>
+        </div>
+        <div class="panel-body">
+          <div class="clearfix"></div>
+          <hr>
+          <%@product.reviews.each do |review|%>
+          <ul>
+            <span class="text-muted pull-right">
+              <small class="text-muted"><%=review.created_at.strftime("%B %d, %Y at %I:%M %p")%></small>
+            </span>
+            <%=review.rating%> out of 5 stars</li>
+            <% review.rating.to_i.times do  %>
+              <i class="fa fa-star", aria-hidden="true"> </i>
+            <% end %>
+            <% (5-review.rating).to_i.times do  %>
+              <i class="fa fa-star-o", aria-hidden="true"> </i>
+            <% end %>
+            <li><%=review.name%></li>
+            <li><%=review.comment%></li>
+          </ul>
+          <% end %>
+          </div>
+        </div>
+      </div>
+ 
+</div>
 
