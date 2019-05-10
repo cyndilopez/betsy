@@ -14,64 +14,66 @@
   </head>
 
   <body>
-    <header>
-    
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <%= link_to image_tag('logo@2x.png'), root_path, class: "navbar-brand" %></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div class="site-container">
+      <header>
       
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="/products_path" id="navbarDropdownMenuLink" data-toggle="dropdown">Shop</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/products">All products</a>
-              <a class="dropdown-item" href="/categories">By category</a>
-              <a class="dropdown-item" href="/merchants">By seller</a>
-            </div>
-          </li>
-
-          <% if session[:order_id]%>
-          <li><%= link_to "Cart", order_path(session[:order_id]), class: "nav-link active" %></li>
-          <% end %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <%= link_to image_tag('logo@2x.png'), root_path, class: "navbar-brand" %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" >
+          <span class="navbar-toggler-icon"></span>
+        </button>
         
-          <%if session[:merchant_id] %>
-            <li><%= link_to "Merchants", merchant_path(session[:merchant_id]), class: "nav-link active" %></li>
-          <%end%>
-          
-        <%if session[:merchant_id] %>
-          <li><%= link_to "Logout", logout_path, class: "nav-link", method: :delete %></li>
-        <%else%>
-          <li><%= link_to "Login with GitHub", github_login_path, class: "nav-link active" %></li>
-        <%end%>
-          <li><%= link_to "Add New Product", new_product_path, class: "nav-link active" %></li>
-        </div>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link active dropdown-toggle" href="/products_path" id="navbarDropdownMenuLink" data-toggle="dropdown">Shop</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/products">All products</a>
+                <a class="dropdown-item" href="/categories">By category</a>
+                <a class="dropdown-item" href="/merchants">By seller</a>
+              </div>
+            </li>
 
-      </nav>
-    </nav>
-  </header>
-    
-
-    <main>
-     <% if flash[:messages] or flash[:message] %>
-      <div class="alert alert-info">
-        <%= flash[:status].to_s == "error" ? "A problem occurred: " : "" %><span><%= flash[:message] %></span>
-        <% if flash[:messages] %>
-          <ul>
-            <% flash[:messages].each do |name, problems| %>
-              <% problems.each do |problem| %>
-                <li><%= name %>: <%= problem %></li>
-              <% end %>
+            <% if session[:order_id]%>
+            <li><%= link_to "Cart", order_path(session[:order_id]), class: "nav-link active" %></li>
             <% end %>
-          </ul>
-        <% end %>
-      </div>
-    <% end %>
-    
-    <%= yield %>
-    </main>
+          
+            <%if session[:merchant_id] %>
+              <li><%= link_to "Merchants", merchant_path(session[:merchant_id]), class: "nav-link active" %></li>
+            <%end%>
+            
+          <%if session[:merchant_id] %>
+            <li><%= link_to "Logout", logout_path, class: "nav-link", method: :delete %></li>
+          <%else%>
+            <li><%= link_to "Login with GitHub", github_login_path, class: "nav-link active" %></li>
+          <%end%>
+            <li><%= link_to "Add New Product", new_product_path, class: "nav-link active" %></li>
+          </div>
+
+        </nav>
+      </nav>
+    </header>
+      
+
+      <main>
+      <% if flash[:messages] or flash[:message] %>
+        <div class="alert alert-info">
+          <%= flash[:status].to_s == "error" ? "A problem occurred: " : "" %><span><%= flash[:message] %></span>
+          <% if flash[:messages] %>
+            <ul>
+              <% flash[:messages].each do |name, problems| %>
+                <% problems.each do |problem| %>
+                  <li><%= name %>: <%= problem %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <%= yield %>
+      </main>
+    </div>
   </body>
 </div>  
 
