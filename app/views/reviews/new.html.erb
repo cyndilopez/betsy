@@ -1,20 +1,18 @@
 <h2>Add a Review</h2>
-<br></br>
+<br>
 <div class="form-group">
 <%=form_tag(product_reviews_path(@product), method: :post)%>
-<label>Name</label>
+<label for= "name">Name</label>
 <%=text_field(:review, :name, class: "form-control")%>
 </div>
 <div class="form-group">
-<label for= "comment">Comment</label>
+<label for="comment" >Comment</label>
 <%=text_field(:review, :comment, class: "form-control")%>
 </div>
 <div class="form-group">
-<label>Rating</label>
+<label for="rating">Rating</label>
 <%=text_field(:review, :rating, class: "form-control")%>
 </div>
 <div>
 <%= submit_tag "Create Review", class: "btn btn-table" %>
 </div>
-
-
