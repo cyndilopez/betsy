@@ -49,3 +49,19 @@ ul.horizontal-group {
 //     display: inline;
 //     height: 10vh;
 // }
+
+
+.comment-wrapper {
+    max-height:650px;
+}
+
+
+.list-group {
+    align-items: flex-start;
+    border-bottom:1px dashed #efefef;
+    margin-bottom:25px;
+}
+          
+#reviews h5 {
+    margin-bottom: 50px;
+}
