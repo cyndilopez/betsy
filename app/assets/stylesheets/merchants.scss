@@ -10,6 +10,10 @@
     background-color: #27AAE1;
 }
 
+.btn.inactive:hover {
+    background-color: #A0DAEF; 
+}
+
 li .btn {
     background-color: lightgrey;
     color: darkslategray;
