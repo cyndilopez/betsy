@@ -52,3 +52,27 @@
  <p>Revenue from Completed Orders: <%= number_to_currency(@merchant.paid_order_items) %>
  <p>Revenue from Pending Orders: <%= number_to_currency(@merchant.pending_order_items) %>
 </section>
+
+<table class="table table-borderless">
+  <thead class="order-items-header">
+    <tr>
+      <th scope="col">Number</th>
+      <th scope="col">Date</th>
+      <th scope="col">Product</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Subtotal</th>
+      <th scope="col">Status</th>   
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @merchant.orders.each do |order| %>
+      <tr>
+        <td scope="row"><%=link_to order.id, order_path(order.id)%></td>
+        <td><%= order.created_at.strftime("%B %d, %Y") %></td>  
+        <%# <td><%= Product.order_items.where(order_id: order.id, merchant_id: @merchant.id).each { |product| product.name} %></td> %>
+        <td><%= order.status %></td>   
+      </tr>
+
+    <% end %>
