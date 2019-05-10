@@ -45,3 +45,29 @@ ul.horizontal-group {
     border:2px solid #e5e7e8;
 }
 
+.reviews .column {
+    justify-content: flex-start
+}
+
+.row {
+    flex-direction: row
+}
+
+.list-group {
+    align-items: flex-start
+}
+
+
+.comment-wrapper {
+    max-height:650px;
+}
+
+
+.list-group {
+    border-bottom:1px dashed #efefef;
+    margin-bottom:25px;
+}
+          
+#reviews h5 {
+    margin-bottom: 50px;
+}
