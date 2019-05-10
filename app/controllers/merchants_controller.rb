@@ -2,7 +2,7 @@ class MerchantsController < ApplicationController
   skip_before_action :require_login
 
   def index
-    @merchants = Merchant.all
+    @merchants = Merchant.order(username: :asc)
   end
 
   def create
