@@ -8,8 +8,6 @@
   <li class="list-group-item">Description: <%=@product.description %></li>
   <li class="list-group-item"><%= link_to "Add to cart", product_order_items_path(@product), method: :post, class: "btn btn-primary btn-lg" %></li>
 </ul>
-
-
 <br>
 <br>
 <div class="comment-wrapper">
@@ -37,5 +35,6 @@
     <%=link_to "Write a customer review", new_product_review_path(@product), class: "btn btn-sm"%>
   </div>
 </div>
+
 
 

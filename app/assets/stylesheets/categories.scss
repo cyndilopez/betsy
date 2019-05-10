@@ -15,3 +15,13 @@
   label {
       font-size: 1rem;
   }
+
+  li .btn {
+    background-color: lightgrey;
+    color: darkslategray;
+  }
+
+  li .btn:hover {
+    background-color: lightblue;
+    color: black;
+  }

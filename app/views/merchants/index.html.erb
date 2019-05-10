@@ -4,7 +4,7 @@
   <% @merchants.each do |merchant|%>
   <li>
     <p>
-      <%= link_to merchant.username, merchants_products_path(merchant) %>
+      <%= link_to merchant.username, merchants_products_path(merchant), class: "btn btn-primary" %>
     </p>
   </li>
   <% end %>
