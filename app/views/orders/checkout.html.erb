@@ -4,27 +4,27 @@
 <%= form_with model: @order, :method => :patch,  class: 'product-form' do |f| %>
   <form>
     <div class="form-group">
-      <label for= "Checkout" >Name on Credit Card</label>
+      <label for= "name" >Name on Credit Card</label>
       <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="form-group">
       <label for="Email">Email</label>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
       <%= f.text_field :address, class: "form-control" %>
     </div>
     <div class="form-group">
-      <label for="Email">Address</label>
-      <%= f.text_field :address, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <label for="Email">Credit Card Number</label>
+      <label for="cc_num">Credit Card Number</label>
       <%= f.text_field :cc_num, placeholder: "1234567890123456", class: "form-control"%>
     </div>
     <div class="form-group">
-      <label for="Email">CVV</label>
+      <label for="cc_cvv">CVV</label>
       <%= f.text_field :cc_cvv, placeholder: "123", class: "form-control" %>
     </div>
     <div class="form-group">
-      <label for="Email">Expiration</label>
+      <label for="cc_expiration">Expiration</label>
       <%= f.text_field :cc_expiration, placeholder: "MMYYYY", class: "form-control"%>
     </div>
     <div class = "form-group-row">
