@@ -4,7 +4,7 @@
   <% @categories.each do |category|%>
   <li>
     <p>
-      <%= link_to category.name, categories_products_path(category) %>
+      <%= link_to category.name, categories_products_path(category), class: "btn btn-primary"  %>
     </p>
   </li>
   <% end %>

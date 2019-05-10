@@ -1,9 +1,11 @@
 <%= form_with model: @category do |f| %>
-
-  <div>
+  <h1>Create New Category</h1>
+  <div class="form-group">
     <%= f.label :name, "Category name" %>
-    <%= f.text_field :name, placeholder: "Confections" %>
-    <%= f.submit "Create!", class: "btn btn-success btn-block" %>
+    <%= f.text_field :name, placeholder: "Confections", class: "form-control" %>
+    <div>
+    <%= f.submit "Create!", class: "btn btn-success" %>
+    </div>
 
   </div>
   <%end%>
