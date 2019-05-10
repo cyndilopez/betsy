@@ -323,6 +323,26 @@ img.logo {
   color: rgb(107, 11, 116); 
 }
 
-div.alert {
-  width: inherit;
+// div.alert {
+//   width: inherit;
+// }
+
+// div.d-flex align-items-baseline {
+//   display: inline-block;
+//   position: relative;
+//   flex-flow: row wrap;
+//   justify-content: flex-start;
+//   align-items: baseline;
+  
+// }
+
+// div.d-flex align-items-end{
+//   align-self: flex-end;
+// }
+
+div.root-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  
 }
