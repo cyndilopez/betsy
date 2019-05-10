@@ -14,11 +14,11 @@
 <% end %>
 
 <%= form_with model: @product, class: 'product-form' do |f| %>
-
-<p>
-    <%= f.label :categories, "Select categories" %>
+<form>
+<div class="form-group">
+     <label for= "Select Categories">Select Categories</label>
     <%if Category.all == []%>
-      No categories to display at the time. Add one!
+      <p>No categories to display at the time. Add one!</p>
     <%else%>
     <%# <div class="col-md-4 checkbox-list"> %>
       <ul class="horizontal-group">
@@ -26,36 +26,37 @@
       <li> <%=  c.check_box  %><%= c.label %></li>
       <% end %>
       </ul>
-</p>
     <% end %>
+  </div>
 
- <p>
-    <%= f.label :name, "Product name" %>
-    <%= f.text_field :name, placeholder: "Sweetness pencil pouch" %>
- </p>
+ <div class="form-group">
+    <label for= "Product Name">Product Name</label>
+    <p><%= f.text_field :name, placeholder: "Sweetness pencil pouch" %></p>
+ </div>
   
- <p>
-    <%= f.label :price, "Unit price" %>
-    <%= f.text_field :price, placeholder: "$" %>
- </p>
+ <div class="form-group">
+    <label for= "Unit Price">Unit Price </label>
+    <p><%= f.text_field :price, placeholder: "$" %></p>
+ </div>
 
- <p>
-    <%= f.label :stock, "Quantity in stock" %>
-    <%= f.text_field :stock, placeholder: "45" %>
- </p>
+ <div class="form-group">
+    <label for = "stock">Quantity in stock </label>
+    <p><%= f.text_field :stock, placeholder: "45" %></p>
+ </div>
  
- <p>
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description, placeholder: "Carrying size pencil pouch" %>
- </p>
+ <div class="form-group">
+    <label for= "description">Description</label>
+    <p><%= f.text_area :description, placeholder: "Carrying size pencil pouch" %></p>
+ </div>
 
- <p>
-    <%= f.label :photoURL, "Product photo URL" %>
-    <%= f.text_field :photoURL, placeholder: "http://image-host.com/yourimage.png" %>
- </p>
+ <div class="form-group">
+    <label for = "photoURL">Product photo URL</label>
+    <p><%= f.text_field :photoURL, placeholder: "http://image-host.com/yourimage.png" %></p>
+ </div>
 
- <p>
+ <div class="form-group">
   <%= f.submit button_text, class: "btn btn-primary" %>
- </p>
+ </div>
+ </form>
   <% end %>
 
