@@ -9,3 +9,13 @@
 .btn.inactive {
     background-color: #27AAE1;
 }
+
+li .btn {
+    background-color: lightgrey;
+    color: darkslategray;
+  }
+
+  li .btn:hover {
+    background-color: lightblue;
+    color: black;
+  }
