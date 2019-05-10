@@ -1,11 +1,9 @@
-
-
 <div class="category-index">
   <h1>Shop by Merchant</h1>
   <div class="category-container">
     
       <% @merchants.each do |merchant|%>
-      <%= link_to merchants_path(merchant) do %>
+      <%= link_to merchants_products_path(merchant) do %>
         <div class="category-box">
           <h5><%= merchant.username %></h5>
         </div>
