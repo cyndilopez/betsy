@@ -31,10 +31,6 @@ class Merchant < ApplicationRecord
     return total_revenue
   end
   
-  def total_revenue_by_status
-    
-  end
-  
   def paid_order_items
     revenue = 0
     self.order_items.each do |order_item|
@@ -55,12 +51,5 @@ class Merchant < ApplicationRecord
     return revenue
   end
   
-  # def self.orders
-  #   self.products.map do |product|
-  #     product.order_items.each do |order_item|
-  #       order_item.orders
-  #     end
-  #   end
-  # end
   
 end
